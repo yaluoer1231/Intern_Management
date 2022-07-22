@@ -48,7 +48,7 @@ namespace Inern_management.Controllers
 
             return CreatedAtAction(nameof(GetItern), new { id = intern.Id }, intern);
         }
-        /*
+        
         //PUT
         [HttpPut("{id}")]
         public async Task<ActionResult<Intern>> PutIntern(int id, Intern intern)
@@ -79,10 +79,10 @@ namespace Inern_management.Controllers
             }
 
             return NoContent();
-        }*/
+        }
 
         //DELETE
-        /*[HttpDelete("{id}")]
+        [HttpDelete("{id}")]
         public async Task<ActionResult<Intern>> DeleteItern(int id)
         {
             var drink = _context.Interns.Where(t => t.Id == id).FirstOrDefault();
@@ -98,12 +98,10 @@ namespace Inern_management.Controllers
                 return Ok();
 
             }
-        }*/
+        }
         private bool TodoInternExists(int id)
         {
             return _context.Interns.Any(e => e.Id == id);
         }
-
-
     }
 }

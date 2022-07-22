@@ -36,7 +36,9 @@ namespace Inern_management.Models
             {
                 entity.ToTable("Intern");
 
-                entity.Property(e => e.Id).HasColumnName("id");
+                entity.Property(e => e.Id)
+                .ValueGeneratedOnAdd()
+                .HasColumnName("id");
 
                 entity.Property(e => e.EMail)
                     .HasColumnType("text")
