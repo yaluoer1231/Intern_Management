@@ -15,9 +15,11 @@ namespace Inern_management.Controllers
     {
         private readonly InternContext _context;
 
-        public InternController(InternContext context) {
+        public InternController (InternContext context)
+        {
             _context = context;
         }
+
 
         //GET
         [HttpGet]
@@ -26,7 +28,7 @@ namespace Inern_management.Controllers
             var intern = _context.Interns.ToList();
             return Ok(intern);
         }
-
+        
         [HttpGet("{id}")]
         public async Task<ActionResult<Intern>> GetItern(int id)
         {
@@ -36,7 +38,7 @@ namespace Inern_management.Controllers
 
             return Ok(intern);
         }
-
+        
         //POST
         [HttpPost]
         public async Task<ActionResult<Intern>> PostIntern(Intern intern)

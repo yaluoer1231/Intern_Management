@@ -10,6 +10,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Inern_management.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace Inern_management
 {
@@ -25,6 +27,9 @@ namespace Inern_management
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDbContext<InternContext>(opt => opt
+            .UseSqlServer("Server=DESKTOP-VPN7M0U;Database=Intern_management;" +
+            "Trusted_Connection=True"));
             services.AddControllers();
         }
 
