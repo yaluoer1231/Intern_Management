@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace Inern_management.Models
 {
-    public partial class InternDatum
+    public partial class Intern
     {
         public int Id { get; set; }
         public string Name { get; set; }

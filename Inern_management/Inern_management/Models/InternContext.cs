@@ -17,7 +17,7 @@ namespace Inern_management.Models
         {
         }
 
-        public virtual DbSet<InternDatum> InternData { get; set; }
+        public virtual DbSet<Intern> Interns { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -32,9 +32,9 @@ namespace Inern_management.Models
         {
             modelBuilder.HasAnnotation("Relational:Collation", "Chinese_Taiwan_Stroke_CI_AS");
 
-            modelBuilder.Entity<InternDatum>(entity =>
+            modelBuilder.Entity<Intern>(entity =>
             {
-                entity.ToTable("Intern_Data");
+                entity.ToTable("Intern");
 
                 entity.Property(e => e.Id).HasColumnName("id");
 
