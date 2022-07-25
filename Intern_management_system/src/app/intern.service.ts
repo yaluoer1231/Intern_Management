@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 
 import { Intern } from './Intern_Fromat';
@@ -22,6 +22,6 @@ export class InternService {
   
   getIntern(): Observable<Intern[]>{
     //const Interns = of(INTERNS);
-    return this.http.get<Intern[]>(`${this.InternUrl}/Intern`);
+    return this.http.get<Intern[]>(`${this.InternUrl}Intern`);
   }
 }
