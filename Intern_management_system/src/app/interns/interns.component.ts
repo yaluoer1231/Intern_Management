@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Intern } from '../Intern_Fromat';
-import { INTERNS } from '../Intern_Data';
+
+import { InternService } from '../intern.service';
 
 @Component({
   selector: 'app-interns',
@@ -9,16 +10,20 @@ import { INTERNS } from '../Intern_Data';
 })
 export class InternsComponent implements OnInit {
 
-  Interns = INTERNS;
+  Interns : Intern[]= [];
   selectedintern?: Intern;
 
-  constructor() { }
+  constructor(private internService : InternService) { }
 
   ngOnInit(): void {
+    this.getIntern();
+  }
+
+  getIntern(): void {
+    this.Interns = this.internService.getIntern();
   }
 
   onSelect(intern: Intern): void {
   this.selectedintern = intern;
-}
-
+  }
 }
