@@ -1,1 +1,9 @@
-<p>intern-details works!</p>
+<div *ngIf="intern">
+
+    <h2>{{intern.name}}</h2>
+        <div><span>id: </span>{{intern.id}}</div>
+        <div>
+            <label for="intern-name">實習生姓名： </label>
+            <input id="intern-name" [(ngModel)]="intern.name" placeholder="name">
+        </div>
+  </div>

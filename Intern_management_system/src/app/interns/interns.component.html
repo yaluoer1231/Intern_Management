@@ -1,1 +1,12 @@
-<p>interns works!</p>
+<h2>實習生資料表</h2>
+<ul class = "interns">
+    <li *ngFor = "let intern of Interns">
+        <button [class.selected]="intern === selectedintern" 
+        type = "button" (click)="onSelect(intern)">
+            <span class = "badge">{{intern.id}}</span>
+            <span class = "intern">{{intern.name}}</span>
+        </button>
+    </li>
+</ul>
+
+<app-intern-details [intern]="selectedintern"></app-intern-details>
