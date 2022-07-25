@@ -17,13 +17,15 @@ export class InternsComponent implements OnInit {
 
   ngOnInit(): void {
     this.getIntern();
+    //this.getList();
   }
 
   getIntern(): void {
-    this.Interns = this.internService.getIntern();
+    this.internService.getIntern().subscribe(Interns => this.Interns = Interns); 
   }
 
   onSelect(intern: Intern): void {
-  this.selectedintern = intern;
+    this.selectedintern = intern;
   }
+    
 }

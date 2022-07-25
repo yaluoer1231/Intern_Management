@@ -1,5 +1,8 @@
 import { Injectable } from '@angular/core';
 
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable, of } from 'rxjs';
+
 import { Intern } from './Intern_Fromat';
 import { INTERNS } from './Intern_Data';
 
@@ -7,15 +10,18 @@ import { INTERNS } from './Intern_Data';
   providedIn: 'root'
 })
 export class InternService {
+  InternUrl = 'https://localhost:44388/api/';
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
 
-  getIntern(): Intern[]{
-    return INTERNS;
-  }
-  /*getIntern():Observable<Intern[]>{
+
+  /*getIntern(): Observable<Intern[]>{
     const Interns = of(INTERNS);
     return Interns;
   }*/
-
+  
+  getIntern(): Observable<Intern[]>{
+    //const Interns = of(INTERNS);
+    return this.http.get<Intern[]>(`${this.InternUrl}/Intern`);
+  }
 }
