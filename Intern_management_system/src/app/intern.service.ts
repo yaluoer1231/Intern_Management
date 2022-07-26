@@ -19,21 +19,4 @@ export class InternService {
     const Interns = of(INTERNS);
     return Interns;
   }
-  
-  getInterns(id: number): Observable<Intern> {
-    // For now, assume that a hero with the specified `id` always exists.
-    // Error handling will be added in the next step of the tutorial.
-    const intern = INTERNS.find(h => h.id === id)!;
-    return of(intern);
-  }
-
-
-  updateHero(intern: Intern): Observable<any> {
-    return this.http.put(this.InternUrl, intern)
-  }
-  
-  /*getIntern(): Observable<Intern[]>{
-    //const Interns = of(INTERNS);
-    return this.http.get<Intern[]>(`${this.InternUrl}Intern`);
-  }*/
 }

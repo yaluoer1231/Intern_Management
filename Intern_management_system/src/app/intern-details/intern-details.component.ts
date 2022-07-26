@@ -23,16 +23,4 @@ export class InternDetailsComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
-  getInterns(): void {
-    const id = Number(this.route.snapshot.paramMap.get('id'));
-    this.internService.getInterns(id).subscribe(intern => this.intern = intern);
-  }
-
-  save(): void {
-    if (this.intern) {
-      this.internService.updateHero(this.intern).subscribe();
-    }
-    this.element = false;
-  }
 }
