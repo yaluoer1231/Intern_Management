@@ -1,5 +1,5 @@
 <div class = "interns">
-    <li>
+    <ul>
         <table>
             <tr>
                 <th>Id</th>
@@ -14,14 +14,16 @@
                 <td>{{intern.sex}}</td>
                 <td>{{intern.email}}</td>
                 <td> 
-                    <button [class.selected] = "intern === selectedintern" 
-                        class="Update" (click)= "onSelect(intern)">修改</button>
+                    <!--<button [class.selected] = "intern === selectedintern" 
+                        class="Update" (click)= "onSelect(intern)">修改</button>-->
+                    <button class="Update" (click)= "onSelect(intern)">修改</button>         
                     <button class="Delete">刪除</button>
                 </td>
             </tr>
         </table>
-    </li>
+    </ul>
 </div>
+
 <app-intern-details [intern]="selectedintern"></app-intern-details>
 
 

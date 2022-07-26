@@ -15,6 +15,7 @@ import { Location } from '@angular/common';
 export class InternDetailsComponent implements OnInit {
 
   @Input() intern? : Intern;
+  element = true;
 
   constructor(private route: ActivatedRoute,
     private internService: InternService,
@@ -23,10 +24,15 @@ export class InternDetailsComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  getHero(): void {
+  getInterns(): void {
     const id = Number(this.route.snapshot.paramMap.get('id'));
-    this.internService.getHero(id)
-      .subscribe(intern => this.intern = intern);
+    this.internService.getInterns(id).subscribe(intern => this.intern = intern);
   }
 
+  save(): void {
+    if (this.intern) {
+      this.internService.updateHero(this.intern).subscribe();
+    }
+    this.element = false;
+  }
 }

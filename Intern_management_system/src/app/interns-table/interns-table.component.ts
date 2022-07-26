@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Intern } from '../Intern_Fromat';
+import { InternDetailsComponent } from '../intern-details/intern-details.component';
 
 import { InternService } from '../intern.service';
 
@@ -12,6 +13,7 @@ export class InternsTableComponent implements OnInit {
 
   Interns : Intern[] = [];
   selectedintern? : Intern;
+  private static interndetail :InternDetailsComponent;
 
   constructor(private internService : InternService) { }
 
@@ -22,6 +24,7 @@ export class InternsTableComponent implements OnInit {
   getIntern(): void{
     this.internService.getIntern().subscribe(Interns => this.Interns = Interns);
   }
+  
   onSelect(intern: Intern): void {
     this.selectedintern = intern;
   }
