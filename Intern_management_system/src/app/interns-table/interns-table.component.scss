@@ -1,23 +1,51 @@
+.interns{
+  display: flex;      
+  align-items: center;
+  justify-content: center;
+}
 
-
-interns.table { 
+  .interns table { 
     border:1px solid #000; 
-    font-family: 微軟正黑體; 
+    font-family: 華康楷書體W7; 
     font-size:16px; 
     width:200px;
     border:1px solid #000;
     text-align:center;
     border-collapse:collapse;
   } 
-  th { 
+    th { 
     background-color: #009FCC;
+    white-space:nowrap; 
     padding:10px;
     border:1px solid #000;
     color:#fff;
   } 
-  td { 
-    border:1px solid #000;
+    td { 
+    border:1px solid rgb(5, 2, 2);
+    white-space:nowrap; 
+    text-align: center;
     padding:5px;
-  } 
+  }
+  button {
+    border-radius: 8px;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+  }
+  .Update{
+    background-color: #59addd;
+  }
+  .Delete {
+    background-color: #f39406;
+  }
+  details {
+    display: flex; 
+    align-items: center;
+    justify-content: center;
+  }
+
+   
   
   
