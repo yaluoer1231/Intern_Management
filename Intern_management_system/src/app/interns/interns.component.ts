@@ -17,28 +17,23 @@ export class InternsComponent implements OnInit {
   constructor(private internService : InternService) { }
 
   ngOnInit(): void {
-    //this.getIntern();
-    this.getList();
+    this.getIntern();
+    //this.getList();
   }
 
-  /*getIntern(): void {
-    //this.internService.getIntern().subscribe(Interns => this.Interns = Interns); 
-    this.internService.getIntern().subscribe(
-      (data: any) => {this.Interns = data},
-    //接收回傳值
-      (error: HttpErrorResponse) => {console.log('ERROR')}
-      )
-  }*/
+  getIntern(): void {
+    this.internService.getIntern().subscribe(Interns => this.Interns = Interns); 
+  }
 
   onSelect(intern: Intern): void {
     this.selectedintern = intern;
   }
 
-  getList() {
+  /*getList() {
     this.internService.getIntern().subscribe(
       (data: any) => {this.Interns = data},
     //接收回傳值
       (error: HttpErrorResponse) => {console.log('ERROR')}
       );
-    }  
+    }  */
 }

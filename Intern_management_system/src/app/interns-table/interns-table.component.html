@@ -1,0 +1,19 @@
+<h2>實習生資料表</h2>
+<div class = "interns">
+    <li>
+        <table>
+            <tr>
+                <th>Id</th>
+                <th>姓名</th>
+                <th>性別</th>
+                <th>電子信箱</th>
+            </tr>
+            <tr *ngFor = "let intern of Interns">
+                <td>{{intern.id}}</td>
+                <td>{{intern.name}}</td>
+                <td>{{intern.sex}}</td>
+                <td>{{intern.email}}</td>
+            </tr>
+        </table>
+    </li>
+</div>
