@@ -15,13 +15,13 @@ export class InternService {
   constructor(private http: HttpClient) { }
 
 
-  /*getIntern(): Observable<Intern[]>{
+  getIntern(): Observable<Intern[]>{
     const Interns = of(INTERNS);
     return Interns;
-  }*/
+  }
   
-  getIntern(): Observable<Intern[]>{
+  /*getIntern(): Observable<Intern[]>{
     //const Interns = of(INTERNS);
     return this.http.get<Intern[]>(`${this.InternUrl}Intern`);
-  }
+  }*/
 }
