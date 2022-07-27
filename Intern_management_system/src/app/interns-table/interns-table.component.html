@@ -18,7 +18,7 @@
                         class="Update" (click)= "onSelect(intern)">修改</button>-->
                     <button [class.selected] = "intern === selectedintern "
                         class="Update" (click)= "Update(true);onSelect(intern)">修改</button>         
-                    <button class="Delete">刪除</button>
+                    <button class="Delete"(click)= "Update(true);onSelect(intern)">刪除</button>
                 </td>
             </tr>
         </table>

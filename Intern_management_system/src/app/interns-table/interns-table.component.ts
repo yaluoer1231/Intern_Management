@@ -51,12 +51,18 @@ export class InternsTableComponent implements OnInit {
       return ; 
   }
 
-  Delete(display : boolean) : void{
+  showDelete(display : boolean) : void{
     if (this.ShowDelete == false)
         this.ShowDelete = true;
     else if (this.ShowDelete == true && display == false)
-      this.ShowDelete = display;
+      {
+        this.ShowDelete = display;
+      }
     else
       return ; 
+  }
+  Delete(intern: Intern): void{
+    this.Interns = this.Interns.filter(h => h !== intern);
+    this.internService.deleteHero(intern.id).subscribe();
   }
 }

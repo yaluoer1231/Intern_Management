@@ -29,7 +29,15 @@ export class InternDetailsComponent implements OnInit {
     this.internstablecomponent.Update(Display);
   }
 
-  Delete(Display : boolean): void{
-    this.internstablecomponent.Delete(Display);
+  save(): void {
+    if (this.intern) {
+      this.internService.putIntern(this.intern)
+        .subscribe(() => this.Update(false));
+      this.internstablecomponent.Update(false);
+    }
+  }
+
+  Delete(intern:Intern): void{
+    this.internstablecomponent.Delete(intern);
   }
 }

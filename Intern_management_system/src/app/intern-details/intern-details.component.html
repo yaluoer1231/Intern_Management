@@ -11,13 +11,14 @@
         <input id="intern-name" [(ngModel)]="intern.eMail" placeholder="email"><br>
     </ul>
     <div>
-        <button type="Update" (click)= "Update(false)">修改</button>
+        <button type="Update" (click)= "save()">修改</button>
     </div>  
 </div>
-<div class = "Delete" *ngIf= "intern">
+<div class = "Delete" *ngIf= "intern" >
         <h2>確定刪除「{{intern.name}}」嗎?</h2>
     <div>
-        <button type="Update" (click)= "Delete(false)">確定</button>
+        <button type="Update" (click)= "Update(false);Delete(intern)">確定</button>
     </div>  
 </div>
+
 

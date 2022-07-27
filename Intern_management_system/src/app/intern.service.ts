@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { catchError, map, tap } from 'rxjs/operators';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 
 import { Intern } from './Intern_Fromat';
@@ -13,17 +13,22 @@ export class InternService {
 
   constructor(private http: HttpClient) { }
 
+  //GET全部
   getIntern(): Observable<Intern[]>{
     /*const Interns = of(INTERNS);
     return Interns;*/
-    const Interns = this.http.get<Intern[]>(`${this.InternUrl}Intern`)
-    return Interns;
+    return this.http.get<Intern[]>(`${this.InternUrl}Intern`);
   }
-  private handleError<T>(operation = 'operation', result?: T) {
-    return (error: any): Observable<T> => {
   
-      console.error(error);
-      return of(result as T);
-    };
+  //PUT修改
+  putIntern(intern:Intern): Observable<any>{
+    return this.http.put(this.InternUrl, intern);
+  }
+
+  //DELETE刪除
+  deleteHero(id: number): Observable<Intern> {
+    const url = `${this.InternUrl}/${id}`;
+  
+    return this.http.delete<Intern>(url);
   }
 }
