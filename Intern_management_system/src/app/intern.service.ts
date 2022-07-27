@@ -4,7 +4,6 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 
 import { Intern } from './Intern_Fromat';
-import { INTERNS } from './Intern_Data';
 
 @Injectable({
   providedIn: 'root'

@@ -49,7 +49,7 @@ namespace Inern_management.Models
                     .HasColumnType("text")
                     .HasColumnName("name");
 
-                entity.Property(e => e.Sex).HasColumnName("sex");
+                entity.Property(e => e.SexCode).HasColumnName("sex_code");
             });
 
             OnModelCreatingPartial(modelBuilder);

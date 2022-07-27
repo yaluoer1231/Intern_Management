@@ -9,7 +9,7 @@ namespace Inern_management.Models
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public int Sex { get; set; }
+        public int SexCode { get; set; }
         public string EMail { get; set; }
     }
 }

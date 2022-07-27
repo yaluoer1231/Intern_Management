@@ -27,9 +27,9 @@ export class InternsTableComponent implements OnInit {
       console.log(Interns);
       for (var i = 0;i <= Interns.length-1;i++) //迴圈找陣列，Interns.length-1為陣列長度，檢索從0開始
         {
-          if(Interns[i].sex_code == 1)  //Interns[i].sex_code：含物件的資料表，後面需要加上鍵值，也就是要找的欄位
+          if(Interns[i].sexCode == 1)  //Interns[i].sex_code：含物件的資料表，後面需要加上鍵值，也就是要找的欄位
             Interns[i].sex = "男";
-          else if (Interns[i].sex_code == 2)
+          else if (Interns[i].sexCode == 2)
             Interns[i].sex = "女";
           else 
             Interns[i].sex = "錯誤";
