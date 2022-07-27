@@ -16,7 +16,8 @@
                 <td> 
                     <!--<button [class.selected] = "intern === selectedintern" 
                         class="Update" (click)= "onSelect(intern)">修改</button>-->
-                    <button class="Update" (click)= "onSelect(intern)">修改</button>         
+                    <button [class.selected] = "intern === selectedintern "
+                        class="Update" (click)= "onSelect(intern)">修改</button>         
                     <button class="Delete">刪除</button>
                 </td>
             </tr>
@@ -24,6 +25,6 @@
     </ul>
 </div>
 
-<app-intern-details [intern]="selectedintern"></app-intern-details>
+<app-intern-details [intern]="selectedintern" *ngIf= "ShowUpdate == true"></app-intern-details>
 
 

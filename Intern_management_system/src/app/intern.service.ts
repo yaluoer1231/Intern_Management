@@ -14,7 +14,6 @@ export class InternService {
 
   constructor(private http: HttpClient) { }
 
-
   getIntern(): Observable<Intern[]>{
     const Interns = of(INTERNS);
     return Interns;

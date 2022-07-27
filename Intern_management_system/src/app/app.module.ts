@@ -8,12 +8,14 @@ import { HttpClientModule } from '@angular/common/http';
 import { InternDetailsComponent } from './intern-details/intern-details.component';4
 import { FormsModule } from '@angular/forms';
 import { InternsTableComponent } from './interns-table/interns-table.component';
+import { SexPipe } from './sex.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
     InternDetailsComponent,
-    InternsTableComponent
+    InternsTableComponent,
+    SexPipe
   ],
   imports: [
     BrowserModule,

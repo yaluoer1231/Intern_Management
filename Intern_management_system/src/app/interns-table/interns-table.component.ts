@@ -14,6 +14,7 @@ export class InternsTableComponent implements OnInit {
   Interns : Intern[] = [];
   selectedintern? : Intern;
   private static interndetail :InternDetailsComponent;
+  ShowUpdate = false;
 
   constructor(private internService : InternService) { }
 
@@ -22,11 +23,18 @@ export class InternsTableComponent implements OnInit {
   }
 
   getIntern(): void{
-    this.internService.getIntern().subscribe(Interns => this.Interns = Interns);
+    this.internService.getIntern().subscribe(Interns =>{
+      this.Interns = Interns;
+    });
   }
   
   onSelect(intern: Intern): void {
+    this.ShowUpdate = true;
     this.selectedintern = intern;
+  }
+
+  Update(display : boolean): void{
+    this.ShowUpdate = display;
   }
 
 }

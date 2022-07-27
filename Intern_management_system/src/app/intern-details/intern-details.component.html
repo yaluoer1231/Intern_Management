@@ -1,5 +1,4 @@
-<div  *ngIf= "element == true">
-    <div *ngIf="intern">
+<div *ngIf="intern">
 
         <li><h2>{{intern.name}}</h2>
             <span>id: </span>{{intern.id}}</li>
@@ -11,5 +10,8 @@
                 <label for="intern-name">電子信箱： </label>
                 <input id="intern-name" [(ngModel)]="intern.email" placeholder="email"><br>
             </ul>
-    <div>
+</div>
+
+<div>
+    <button type="Update" (click)= "Update(false)">修改</button>
 </div>
