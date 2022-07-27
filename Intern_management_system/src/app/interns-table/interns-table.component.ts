@@ -13,8 +13,8 @@ export class InternsTableComponent implements OnInit {
 
   Interns : Intern[] = [];
   selectedintern? : Intern;
-  private static interndetail :InternDetailsComponent;
   ShowUpdate = false;
+  ShowDelete = false;
 
   constructor(private internService : InternService) { }
 
@@ -23,18 +23,40 @@ export class InternsTableComponent implements OnInit {
   }
 
   getIntern(): void{
-    this.internService.getIntern().subscribe(Interns =>{
+    this.internService.getIntern().subscribe(Interns => {
+      for (var i = 0;i <= Interns.length-1;i++) //迴圈找陣列，Interns.length-1為陣列長度，檢索從0開始
+        {
+          if(Interns[i].sex_code == 1)  //Interns[i].sex_code：含物件的資料表，後面需要加上鍵值，也就是要找的欄位
+            Interns[i].sex = "男";
+          else if (Interns[i].sex_code == 2)
+            Interns[i].sex = "女";
+          else 
+            Interns[4].sex = "錯誤";
+        }
       this.Interns = Interns;
     });
   }
   
   onSelect(intern: Intern): void {
-    this.ShowUpdate = true;
     this.selectedintern = intern;
   }
 
   Update(display : boolean): void{
-    this.ShowUpdate = display;
+    if (this.ShowUpdate == false)
+        this.ShowUpdate = true;
+    else if (this.ShowUpdate == true && display == false)
+      this.ShowUpdate = display;
+    else
+      return ; 
+  }
+
+  Delete(display : boolean) : void{
+    if (this.ShowDelete == false)
+        this.ShowDelete = true;
+    else if (this.ShowDelete == true && display == false)
+      this.ShowDelete = display;
+    else
+      return ; 
   }
 
 }

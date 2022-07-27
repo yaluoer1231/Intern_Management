@@ -17,5 +17,6 @@ export class InternService {
   getIntern(): Observable<Intern[]>{
     const Interns = of(INTERNS);
     return Interns;
+    
   }
 }

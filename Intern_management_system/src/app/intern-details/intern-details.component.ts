@@ -28,4 +28,8 @@ export class InternDetailsComponent implements OnInit {
   Update(Display : boolean): void{
     this.internstablecomponent.Update(Display);
   }
+
+  Delete(Display : boolean): void{
+    this.internstablecomponent.Delete(Display);
+  }
 }

@@ -2,6 +2,7 @@
 export interface Intern{
     id : number;
     name : string;
-    sex : number;
+    sex_code : number;
+    sex  :string;
     email: string;
 }

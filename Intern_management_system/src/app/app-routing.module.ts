@@ -6,7 +6,6 @@ import { InternDetailsComponent } from './intern-details/intern-details.componen
 const routes: Routes = [
   { path: '', redirectTo: '/interns-table', pathMatch: 'full' },
   { path: 'interns-table', component: InternsTableComponent  },
-  { path: 'interns-details', component: InternDetailsComponent  }
 ];
 
 @NgModule({
