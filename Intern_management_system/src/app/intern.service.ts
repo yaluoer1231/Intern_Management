@@ -22,12 +22,17 @@ export class InternService {
   
   //PUT修改
   putIntern(intern:Intern): Observable<any>{
-    return this.http.put(this.InternUrl, intern);
+    if (intern.sex == "男")
+      intern.sexCode = 1;
+    if (intern.sex == "女")
+      intern.sexCode = 2;
+    return this.http.put(`${this.InternUrl}Intern/${intern.id}`, intern);
   }
 
   //DELETE刪除
   deleteHero(id: number): Observable<Intern> {
-    const url = `${this.InternUrl}/${id}`;
+    const url = `${this.InternUrl}${id}`;
     return this.http.delete<Intern>(url);
+
   }
 }
