@@ -42,6 +42,11 @@ namespace Inern_management
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseCors(x => x
+                    .AllowAnyMethod()
+                    .AllowAnyHeader()
+                    .AllowAnyOrigin());
+
             app.UseHttpsRedirection();
 
             app.UseRouting();

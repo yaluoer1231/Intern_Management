@@ -4,5 +4,5 @@ export interface Intern{
     name : string;
     sex_code : number;
     sex  :string;
-    email: string;
+    eMail: string;
 }
