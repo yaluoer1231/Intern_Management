@@ -31,7 +31,7 @@ export class InternsTableComponent implements OnInit {
           else if (Interns[i].sex_code == 2)
             Interns[i].sex = "女";
           else 
-            Interns[4].sex = "錯誤";
+            Interns[i].sex = "錯誤";
         }
       this.Interns = Interns;
     });
@@ -58,5 +58,4 @@ export class InternsTableComponent implements OnInit {
     else
       return ; 
   }
-
 }
