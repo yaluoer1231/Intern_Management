@@ -17,14 +17,14 @@
                     <!--<button [class.selected] = "intern === selectedintern" 
                         class="Update" (click)= "onSelect(intern)">修改</button>-->
                     <button [class.selected] = "intern === selectedintern "
-                        class="Update" (click)= "Update(true);onSelect(intern)">修改</button>         
-                    <button class="Delete"(click)= "Update(true);onSelect(intern)">刪除</button>
+                        class="Update" (click)= "showUpdate(true);onSelect(intern)">修改</button>         
+                    <button class="Delete"(click)= "showDelete(true);onSelect(intern)">刪除</button>
                 </td>
             </tr>
         </table>
     </ul>
 </div>
 
-<app-intern-details [intern]="selectedintern" *ngIf= "ShowUpdate == true"></app-intern-details>
+<app-intern-details [intern]="selectedintern" *ngIf= "Show  == true"></app-intern-details>
 
 

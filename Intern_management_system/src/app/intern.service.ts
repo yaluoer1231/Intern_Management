@@ -28,7 +28,6 @@ export class InternService {
   //DELETE刪除
   deleteHero(id: number): Observable<Intern> {
     const url = `${this.InternUrl}/${id}`;
-  
     return this.http.delete<Intern>(url);
   }
 }

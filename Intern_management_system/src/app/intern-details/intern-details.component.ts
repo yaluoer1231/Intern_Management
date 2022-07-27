@@ -16,28 +16,40 @@ import { Location } from '@angular/common';
 export class InternDetailsComponent implements OnInit {
 
   @Input() intern? : Intern;
+  showDelete = false;
+  showUpdata = false;
+
 
   constructor(private route: ActivatedRoute,
     private internService: InternService,
     private location: Location,
     private internstablecomponent: InternsTableComponent) { }
 
+  
+
   ngOnInit(): void {
+    const internTable = this.internstablecomponent;
+    if (internTable.Show == true)
+      {
+        if (internTable.ShowUpdate == true != this.showUpdata)
+          this.showUpdata = true;
+        if (internTable.ShowDelete == true != this.showDelete)
+          this.showDelete = true;
+      }
   }
 
-  Update(Display : boolean): void{
-    this.internstablecomponent.Update(Display);
-  }
-
+  
   save(): void {
     if (this.intern) {
-      this.internService.putIntern(this.intern)
-        .subscribe(() => this.Update(false));
-      this.internstablecomponent.Update(false);
+      this.internService.putIntern(this.intern).subscribe();
+      this.internstablecomponent.showUpdate(false);
+      this.showUpdata = false;
     }
   }
 
   Delete(intern:Intern): void{
     this.internstablecomponent.Delete(intern);
+    this.internstablecomponent.showDelete(false);
+    this.showDelete = false;
   }
 }

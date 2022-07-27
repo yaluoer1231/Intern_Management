@@ -15,6 +15,7 @@ export class InternsTableComponent implements OnInit {
   selectedintern? : Intern;
   ShowUpdate = false;
   ShowDelete = false;
+  Show = false;
 
   constructor(private internService : InternService) { }
 
@@ -40,13 +41,17 @@ export class InternsTableComponent implements OnInit {
   
   onSelect(intern: Intern): void {
     this.selectedintern = intern;
+    this.Show = true;
   }
 
-  Update(display : boolean): void{
+  showUpdate(display : boolean): void{
     if (this.ShowUpdate == false)
         this.ShowUpdate = true;
     else if (this.ShowUpdate == true && display == false)
-      this.ShowUpdate = display;
+      {
+        this.ShowUpdate = display;
+        this.Show = false;
+      }
     else
       return ; 
   }
@@ -57,10 +62,12 @@ export class InternsTableComponent implements OnInit {
     else if (this.ShowDelete == true && display == false)
       {
         this.ShowDelete = display;
+        this.Show = false;
       }
     else
       return ; 
   }
+
   Delete(intern: Intern): void{
     this.Interns = this.Interns.filter(h => h !== intern);
     this.internService.deleteHero(intern.id).subscribe();
