@@ -1,5 +1,5 @@
 <div *ngIf= "intern"> 
-    <div class = "Update" *ngIf= "showUpdate == true && showDelete == false">
+    <div class = "Update" *ngIf= "showUpdate == true">
         <ul>
             <h2>{{intern.name}}</h2>
             <ul class="Input">
@@ -18,7 +18,7 @@
         </ul>
     </div>
 
-    <div class = "Delete" *ngIf= "showDelete == true && showUpdate == false">
+    <div class = "Delete" *ngIf= "showDelete == true ">
             <h2>確定刪除「{{intern.name}}」嗎?</h2>
         <div >
             <button type="Update" (click)= "Delete(intern)">確定</button>
@@ -26,7 +26,7 @@
         </div>  
     </div>
 
-    <div>
+    <div class = "ADD" *ngIf ="showPost == true ">
         <label for="new-intern">實習生姓名: </label>
         <input id="new-intern" #internName><br>
         <label for="new-intern">性別: </label>
@@ -42,6 +42,6 @@
     </div>  
 
 
-    <pre>{{intern | json}}</pre> <!--Debug用-->
+    <!--<pre>{{intern | json}}</pre> Debug用-->
 </div>
 

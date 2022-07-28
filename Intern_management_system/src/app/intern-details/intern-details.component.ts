@@ -67,7 +67,7 @@ export class InternDetailsComponent implements OnInit {
         this.internstablecomponent.SexChange(intern);
         this.internstablecomponent.Interns.push(intern)
       });
-    this.internstablecomponent.Back();
+    this.internstablecomponent.Back();//改用output
     this.showPost = false;
   }
 

@@ -14,9 +14,6 @@ export class InternsTableComponent implements OnInit {
   Interns : Intern[] = [];
   selectedintern? : Intern;
   showCode = 0;
-  ShowUpdate = false;
-  ShowDelete = false;
-  ShowPost = false;
   IsShow = false;
 
   constructor(private internService : InternService) { }
@@ -75,7 +72,6 @@ export class InternsTableComponent implements OnInit {
 
   Back(): void{
     this.IsShow = false;
-    this.ShowUpdate = false;
-    this.ShowDelete = false;
+    this.showCode = 0;
   }
 }
