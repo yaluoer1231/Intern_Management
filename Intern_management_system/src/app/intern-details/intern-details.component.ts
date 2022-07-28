@@ -45,7 +45,6 @@ export class InternDetailsComponent implements OnInit {
         this.intern.sex = "男";
       else if (this.intern.sexCode == 2)
         this.intern.sex = "女";
-      console.log("修改後的"+this.intern.sexCode);
       this.internService.putIntern(this.intern).subscribe();
       this.internstablecomponent.showUpdate(false);
       this.showUpdate = false;

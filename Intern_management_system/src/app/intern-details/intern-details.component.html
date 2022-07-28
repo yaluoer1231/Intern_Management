@@ -7,7 +7,7 @@
                 <input id="intern-name" [(ngModel)]="intern.name" placeholder="name"><br>
 
                 <label for="intern-name">性別： </label>
-                <input type = "radio" name="sex" [(ngModel)]="intern.sexCode" value=1>男
+                <input type = "radio" name="sex" [(ngModel)]="intern.sexCode" value=1 checked>男
                 <input type = "radio" name="sex" [(ngModel)]="intern.sexCode" value=2>女<br>
                 
                 <label for="intern-name">電子信箱： </label>
@@ -24,7 +24,8 @@
             <button type="Back" (click)= "Back()">取消</button>
         </div>  
     </div>
-    
+
+
     <pre>{{intern | json}}</pre> <!--Debug用-->
     
 </div>

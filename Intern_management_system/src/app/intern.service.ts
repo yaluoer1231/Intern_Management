@@ -30,9 +30,13 @@ export class InternService {
   }
 
   //DELETE刪除
-  deleteHero(id: number): Observable<Intern> {
-    const url = `${this.InternUrl}${id}`;
+  deleteIntern(id: number): Observable<Intern> {
+    const url = `${this.InternUrl}Intern/${id}`;
     return this.http.delete<Intern>(url);
-
+  }
+  
+  //POST增加
+  postIntern(intern:Intern): Observable<Intern> {
+    return this.http.post<Intern>(`${this.InternUrl}Intern`, intern);
   }
 }

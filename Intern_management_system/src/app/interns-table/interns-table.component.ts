@@ -34,7 +34,6 @@ export class InternsTableComponent implements OnInit {
           else 
             Interns[i].sex = "錯誤";
         }
-        console.log(Interns);
       this.Interns = Interns;
     });
   }
@@ -70,10 +69,26 @@ export class InternsTableComponent implements OnInit {
     else
       return ; 
   }
+  
+  Post(name : string,SexCode : string, eMail : string): void{
+    name = name.trim();
+    const sexCode = Number(SexCode); 
+    eMail = eMail.trim();
+    if (!name) { return; }
+    this.internService.postIntern({name,sexCode,eMail} as Intern)
+      .subscribe(intern => {
+        if (intern.sexCode == 1) //Interns[i].sex_code：含物件的資料表，後面需要加上鍵值，也就是要找的欄位
+            intern.sex = "男";
+          else if (intern.sexCode == 2)
+            intern.sex = "女";
+        this.Interns.push(intern)
+      });
+  }
+
 
   Delete(intern: Intern): void{
     this.Interns = this.Interns.filter(h => h !== intern);
-    this.internService.deleteHero(intern.id).subscribe();
+    this.internService.deleteIntern(intern.id).subscribe();
   }
 
   Back(): void{
