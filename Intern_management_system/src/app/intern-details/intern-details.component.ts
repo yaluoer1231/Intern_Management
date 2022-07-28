@@ -29,11 +29,6 @@ export class InternDetailsComponent implements OnInit {
 
   ngOnInit(): void {
     const internTable = this.internstablecomponent;
-    console.log("ShoW:"+internTable.Show);
-    console.log("ShoWTableUp:"+internTable.ShowUpdate);
-    console.log("ShoWTableDe:"+internTable.ShowDelete);
-    console.log("ShowUpdate:"+this.showUpdate);
-    console.log("ShowDelete:"+this.showDelete);
     if (internTable.Show == true)
       {
         if (internTable.ShowUpdate == true && this.showUpdate == false)
@@ -41,13 +36,16 @@ export class InternDetailsComponent implements OnInit {
         if (internTable.ShowDelete == true && this.showDelete == false)
           this.showDelete = true;
       }
-    console.log("轉換後ShowUpdate:"+this.showUpdate);
-    console.log("轉換後ShowDelete:"+this.showDelete)
   }
 
   
   save(): void {
     if (this.intern) {
+      if(this.intern.sexCode == 1)
+        this.intern.sex = "男";
+      else if (this.intern.sexCode == 2)
+        this.intern.sex = "女";
+      console.log("修改後的"+this.intern.sexCode);
       this.internService.putIntern(this.intern).subscribe();
       this.internstablecomponent.showUpdate(false);
       this.showUpdate = false;
