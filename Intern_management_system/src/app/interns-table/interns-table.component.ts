@@ -40,8 +40,11 @@ export class InternsTableComponent implements OnInit {
   }
   
   onSelect(intern: Intern): void {
-    this.selectedintern = intern;
-    this.Show = true;
+    if (this.Show == false)
+    { 
+      this.Show = true;
+      this.selectedintern = intern;
+    }
   }
 
   showUpdate(display : boolean): void{
@@ -71,5 +74,11 @@ export class InternsTableComponent implements OnInit {
   Delete(intern: Intern): void{
     this.Interns = this.Interns.filter(h => h !== intern);
     this.internService.deleteHero(intern.id).subscribe();
+  }
+
+  Back(): void{
+    this.Show = false;
+    this.ShowUpdate = false;
+    this.ShowDelete = false;
   }
 }

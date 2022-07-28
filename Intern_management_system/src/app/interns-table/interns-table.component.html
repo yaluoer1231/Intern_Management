@@ -13,12 +13,11 @@
                 <td>{{intern.name}}</td>
                 <td>{{intern.sex}}</td>
                 <td>{{intern.eMail}}</td>
-                <td> 
+                <td>
                     <!--<button [class.selected] = "intern === selectedintern" 
                         class="Update" (click)= "onSelect(intern)">修改</button>-->
-                    <button [class.selected] = "intern === selectedintern "
-                        class="Update" (click)= "showUpdate(true);onSelect(intern)">修改</button>         
-                    <button class="Delete"(click)= "showDelete(true);onSelect(intern)">刪除</button>
+                    <button class="Update" (click)= "showUpdate(true);onSelect(intern)">修改</button>         
+                    <button class="Delete" (click)= "showDelete(true);onSelect(intern)">刪除</button>
                 </td>
             </tr>
         </table>

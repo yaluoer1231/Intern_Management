@@ -17,7 +17,7 @@ export class InternDetailsComponent implements OnInit {
 
   @Input() intern? : Intern;
   showDelete = false;
-  showUpdata = false;
+  showUpdate = false;
 
 
   constructor(private route: ActivatedRoute,
@@ -29,13 +29,20 @@ export class InternDetailsComponent implements OnInit {
 
   ngOnInit(): void {
     const internTable = this.internstablecomponent;
+    console.log("ShoW:"+internTable.Show);
+    console.log("ShoWTableUp:"+internTable.ShowUpdate);
+    console.log("ShoWTableDe:"+internTable.ShowDelete);
+    console.log("ShowUpdate:"+this.showUpdate);
+    console.log("ShowDelete:"+this.showDelete);
     if (internTable.Show == true)
       {
-        if (internTable.ShowUpdate == true != this.showUpdata)
-          this.showUpdata = true;
-        if (internTable.ShowDelete == true != this.showDelete)
+        if (internTable.ShowUpdate == true && this.showUpdate == false)
+          this.showUpdate = true;
+        if (internTable.ShowDelete == true && this.showDelete == false)
           this.showDelete = true;
       }
+    console.log("轉換後ShowUpdate:"+this.showUpdate);
+    console.log("轉換後ShowDelete:"+this.showDelete)
   }
 
   
@@ -43,7 +50,7 @@ export class InternDetailsComponent implements OnInit {
     if (this.intern) {
       this.internService.putIntern(this.intern).subscribe();
       this.internstablecomponent.showUpdate(false);
-      this.showUpdata = false;
+      this.showUpdate = false;
     }
   }
 
@@ -51,5 +58,13 @@ export class InternDetailsComponent implements OnInit {
     this.internstablecomponent.Delete(intern);
     this.internstablecomponent.showDelete(false);
     this.showDelete = false;
+  }
+
+  Back(): void{
+    this.internstablecomponent.Back();
+    if (this.showDelete == true)
+      this.showDelete = false;
+    if (this.showUpdate == true)
+      this.showUpdate = false;
   }
 }

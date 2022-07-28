@@ -1,24 +1,31 @@
 <div *ngIf= "intern"> 
-    <div class = "Update" *ngIf= "showUpdata == true && showDelete == false">
+    <div class = "Update" *ngIf= "showUpdate == true && showDelete == false">
         <ul>
             <h2>{{intern.name}}</h2>
             <ul class="Input">
                 <label for="intern-name">實習生姓名： </label>
                 <input id="intern-name" [(ngModel)]="intern.name" placeholder="name"><br>
+
                 <label for="intern-name">性別： </label>
-                <input id="intern-name" [(ngModel)]="intern.sex" placeholder="sex"><br>
+                <input type = "radio" name="sex" [(ngModel)]="intern.sexCode" value=1>男
+                <input type = "radio" name="sex" [(ngModel)]="intern.sexCode" value=2>女<br>
+                
                 <label for="intern-name">電子信箱： </label>
                 <input id="intern-name" [(ngModel)]="intern.eMail" placeholder="email"><br>
             </ul>
-            <button type="Update" (click)= "save()">修改</button>
+            <div><button type="Update" (click)= "save()">修改</button>
+                 <button type="Back" (click)= "Back()">取消</button></div>
         </ul>
     </div>
-    <div class = "Delete" *ngIf= "showDelete == true && showUpdata == false">
+    <div class = "Delete" *ngIf= "showDelete == true && showUpdate == false">
             <h2>確定刪除「{{intern.name}}」嗎?</h2>
-        <div>
+        <div >
             <button type="Update" (click)= "Delete(intern)">確定</button>
+            <button type="Back" (click)= "Back()">取消</button>
         </div>  
     </div>
+    
+    <pre>{{intern | json}}</pre> <!--Debug用-->
+    
 </div>
-
 
