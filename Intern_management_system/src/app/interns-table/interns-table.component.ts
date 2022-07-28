@@ -13,8 +13,10 @@ export class InternsTableComponent implements OnInit {
 
   Interns : Intern[] = [];
   selectedintern? : Intern;
+  showCode = 0;
   ShowUpdate = false;
   ShowDelete = false;
+  ShowPost = false;
   Show = false;
 
   constructor(private internService : InternService) { }
@@ -26,49 +28,31 @@ export class InternsTableComponent implements OnInit {
   getIntern(): void{
     this.internService.getIntern().subscribe(Interns => {
       for (var i = 0;i <= Interns.length-1;i++) //迴圈找陣列，Interns.length-1為陣列長度，檢索從0開始
-        {
-          if(Interns[i].sexCode == 1)  //Interns[i].sex_code：含物件的資料表，後面需要加上鍵值，也就是要找的欄位
-            Interns[i].sex = "男";
-          else if (Interns[i].sexCode == 2)
-            Interns[i].sex = "女";
-          else 
-            Interns[i].sex = "錯誤";
-        }
+        this.SexChange(Interns[i]);
       this.Interns = Interns;
     });
   }
-  
-  onSelect(intern: Intern): void {
+
+  onSelect(intern: Intern,ShowCode : number): void {
     if (this.Show == false)
-    { 
+    {
       this.Show = true;
       this.selectedintern = intern;
+      this.showCode = ShowCode; //以代號顯示功能，0:關閉，1:PUT，2:DELETE，3:POST
     }
   }
 
-  showUpdate(display : boolean): void{
-    if (this.ShowUpdate == false)
-        this.ShowUpdate = true;
-    else if (this.ShowUpdate == true && display == false)
-      {
-        this.ShowUpdate = display;
-        this.Show = false;
-      }
+  //將資料庫的性別代號轉換成文字
+  SexChange(intern: Intern): void{
+    if (intern.sexCode == 1)
+      intern.sex = "男";
+    else if (intern.sexCode == 2)
+      intern.sex = "女";
     else
-      return ; 
+      intern.sex = "錯誤";
+    return ;
   }
 
-  showDelete(display : boolean) : void{
-    if (this.ShowDelete == false)
-        this.ShowDelete = true;
-    else if (this.ShowDelete == true && display == false)
-      {
-        this.ShowDelete = display;
-        this.Show = false;
-      }
-    else
-      return ; 
-  }
   
   Post(name : string,SexCode : string, eMail : string): void{
     name = name.trim();

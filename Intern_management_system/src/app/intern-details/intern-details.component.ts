@@ -31,9 +31,9 @@ export class InternDetailsComponent implements OnInit {
     const internTable = this.internstablecomponent;
     if (internTable.Show == true)
       {
-        if (internTable.ShowUpdate == true && this.showUpdate == false)
+        if (internTable.showCode == 1)
           this.showUpdate = true;
-        if (internTable.ShowDelete == true && this.showDelete == false)
+        if (internTable.showCode == 2)
           this.showDelete = true;
       }
   }
@@ -41,27 +41,22 @@ export class InternDetailsComponent implements OnInit {
   
   save(): void {
     if (this.intern) {
-      if(this.intern.sexCode == 1)
-        this.intern.sex = "男";
-      else if (this.intern.sexCode == 2)
-        this.intern.sex = "女";
+      this.internstablecomponent.SexChange(this.intern);
       this.internService.putIntern(this.intern).subscribe();
-      this.internstablecomponent.showUpdate(false);
+      this.internstablecomponent.Back();
       this.showUpdate = false;
     }
   }
 
   Delete(intern:Intern): void{
     this.internstablecomponent.Delete(intern);
-    this.internstablecomponent.showDelete(false);
+    this.internstablecomponent.Back();
     this.showDelete = false;
   }
 
   Back(): void{
     this.internstablecomponent.Back();
-    if (this.showDelete == true)
-      this.showDelete = false;
-    if (this.showUpdate == true)
-      this.showUpdate = false;
+    this.showDelete = false;
+    this.showUpdate = false;
   }
 }

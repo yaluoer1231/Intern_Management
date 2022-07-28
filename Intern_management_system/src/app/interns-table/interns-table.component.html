@@ -16,13 +16,15 @@
                 <td>
                     <!--<button [class.selected] = "intern === selectedintern" 
                         class="Update" (click)= "onSelect(intern)">修改</button>-->
-                    <button class="Update" (click)= "showUpdate(true);onSelect(intern)">修改</button>         
-                    <button class="Delete" (click)= "showDelete(true);onSelect(intern)">刪除</button>
+                    <button class="Update" (click)= "onSelect(intern,1)">修改</button>         
+                    <button class="Delete" (click)= "onSelect(intern,2)">刪除</button>
                 </td>
             </tr>
         </table>
     </ul>
 </div>
+<app-intern-details [intern]="selectedintern" *ngIf= "Show  == true"></app-intern-details>
+
 <div>
     <label for="new-intern">實習生姓名: </label>
     <input id="new-intern" #internName><br>
@@ -34,15 +36,9 @@
     <input id="new-intern" #internEmail><br>
     <button type="button" class="add-button" 
         (click)= "Post(internName.value,internSex.value,internEmail.value); 
-        internName.value='';internEmail.value=''">
-        增加
-      </button>
-    <button type="button" class="Bacd-button">
-        取消
-      </button>
-
+        internName.value='';internEmail.value=''">增加</button>
+        <button type="button" class="Bacd-button">取消</button>
 </div>  
 
-<app-intern-details [intern]="selectedintern" *ngIf= "Show  == true"></app-intern-details>
 
 
