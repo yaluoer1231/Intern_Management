@@ -17,7 +17,7 @@ export class InternsTableComponent implements OnInit {
   ShowUpdate = false;
   ShowDelete = false;
   ShowPost = false;
-  Show = false;
+  IsShow = false;
 
   constructor(private internService : InternService) { }
 
@@ -34,9 +34,9 @@ export class InternsTableComponent implements OnInit {
   }
 
   onSelect(intern: Intern,ShowCode : number): void {
-    if (this.Show == false)
+    if (this.IsShow == false)
     {
-      this.Show = true;
+      this.IsShow = true;
       this.selectedintern = intern;
       this.showCode = ShowCode; //以代號顯示功能，0:關閉，1:PUT，2:DELETE，3:POST
     }
@@ -52,7 +52,6 @@ export class InternsTableComponent implements OnInit {
       intern.sex = "錯誤";
     return ;
   }
-
   
   Post(name : string,SexCode : string, eMail : string): void{
     name = name.trim();
@@ -69,14 +68,13 @@ export class InternsTableComponent implements OnInit {
       });
   }
 
-
   Delete(intern: Intern): void{
     this.Interns = this.Interns.filter(h => h !== intern);
     this.internService.deleteIntern(intern.id).subscribe();
   }
 
   Back(): void{
-    this.Show = false;
+    this.IsShow = false;
     this.ShowUpdate = false;
     this.ShowDelete = false;
   }

@@ -17,6 +17,7 @@
                  <button type="Back" (click)= "Back()">取消</button></div>
         </ul>
     </div>
+
     <div class = "Delete" *ngIf= "showDelete == true && showUpdate == false">
             <h2>確定刪除「{{intern.name}}」嗎?</h2>
         <div >
@@ -25,8 +26,22 @@
         </div>  
     </div>
 
+    <div>
+        <label for="new-intern">實習生姓名: </label>
+        <input id="new-intern" #internName><br>
+        <label for="new-intern">性別: </label>
+        <!--<input id="new-intern" #internSex><br>-->
+        <input type = "radio" name = "sex" value="1" #internSex checked>男
+        <input type = "radio" name = "sex" value="2" #internSex>女<br>
+        <label for="new-intern">電子信箱: </label>
+        <input id="new-intern" #internEmail><br>
+        <button type="button" class="add-button" 
+            (click)= "Post(internName.value,internSex.value,internEmail.value); 
+            internName.value='';internEmail.value=''">增加</button>
+            <button type="button"  (click)= "Back()">取消</button>
+    </div>  
+
 
     <pre>{{intern | json}}</pre> <!--Debug用-->
-    
 </div>
 
