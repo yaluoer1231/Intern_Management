@@ -1,14 +1,14 @@
 <div class = "interns">
      <table>
         <tr>
-            <th>Id</th>
+            <th>序列</th>
             <th>姓名</th>
             <th>性別</th>
             <th>電子信箱</th>
             <th>操作</th>
         </tr>
         <tr *ngFor = "let intern of Interns">
-            <td>{{intern.id}}</td>
+            <td>{{intern.sort}}</td>
             <td>{{intern.name}}</td>
             <td>{{intern.sex}}</td>
             <td>{{intern.eMail}}</td>
@@ -21,8 +21,9 @@
 </div>
 
 <div class = "detail">
-    <app-intern-details [intern]="selectedintern" [showCode]= "showCode" (SexChange) = "SexChange($event)" 
-            (GoBack) = "Back()" (GoPost) = "Post($event)"(GoDelete)= "Delete($event)"
+    <app-intern-details [intern]="selectedintern" [showCode]= "showCode" 
+            (SexChange) = "SexChange($event)" (GoSort)="IdChange($event)"
+            (GoBack) = "Back()"  (GoDelete)= "Delete($event)"
             *ngIf= "isShow  == true"></app-intern-details>
 </div>
 

@@ -20,6 +20,7 @@ export class InternDetailsComponent implements OnInit {
   @Output() GoBack = new EventEmitter();
   @Output() GoDelete = new EventEmitter();
   @Output() GoPost = new EventEmitter();
+  @Output() GoSort = new EventEmitter();
   
   showDelete = false;
   showUpdate = false;
@@ -61,7 +62,7 @@ export class InternDetailsComponent implements OnInit {
     this.internService.postIntern({name,sexCode,eMail} as Intern)
       .subscribe(intern => {
         this.SexChange.emit(this.intern);
-        this.GoPost.emit(intern)
+        this.internService.postIntern(intern);
       });
       this.GoBack.emit();
     this.showPost = false;

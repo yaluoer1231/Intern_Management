@@ -15,6 +15,7 @@ export class InternsTableComponent implements OnInit {
   selectedintern? : Intern;
   showCode = 0; //以代號顯示功能，0:關閉，1:PUT，2:DELETE，3:POST
   isShow = false;
+  idShow = 0;
 
   constructor(private internService : InternService) { }
 
@@ -23,10 +24,13 @@ export class InternsTableComponent implements OnInit {
   }
 
   getIntern(): void{
+    this.idShow = 0;
     this.internService.getIntern()
       .subscribe(Interns => {
-        for (var i = 0;i <= Interns.length-1;i++) //迴圈找陣列，Interns.length-1為陣列長度，檢索從0開始
+        for (var i = 0;i <= Interns.length-1;i++){ //迴圈找陣列，Interns.length-1為陣列長度，檢索從0開始
           this.SexChange(Interns[i]);
+          this.IdChange(Interns[i]);
+        }
         this.Interns = Interns;
       })
   }
@@ -35,6 +39,8 @@ export class InternsTableComponent implements OnInit {
       this.isShow = true;
       this.selectedintern = intern;
       this.showCode = ShowCode;
+      if (this.showCode == 2 && this.Interns.length <= 1)
+        this.showCode = 2.5;
   }
 
   //將資料庫的性別代號轉換成文字
@@ -47,21 +53,18 @@ export class InternsTableComponent implements OnInit {
       intern.sex = "錯誤";
     return ;
   }
-  
-  Post(intern: Intern): void{
-    for (var i = 1; i <= this.Interns.length-1; i++){
-      if (this.Interns[i].name == null){
-        intern.id = this.Interns[i].id;
-      }
-    }
-    this.internService.postIntern(intern)
-      .subscribe();
+
+  IdChange(intern: Intern){
+    this.idShow = this.idShow+1
+    intern.sort = this.idShow;
   }
 
   Delete(intern: Intern): void{
-    this.Interns = this.Interns.filter(h => h !== intern);
-    this.internService.deleteIntern(intern.id)
-      .subscribe();
+    if (this.Interns.length > 1){
+      this.Interns = this.Interns.filter(h => h !== intern);
+      this.internService.deleteIntern(intern.id)
+        .subscribe();
+    }
   }
 
   Back(): void{

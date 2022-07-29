@@ -25,6 +25,14 @@
             <button type="Back" (click)= "Back()">取消</button>
         </div>  
     </div>
+    
+    <div class = "Delete" *ngIf= "showCode == 2.5 ">
+        <h2>資料表不得為空，無法刪除「{{intern.name}}」</h2>
+    <div class = "ButtonArea">
+        <button type="Back" (click)= "Back()">返回</button>
+    </div>  
+    </div>
+
 
     <div class = "Post" *ngIf ="showCode == 3 ">
         <h2>請輸入實習生的資料</h2>
