@@ -7,7 +7,7 @@ import { InternService } from '../intern.service';
 @Component({
   selector: 'app-interns-table',
   templateUrl: './interns-table.component.html',
-  styleUrls: ['./interns-table.component.scss']
+  styleUrls: ['./interns-table.component.scss','./button-table.scss']
 })
 export class InternsTableComponent implements OnInit {
 
@@ -50,19 +50,8 @@ export class InternsTableComponent implements OnInit {
     return ;
   }
   
-  Post(name : string,SexCode : string, eMail : string): void{
-    name = name.trim();
-    const sexCode = Number(SexCode); 
-    eMail = eMail.trim();
-    if (!name) { return; }
-    this.internService.postIntern({name,sexCode,eMail} as Intern)
-      .subscribe(intern => {
-        if (intern.sexCode == 1) //Interns[i].sex_code：含物件的資料表，後面需要加上鍵值，也就是要找的欄位
-            intern.sex = "男";
-          else if (intern.sexCode == 2)
-            intern.sex = "女";
-        this.Interns.push(intern)
-      });
+  Post(intern: Intern): void{
+    this.internService.postIntern(intern).subscribe();
   }
 
   Delete(intern: Intern): void{

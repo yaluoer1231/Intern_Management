@@ -24,8 +24,11 @@
     </ul>
 </div>
 
-<button class="Add" (click)= "onSelect(Interns[0],3)" *ngIf = "IsShow == false">資料增加</button>
-<app-intern-details [intern]="selectedintern" *ngIf= "IsShow  == true"></app-intern-details>
+<div class ="Button_Area"><button class="Add" (click)= "onSelect(Interns[0],3)" *ngIf = "IsShow == false">資料增加</button>
+<app-intern-details [intern]="selectedintern" [ShowCode]= "showCode"
+                    (SexChange) = "SexChange($event)" (GoBack) = "Back()" (GoPost) = "Post($event)"
+                    (GoDelete)= "Delete($event)"
+                    *ngIf= "IsShow  == true"></app-intern-details>
 
 
 

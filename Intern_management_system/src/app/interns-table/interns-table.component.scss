@@ -1,8 +1,5 @@
-
-
-  .interns table { 
+.interns table { 
     border:1px solid #000; 
-    font-family: 標楷體; 
     font-size:16px; 
     width:200px;
     border:1px solid #000;
@@ -10,7 +7,7 @@
     border-collapse:collapse;
   } 
     th { 
-    background-color: #009FCC;
+    background-color: #a54a00;
     white-space:nowrap; 
     padding:10px;
     border:1px solid #000;
@@ -23,20 +20,12 @@
     padding:5px;
     background-color:#ffffff
   }
-  button {
-    border-radius: 8px;
-    color: white;
-    padding: 10px 20px;
-    text-align: center;
-    text-decoration: none;
-    font-size: 16px;
-  }
-  .Update{
-    background-color: #59addd;
-  }
-  .Delete {
-    background-color: #f39406;
-  }
+  
+.Button_Area{
+  display: flex;
+  justify-content: center;    
+  align-items: center;   
+}
 
    
   

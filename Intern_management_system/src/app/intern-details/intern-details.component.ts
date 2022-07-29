@@ -1,12 +1,10 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Intern } from '../Intern_Fromat';
 import { InternService } from '../intern.service';
 import { InternsTableComponent } from '../interns-table/interns-table.component';
 
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
-
-
 
 @Component({
   selector: 'app-intern-details',
@@ -16,6 +14,13 @@ import { Location } from '@angular/common';
 export class InternDetailsComponent implements OnInit {
 
   @Input() intern? : Intern;
+  @Input() ShowCode? : number;
+
+  @Output() SexChange =  new EventEmitter();
+  @Output() GoBack = new EventEmitter();
+  @Output() GoDelete = new EventEmitter();
+  @Output() GoPost = new EventEmitter();
+  
   showDelete = false;
   showUpdate = false;
   showPost = false;
@@ -29,31 +34,27 @@ export class InternDetailsComponent implements OnInit {
   
 
   ngOnInit(): void {
-    const internTable = this.internstablecomponent;
-    if (internTable.IsShow == true)
-      {
-        if (internTable.showCode == 1)
+        if (this.ShowCode == 1)
           this.showUpdate = true;
-        if (internTable.showCode == 2)
+        if (this.ShowCode == 2)
           this.showDelete = true;
-        if (internTable.showCode == 3)
+        if (this.ShowCode == 3)
           this.showPost = true;
-      }
   }
 
   
   save(): void {
     if (this.intern) {
-      this.internstablecomponent.SexChange(this.intern);
+      this.SexChange.emit(this.intern);
       this.internService.putIntern(this.intern).subscribe();
-      this.internstablecomponent.Back();
+      this.GoBack.emit();
       this.showUpdate = false;
     }
   }
 
   Delete(intern:Intern): void{
-    this.internstablecomponent.Delete(intern);
-    this.internstablecomponent.Back();
+    this.GoDelete.emit(intern);
+    this.GoBack.emit();
     this.showDelete = false;
   }
 
@@ -64,16 +65,17 @@ export class InternDetailsComponent implements OnInit {
     if (!name) { return; }
     this.internService.postIntern({name,sexCode,eMail} as Intern)
       .subscribe(intern => {
-        this.internstablecomponent.SexChange(intern);
-        this.internstablecomponent.Interns.push(intern)
+        this.SexChange.emit(this.intern);
+        this.GoPost.emit(intern)
       });
-    this.internstablecomponent.Back();//改用output
+      this.GoBack.emit();
     this.showPost = false;
   }
 
   Back(): void{
-    this.internstablecomponent.Back();
+    this.GoBack.emit();
     this.showDelete = false;
     this.showUpdate = false;
+    this.showPost = false;
   }
 }
