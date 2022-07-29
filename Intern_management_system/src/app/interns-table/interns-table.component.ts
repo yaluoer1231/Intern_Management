@@ -13,7 +13,7 @@ export class InternsTableComponent implements OnInit {
 
   Interns : Intern[] = [];
   selectedintern? : Intern;
-  showCode = 0;
+  showCode = 0; //以代號顯示功能，0:關閉，1:PUT，2:DELETE，3:POST
   isShow = false;
 
   constructor(private internService : InternService) { }
@@ -32,11 +32,9 @@ export class InternsTableComponent implements OnInit {
   }
 
   onSelect(intern: Intern,ShowCode : number): void {
-    if (this.isShow == false) {
       this.isShow = true;
       this.selectedintern = intern;
-      this.showCode = ShowCode; //以代號顯示功能，0:關閉，1:PUT，2:DELETE，3:POST
-    }
+      this.showCode = ShowCode;
   }
 
   //將資料庫的性別代號轉換成文字
@@ -51,6 +49,11 @@ export class InternsTableComponent implements OnInit {
   }
   
   Post(intern: Intern): void{
+    for (var i = 1; i <= this.Interns.length-1; i++){
+      if (this.Interns[i].name == null){
+        intern.id = this.Interns[i].id;
+      }
+    }
     this.internService.postIntern(intern)
       .subscribe();
   }
