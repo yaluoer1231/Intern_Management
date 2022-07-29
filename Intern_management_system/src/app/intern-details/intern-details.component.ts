@@ -39,13 +39,15 @@ export class InternDetailsComponent implements OnInit {
 
   
   save(): void {
-    if (this.intern) {
+    if (this.intern && this.intern.name && this.intern.sex) {
       this.SexChange.emit(this.intern);
       this.internService.putIntern(this.intern)
         .subscribe();
       this.GoBack.emit();
       this.showUpdate = false;
     }
+    else
+      this.showCode = 1.5;
   }
 
   Delete(intern:Intern): void{
@@ -71,5 +73,10 @@ export class InternDetailsComponent implements OnInit {
   Back(): void{
     this.GoBack.emit();
     this.showCode = 0;
+  }
+
+  UpPage(): void{
+    if (this.showCode == 1.5)
+      this.showCode =1;
   }
 }

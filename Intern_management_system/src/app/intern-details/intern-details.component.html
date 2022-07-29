@@ -1,7 +1,7 @@
 <div *ngIf= "intern"> 
     <div class = "Update" *ngIf= "showCode == 1">
         <ul>
-            <h2>正在修改「{{intern.name}}」的資料</h2>
+            <h2>正在修改{{intern.sort}}號「{{intern.name}}」的資料</h2>
             <div class="Input">
                 <p class="name"><label for="intern-name">實習生姓名： </label>
                 <input id="intern-name" [(ngModel)]="intern.name" placeholder="name"></p>
@@ -16,6 +16,12 @@
             <div class = "ButtonArea"><button type="Update" (click)= "save()">修改</button>
                  <button type="Back" (click)= "Back()">取消</button></div>
         </ul>
+    </div>
+    <div class = "Update" *ngIf= "showCode == 1.5 ">
+        <h2>請務必填寫姓名或性別！</h2>
+        <div class = "ButtonArea">
+            <button type="Uppage" (click)= "UpPage()">返回</button>
+        </div>  
     </div>
 
     <div class = "Delete" *ngIf= "showCode == 2 ">
