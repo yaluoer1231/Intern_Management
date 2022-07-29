@@ -1,44 +1,48 @@
 <div *ngIf= "intern"> 
-    <div class = "Update" *ngIf= "showUpdate == true">
+    <div class = "Update" *ngIf= "showCode == 1">
         <ul>
-            <h2>{{intern.name}}</h2>
-            <ul class="Input">
-                <label for="intern-name">實習生姓名： </label>
-                <input id="intern-name" [(ngModel)]="intern.name" placeholder="name"><br>
+            <h2>正在修改「{{intern.name}}」的資料</h2>
+            <div class="Input">
+                <p class="name"><label for="intern-name">實習生姓名： </label>
+                <input id="intern-name" [(ngModel)]="intern.name" placeholder="name"></p>
 
-                <label for="intern-name">性別： </label>
+                <p class="Another"><label for="intern-name">性別： </label>
                 <input type = "radio" name="sex" [(ngModel)]="intern.sexCode" value=1 checked>男
-                <input type = "radio" name="sex" [(ngModel)]="intern.sexCode" value=2>女<br>
+                <input type = "radio" name="sex" [(ngModel)]="intern.sexCode" value=2>女</p>
                 
-                <label for="intern-name">電子信箱： </label>
-                <input id="intern-name" [(ngModel)]="intern.eMail" placeholder="email"><br>
-            </ul>
-            <div><button type="Update" (click)= "save()">修改</button>
+                <p class="Another"><label for="intern-name">電子信箱： </label>
+                <input id="intern-name" [(ngModel)]="intern.eMail" placeholder="email"></p>
+                </div>
+            <div class = "ButtonArea"><button type="Update" (click)= "save()">修改</button>
                  <button type="Back" (click)= "Back()">取消</button></div>
         </ul>
     </div>
 
-    <div class = "Delete" *ngIf= "showDelete == true ">
+    <div class = "Delete" *ngIf= "showCode == 2 ">
             <h2>確定刪除「{{intern.name}}」嗎?</h2>
-        <div >
-            <button type="Update" (click)= "Delete(intern)">確定</button>
+        <div class = "ButtonArea">
+            <button type="Delete" (click)= "Delete(intern)">確定</button>
             <button type="Back" (click)= "Back()">取消</button>
         </div>  
     </div>
 
-    <div class = "ADD" *ngIf ="showPost == true ">
-        <label for="new-intern">實習生姓名: </label>
-        <input id="new-intern" #internName><br>
-        <label for="new-intern">性別: </label>
-        <!--<input id="new-intern" #internSex><br>-->
-        <input type = "radio" name = "sex" value="1" #internSex checked>男
-        <input type = "radio" name = "sex" value="2" #internSex>女<br>
-        <label for="new-intern">電子信箱: </label>
-        <input id="new-intern" #internEmail><br>
-        <button type="button" class="add-button" 
-            (click)= "Post(internName.value,internSex.value,internEmail.value); 
-            internName.value='';internEmail.value=''">增加</button>
-            <button type="button"  (click)= "Back()">取消</button>
+    <div class = "Post" *ngIf ="showCode == 3 ">
+        <h2>請輸入實習生的資料</h2>
+            <p class="name"><label for="new-intern">實習生姓名: </label>
+            <input id="new-intern" #internName></p>
+
+            <p class="Another"><label for="new-intern">性別: </label>
+            <input type = "radio" name = "sex" value="1" #internSex checked>男
+            <input type = "radio" name = "sex" value="2" #internSex>女</p>
+
+            <p class="Another"><label for="new-intern">電子信箱: </label>
+            <input id="new-intern" #internEmail></p>
+        <div class = "ButtonArea">
+            <button type="Post" class="add-button" 
+                (click)= "Post(internName.value,internSex.value,internEmail.value); 
+                internName.value='';internEmail.value=''">增加</button>
+                <button type="Back"  (click)= "Back()">取消</button>
+        </div>
     </div>  
 
 

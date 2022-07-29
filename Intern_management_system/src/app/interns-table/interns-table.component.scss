@@ -1,3 +1,5 @@
+
+
 .interns table { 
     border:1px solid #000; 
     font-size:16px; 
@@ -5,6 +7,7 @@
     border:1px solid #000;
     text-align:center;
     border-collapse:collapse;
+    margin-bottom: 2rem;
   } 
     th { 
     background-color: #a54a00;
@@ -21,12 +24,12 @@
     background-color:#ffffff
   }
   
-.Button_Area{
-  display: flex;
-  justify-content: center;    
-  align-items: center;   
+.detail {
+  background-color: rgba(255, 255, 255, 0.737);
 }
 
-   
-  
+.Button_Area{
+  display: flex;
+  justify-content: center;
+}
   

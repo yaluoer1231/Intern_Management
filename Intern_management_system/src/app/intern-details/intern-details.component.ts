@@ -14,7 +14,7 @@ import { Location } from '@angular/common';
 export class InternDetailsComponent implements OnInit {
 
   @Input() intern? : Intern;
-  @Input() ShowCode? : number;
+  @Input() showCode? : number;
 
   @Output() SexChange =  new EventEmitter();
   @Output() GoBack = new EventEmitter();
@@ -34,19 +34,14 @@ export class InternDetailsComponent implements OnInit {
   
 
   ngOnInit(): void {
-        if (this.ShowCode == 1)
-          this.showUpdate = true;
-        if (this.ShowCode == 2)
-          this.showDelete = true;
-        if (this.ShowCode == 3)
-          this.showPost = true;
   }
 
   
   save(): void {
     if (this.intern) {
       this.SexChange.emit(this.intern);
-      this.internService.putIntern(this.intern).subscribe();
+      this.internService.putIntern(this.intern)
+        .subscribe();
       this.GoBack.emit();
       this.showUpdate = false;
     }
@@ -74,8 +69,6 @@ export class InternDetailsComponent implements OnInit {
 
   Back(): void{
     this.GoBack.emit();
-    this.showDelete = false;
-    this.showUpdate = false;
-    this.showPost = false;
+    this.showCode = 0;
   }
 }

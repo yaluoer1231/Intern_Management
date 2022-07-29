@@ -14,7 +14,7 @@ export class InternsTableComponent implements OnInit {
   Interns : Intern[] = [];
   selectedintern? : Intern;
   showCode = 0;
-  IsShow = false;
+  isShow = false;
 
   constructor(private internService : InternService) { }
 
@@ -23,17 +23,17 @@ export class InternsTableComponent implements OnInit {
   }
 
   getIntern(): void{
-    this.internService.getIntern().subscribe(Interns => {
-      for (var i = 0;i <= Interns.length-1;i++) //迴圈找陣列，Interns.length-1為陣列長度，檢索從0開始
-        this.SexChange(Interns[i]);
-      this.Interns = Interns;
-    });
+    this.internService.getIntern()
+      .subscribe(Interns => {
+        for (var i = 0;i <= Interns.length-1;i++) //迴圈找陣列，Interns.length-1為陣列長度，檢索從0開始
+          this.SexChange(Interns[i]);
+        this.Interns = Interns;
+      })
   }
 
   onSelect(intern: Intern,ShowCode : number): void {
-    if (this.IsShow == false)
-    {
-      this.IsShow = true;
+    if (this.isShow == false) {
+      this.isShow = true;
       this.selectedintern = intern;
       this.showCode = ShowCode; //以代號顯示功能，0:關閉，1:PUT，2:DELETE，3:POST
     }
@@ -51,16 +51,18 @@ export class InternsTableComponent implements OnInit {
   }
   
   Post(intern: Intern): void{
-    this.internService.postIntern(intern).subscribe();
+    this.internService.postIntern(intern)
+      .subscribe();
   }
 
   Delete(intern: Intern): void{
     this.Interns = this.Interns.filter(h => h !== intern);
-    this.internService.deleteIntern(intern.id).subscribe();
+    this.internService.deleteIntern(intern.id)
+      .subscribe();
   }
 
   Back(): void{
-    this.IsShow = false;
+    this.isShow = false;
     this.showCode = 0;
   }
 }
