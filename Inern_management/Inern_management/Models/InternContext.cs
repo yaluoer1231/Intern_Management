@@ -18,6 +18,7 @@ namespace Inern_management.Models
         }
 
         public virtual DbSet<Intern> Interns { get; set; }
+        public virtual DbSet<InternNote> InternNotes { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -36,9 +37,7 @@ namespace Inern_management.Models
             {
                 entity.ToTable("Intern");
 
-                entity.Property(e => e.Id)
-                .ValueGeneratedOnAdd()
-                .HasColumnName("id");
+                entity.Property(e => e.Id).HasColumnName("id");
 
                 entity.Property(e => e.EMail)
                     .HasColumnType("text")
@@ -50,6 +49,35 @@ namespace Inern_management.Models
                     .HasColumnName("name");
 
                 entity.Property(e => e.SexCode).HasColumnName("sex_code");
+            });
+
+            modelBuilder.Entity<InternNote>(entity =>
+            {
+                entity.ToTable("Intern_Note");
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.DateCreate)
+                    .HasColumnType("date")
+                    .HasColumnName("dateCreate");
+
+                entity.Property(e => e.DateModifited)
+                    .HasColumnType("date")
+                    .HasColumnName("dateModifited");
+
+                entity.Property(e => e.Name)
+                    .IsRequired()
+                    .HasColumnType("text")
+                    .HasColumnName("name");
+
+                entity.Property(e => e.Note)
+                    .HasColumnType("text")
+                    .HasColumnName("note");
+
+                entity.Property(e => e.NoteTitle)
+                    .IsRequired()
+                    .HasColumnType("text")
+                    .HasColumnName("noteTitle");
             });
 
             OnModelCreatingPartial(modelBuilder);

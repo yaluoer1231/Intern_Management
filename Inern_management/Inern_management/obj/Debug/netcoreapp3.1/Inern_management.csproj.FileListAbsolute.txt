@@ -83,7 +83,7 @@ D:\Desktop\Project\Inern_management\Inern_management\obj\Debug\netcoreapp3.1\Ine
 D:\Desktop\Project\Inern_management\Inern_management\obj\Debug\netcoreapp3.1\Inern_management.dll
 D:\Desktop\Project\Inern_management\Inern_management\obj\Debug\netcoreapp3.1\Inern_management.pdb
 D:\Desktop\Project\Inern_management\Inern_management\obj\Debug\netcoreapp3.1\Inern_management.genruntimeconfig.cache
-D:\Desktop\Project\Inern_management\Inern_management\obj\Debug\netcoreapp3.1\staticwebassets\Inern_management.StaticWebAssets.xml
-D:\Desktop\Project\Inern_management\Inern_management\obj\Debug\netcoreapp3.1\scopedcss\bundle\Inern_management.styles.css
 D:\Desktop\Project\Inern_management\Inern_management\bin\Debug\netcoreapp3.1\System.Net.Http.Formatting.dll
 D:\Desktop\Project\Inern_management\Inern_management\bin\Debug\netcoreapp3.1\Newtonsoft.Json.Bson.dll
+D:\Desktop\Project\Inern_management\Inern_management\obj\Debug\netcoreapp3.1\staticwebassets\Inern_management.StaticWebAssets.xml
+D:\Desktop\Project\Inern_management\Inern_management\obj\Debug\netcoreapp3.1\scopedcss\bundle\Inern_management.styles.css
