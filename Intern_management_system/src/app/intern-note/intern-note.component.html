@@ -1,1 +1,16 @@
-<p>intern-note works!</p>
+<div class = "Note">
+    <table>
+        <tr>
+            <th>實習生姓名</th>
+            <th>標題</th>
+            <th>建立時間</th>
+            <th>修改時間</th>
+        </tr>
+        <tr *ngFor= "let note of Notes">
+            <td>{{note.name}}</td>
+            <td>{{note.noteTitle}}</td>
+            <td>{{note.CreatDateShow}}</td>
+            <td>{{note.ModifitedDateShow}}</td>
+        </tr>
+    </table>
+</div>

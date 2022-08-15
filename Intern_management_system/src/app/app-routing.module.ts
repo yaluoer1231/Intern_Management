@@ -7,7 +7,7 @@ import { InternNoteComponent } from './intern-note/intern-note.component';
 const routes: Routes = [
   { path: '', redirectTo: '/interns-table', pathMatch: 'full' },
   { path: 'interns-table', component: InternsTableComponent  },
-  { path: 'interns-note', component: InternNoteComponent  },
+  { path: 'intern-note', component: InternNoteComponent  },
 ];
 
 @NgModule({
