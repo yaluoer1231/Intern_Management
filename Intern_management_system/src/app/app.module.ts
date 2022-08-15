@@ -9,13 +9,15 @@ import { InternDetailsComponent } from './intern-details/intern-details.componen
 import { FormsModule } from '@angular/forms';
 import { InternsTableComponent } from './interns-table/interns-table.component';
 import { SexPipe } from './sex.pipe';
+import { InternNoteComponent } from './intern-note/intern-note.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     InternDetailsComponent,
     InternsTableComponent,
-    SexPipe
+    SexPipe,
+    InternNoteComponent
   ],
   imports: [
     BrowserModule,
