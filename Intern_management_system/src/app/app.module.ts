@@ -10,6 +10,7 @@ import { FormsModule } from '@angular/forms';
 import { InternsTableComponent } from './interns-table/interns-table.component';
 import { SexPipe } from './sex.pipe';
 import { InternNoteComponent } from './intern-note/intern-note.component';
+import { InternNoteEditComponent } from './intern-note-edit/intern-note-edit.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { InternNoteComponent } from './intern-note/intern-note.component';
     InternDetailsComponent,
     InternsTableComponent,
     SexPipe,
-    InternNoteComponent
+    InternNoteComponent,
+    InternNoteEditComponent
   ],
   imports: [
     BrowserModule,

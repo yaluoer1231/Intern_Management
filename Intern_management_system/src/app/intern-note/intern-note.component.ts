@@ -3,6 +3,7 @@ import { Note } from '../Note_Fromat';
 
 import { InternService } from '../intern.service';
 import { NotesService } from '../notes.service';
+import { noop } from 'rxjs';
 
 
 @Component({
@@ -15,26 +16,37 @@ export class InternNoteComponent implements OnInit {
   constructor(private notesService : NotesService) {}
 
   Notes : Note[] = [];
+  SelectNotes? : Note;
+
+  PostShow = true;
 
   ngOnInit(): void {
     this.getNotes();
   }
 
+  onSelect(Note: Note): void {
+    this.SelectNotes = Note;
+  }
+
   getNotes(): void{
     this.notesService.getIntern()
-    .subscribe(Notes => {
-      for (var i = 0; i < Notes.length; i++){
-        this.CreateDateSwitch(Notes[i]);
-        this.ModifitedDateSwitch(Notes[i]);
+    .subscribe(Note => {
+      for (var i = 0; i < Note.length; i++){
+        this.DateSwitch(Note[i]);
       }
-      this.Notes = Notes;
+      this.Notes = Note;
     })
   }
 
+  DateSwitch(Note: Note): void{
+    this.CreateDateSwitch(Note);
+    this.ModifitedDateSwitch(Note);
+  }
+
   CreateDateSwitch(Note: Note): void{
-    var CreatDate = new Date(Note.dateCreate) 
+    var CreatDate = new Date(Note.dateCreate);
     var year = CreatDate.getFullYear();
-    var month = CreatDate.getMonth();
+    var month = CreatDate.getMonth()+1;
     var date = CreatDate.getDate();
     var time = CreatDate.toLocaleTimeString();
 
@@ -43,11 +55,11 @@ export class InternNoteComponent implements OnInit {
   }
 
   ModifitedDateSwitch(Note: Note): void{
-    var CreatDate = new Date(Note.dateModifited) 
-    var year = CreatDate.getFullYear();
-    var month = CreatDate.getMonth();
-    var date = CreatDate.getDate();
-    var time = CreatDate.toLocaleTimeString();
+    var ModifitedDate = new Date(Note.dateModifited);
+    var year = ModifitedDate.getFullYear();
+    var month = ModifitedDate.getMonth()+1;
+    var date = ModifitedDate.getDate();
+    var time = ModifitedDate.toLocaleTimeString();
 
     Note.ModifitedDateShow = year+"年"+month+"月"+date+"日"+"　"+time;
     return ;

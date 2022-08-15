@@ -1,16 +1,30 @@
 <div class = "Note">
     <table>
         <tr>
-            <th>實習生姓名</th>
             <th>標題</th>
+            <th>實習生姓名</th>
             <th>建立時間</th>
             <th>修改時間</th>
+            <th>操作按鈕</th>
         </tr>
         <tr *ngFor= "let note of Notes">
-            <td>{{note.name}}</td>
             <td>{{note.noteTitle}}</td>
+            <td>{{note.name}}</td>
             <td>{{note.CreatDateShow}}</td>
             <td>{{note.ModifitedDateShow}}</td>
+            <td>
+                <button class="Read" (click)= "onSelect(note)">閱讀</button>         
+                <button class="Delete" (click)= "onSelect(note)">刪除</button>
+            </td>
         </tr>
     </table>
 </div>
+
+<div class = "NoteEdit">
+    <app-intern-note-edit [Notes]= "SelectNotes" [Add] = "true" (DateSwitch)="DateSwitch($event)"></app-intern-note-edit>
+</div>
+
+<div class ="Button_Area">
+    <button class="Add" (click)= "onSelect(Notes[0])">新增筆記</button>
+</div>
+

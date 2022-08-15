@@ -19,7 +19,6 @@ export class InternDetailsComponent implements OnInit {
   @Output() SexChange =  new EventEmitter();
   @Output() GoBack = new EventEmitter();
   @Output() GoDelete = new EventEmitter();
-  @Output() GoPost = new EventEmitter();
   @Output() GoSort = new EventEmitter();
   
   showDelete = false;

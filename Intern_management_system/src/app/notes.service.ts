@@ -24,6 +24,11 @@ export class NotesService {
 
   //PUT
   putIntern(Note: Note): Observable<any>{
-    return this.http.put(`${this.InternUrl}Intern/${Note.id}`, Note);
+    return this.http.put(`${this.InternUrl}InternNote/${Note.id}`, Note);
+  }
+
+  //POST
+  postNote(Note: Note): Observable<Note> {
+    return this.http.post<Note>(`${this.InternUrl}InternNote`, Note);
   }
 }

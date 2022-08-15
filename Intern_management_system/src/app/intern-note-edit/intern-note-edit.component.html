@@ -1,0 +1,42 @@
+<div *ngIf= "Notes">
+    <div class="read">
+        <h2>標題：{{Notes.noteTitle}}</h2>
+        <a>實習生：{{Notes.name}}</a>
+        <div>
+            <p>建立時間：{{Notes.CreatDateShow}}</p>
+            <p>上次修改：{{Notes.ModifitedDateShow}}</p>
+        </div>
+        <div>
+            {{Notes.note}}
+        </div>
+        <button class="Read" (click)= "Update = true">修改</button>  
+    </div>
+    <div class = "Update" *ngIf= "Update == true">
+        <ul>
+            <div class="Input">
+                <p class="title"><label for="Notes-name">標題： </label>
+                <input id="Notes-name" [(ngModel)]="Notes.noteTitle" placeholder="name"></p>
+                <p class="name"><label for="Notes-name">實習生姓名： </label>
+                <input id="Notes-name" [(ngModel)]="Notes.name" placeholder="name"></p>
+                <p class="note"><label for="Notes-name">筆記內容： </label>
+                <input id="Notes-name" [(ngModel)]="Notes.note" placeholder="name"></p>
+                <button type="Update" (click)= "save()">修改</button>
+                 <button type="Back" (click)= "Back()">取消</button>
+            </div>
+        </ul>
+    </div>
+    <div class = "Post" *ngIf ="Add == true" >
+            <p class="title"><label for="new-title">標題: </label>
+            <input id="new-title" #interntitle></p>
+
+            <p class="name"><label for="new-name">實習生姓名: </label>
+            <input id="new-name" #internname></p>
+            <p class="note"><label for="new-note">內文: </label>
+            <input id="new-note" #internnote></p>
+        <div class = "ButtonArea">
+            <button type="Post" class="add-button" 
+                (click)= "Post(internname.value,interntitle.value,internnote.value)">增加</button>
+                <button type="Back"  (click)= "Back()">取消</button>
+        </div>
+    </div>  
+</div>
