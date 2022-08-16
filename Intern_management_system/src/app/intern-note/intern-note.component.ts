@@ -18,18 +18,20 @@ export class InternNoteComponent implements OnInit {
   Notes : Note[] = [];
   SelectNotes? : Note;
 
+  showCode? : number;//以代號顯示功能，0:READ，1:PUT，2:DELETE，3:POST，4:CLOSE
   PostShow = true;
 
   ngOnInit(): void {
     this.getNotes();
   }
 
-  onSelect(Note: Note): void {
+  onSelect(Note: Note, Showcode : number): void {
     this.SelectNotes = Note;
+    this.showCode = Showcode;
   }
 
   getNotes(): void{
-    this.notesService.getIntern()
+    this.notesService.getNote()
     .subscribe(Note => {
       for (var i = 0; i < Note.length; i++){
         this.DateSwitch(Note[i]);
@@ -37,6 +39,15 @@ export class InternNoteComponent implements OnInit {
       this.Notes = Note;
     })
   }
+
+  Delete(Note: Note): void{
+    if (this.Notes.length > 1){
+      this.Notes = this.Notes.filter(h => h !== Note);
+      this.notesService.deleteNote(Note.id)
+        .subscribe();
+    }
+  }
+
 
   DateSwitch(Note: Note): void{
     this.CreateDateSwitch(Note);

@@ -16,9 +16,12 @@ export class InternNoteEditComponent implements OnInit {
 
   @Input() Notes? : Note;
   @Input() Add? : Boolean;
+  @Input() Showcode? : number;
 
 
   @Output() DateSwitch = new EventEmitter();
+  @Output() DeleteNote = new EventEmitter();
+  @Output() GoBack = new EventEmitter();
 
   Update = false;
 
@@ -35,7 +38,7 @@ export class InternNoteEditComponent implements OnInit {
       var EditDate = new Date();//產生新的日期與時間，以紀錄修改時間
       this.Notes.dateModifited = EditDate;
       this.DateSwitch.emit(this.Notes)
-      this.notesService.putIntern(this.Notes)
+      this.notesService.putNote(this.Notes)
         .subscribe();
     }
     this.Update = false;
@@ -57,8 +60,13 @@ export class InternNoteEditComponent implements OnInit {
     this.Add = false;
   }
 
+  Delete(Note:Note): void{
+    this.DeleteNote.emit(Note);
+    this.GoBack.emit();
+  }
+
   Back(): void{
     this.Update = false;
-    this.Add = false;
+    this.Showcode = 5;
   }
 }

@@ -21,10 +21,14 @@
 </div>
 
 <div class = "detail">
-    <app-intern-details [intern]="selectedintern" [showCode]= "showCode" 
-            (SexChange) = "SexChange($event)" (GoSort)="IdChange($event)"
-            (GoBack) = "Back()"  (GoDelete)= "Delete($event)"
-            *ngIf= "isShow  == true"></app-intern-details>
+    <app-intern-details 
+        [intern]="selectedintern" 
+        [showCode]= "showCode" 
+        (SexChange) = "SexChange($event)" 
+        (GoSort)= "IdChange($event)"
+        (GoBack) = "Back()"  
+        (GoDelete)= "Delete($event)">
+    </app-intern-details>
 </div>
 
 <div class ="Button_Area">

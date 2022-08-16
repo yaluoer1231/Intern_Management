@@ -14,7 +14,6 @@ export class InternsTableComponent implements OnInit {
   Interns : Intern[] = [];
   selectedintern? : Intern;
   showCode = 0; //以代號顯示功能，0:關閉，1:PUT，2:DELETE，3:POST
-  isShow = false;
   idShow = 0;
 
   constructor(private internService : InternService) { }
@@ -36,7 +35,6 @@ export class InternsTableComponent implements OnInit {
   }
 
   onSelect(intern: Intern,ShowCode : number): void {
-      this.isShow = true;
       this.selectedintern = intern;
       this.showCode = ShowCode;
       if (this.showCode == 2 && this.Interns.length <= 1)
@@ -66,9 +64,9 @@ export class InternsTableComponent implements OnInit {
         .subscribe();
     }
   }
+  
 
   Back(): void{
-    this.isShow = false;
     this.showCode = 0;
   }
 }

@@ -13,18 +13,23 @@
             <td>{{note.CreatDateShow}}</td>
             <td>{{note.ModifitedDateShow}}</td>
             <td>
-                <button class="Read" (click)= "onSelect(note)">閱讀</button>         
-                <button class="Delete" (click)= "onSelect(note)">刪除</button>
+                <button class="Read" (click)= "onSelect(note,0)">閱讀</button>         
+                <button class="Delete" (click)= "onSelect(note,2)">刪除</button>
             </td>
         </tr>
     </table>
 </div>
 
 <div class = "NoteEdit">
-    <app-intern-note-edit [Notes]= "SelectNotes" [Add] = "true" (DateSwitch)="DateSwitch($event)"></app-intern-note-edit>
+    <app-intern-note-edit 
+    [Notes]= "SelectNotes" 
+    [Showcode] = "showCode" 
+    (DeleteNote)= "Delete($event)"
+    (DateSwitch)= "DateSwitch($event)">
+</app-intern-note-edit>
 </div>
 
 <div class ="Button_Area">
-    <button class="Add" (click)= "onSelect(Notes[0])">新增筆記</button>
+    <button class="Add" (click)= "onSelect(Notes[0],3)">新增筆記</button>
 </div>
 

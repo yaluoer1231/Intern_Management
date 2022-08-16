@@ -43,7 +43,6 @@ export class InternDetailsComponent implements OnInit {
       this.internService.putIntern(this.intern)
         .subscribe();
       this.GoBack.emit();
-      this.showUpdate = false;
     }
     else
       this.showCode = 1.5;
@@ -52,7 +51,6 @@ export class InternDetailsComponent implements OnInit {
   Delete(intern:Intern): void{
     this.GoDelete.emit(intern);
     this.GoBack.emit();
-    this.showDelete = false;
   }
 
   Post(name : string,SexCode : string, eMail : string): void{
@@ -66,7 +64,6 @@ export class InternDetailsComponent implements OnInit {
         this.internService.postIntern(intern);
       });
       this.GoBack.emit();
-    this.showPost = false;
   }
 
   Back(): void{
