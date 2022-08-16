@@ -29,8 +29,7 @@ export class InternNoteComponent implements OnInit {
   onSelect(Note: Note, Showcode : number): void {
     this.SelectNotes = Note;
     this.showCode = Showcode;
-    console.log("Note"+this.showCode)
-    console.log("Noteedit"+ Showcode)
+    console.log(this.showCode);
   }
 
   getNotes(): void{

@@ -36,6 +36,7 @@ export class InternNoteEditComponent implements OnInit {
 
   ngOnInit(): void {
     this.CheckInterns();
+    console.log(this.Showcode);
   }
 
   CheckInterns(): void {
@@ -63,7 +64,8 @@ export class InternNoteEditComponent implements OnInit {
     name = name.trim();
     noteTitle = noteTitle.trim();
     note = note.trim();
-    if (!name || !noteTitle) { return; }
+    console.log("輸入前建立日期："+dateCreate)
+    if (name == "請選擇實習生" || !noteTitle) { return; }
     this.notesService.postNote({name,noteTitle,note,dateCreate,dateModifited} as Note)
       .subscribe(Notes => {
         this.DateSwitch.emit(Notes);
@@ -71,6 +73,8 @@ export class InternNoteEditComponent implements OnInit {
       })
     this.GoBack.emit();
   }
+
+  
 
   SelectList(): void{
     this.SelectInterns = this.Interns;

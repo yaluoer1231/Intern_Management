@@ -22,12 +22,6 @@ export class InternDetailsComponent implements OnInit {
   @Output() GoSort = new EventEmitter();
   @Output() Get = new EventEmitter();
 
-
-  showDelete = false;
-  showUpdate = false;
-  showPost = false;
-
-
   constructor(private route: ActivatedRoute,
     private internService: InternService,
     private location: Location,
@@ -36,6 +30,7 @@ export class InternDetailsComponent implements OnInit {
   
 
   ngOnInit(): void {
+    
   }
 
   
