@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Intern } from '../Intern_Fromat';
 import { InternDetailsComponent } from '../intern-details/intern-details.component';
 
@@ -15,6 +15,7 @@ export class InternsTableComponent implements OnInit {
   selectedintern? : Intern;
   showCode = 0; //以代號顯示功能，0:關閉，1:PUT，2:DELETE，3:POST
   idShow = 0;
+
 
   constructor(private internService : InternService) { }
 

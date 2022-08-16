@@ -16,6 +16,7 @@ export class InternNoteComponent implements OnInit {
   constructor(private notesService : NotesService) {}
 
   Notes : Note[] = [];
+  ShowNote : Note[] = [];
   SelectNotes? : Note;
 
   showCode? : number;//以代號顯示功能，0:READ，1:PUT，2:DELETE，3:POST，4:CLOSE
@@ -28,6 +29,8 @@ export class InternNoteComponent implements OnInit {
   onSelect(Note: Note, Showcode : number): void {
     this.SelectNotes = Note;
     this.showCode = Showcode;
+    console.log("Note"+this.showCode)
+    console.log("Noteedit"+ Showcode)
   }
 
   getNotes(): void{
@@ -37,15 +40,26 @@ export class InternNoteComponent implements OnInit {
         this.DateSwitch(Note[i]);
       }
       this.Notes = Note;
+      this.GetShowNotes();
     })
+    
+  }
+
+  GetShowNotes(): void{
+    for(var i = 0; i < this.Notes.length; i++){
+      if (i != this.Notes.length-1)
+        this.ShowNote[i] = this.Notes[i+1]
+    }
   }
 
   Delete(Note: Note): void{
-    if (this.Notes.length > 1){
-      this.Notes = this.Notes.filter(h => h !== Note);
+    if (this.Notes.length > 2){
+      this.Notes = this.Notes.filter(h => h !== Note); //將與Note不同的資料都過濾出來
+      this.ShowNote = this.ShowNote.filter(h => h !== Note);
       this.notesService.deleteNote(Note.id)
         .subscribe();
     }
+    this.GetShowNotes();
   }
 
 
@@ -60,7 +74,6 @@ export class InternNoteComponent implements OnInit {
     var month = CreatDate.getMonth()+1;
     var date = CreatDate.getDate();
     var time = CreatDate.toLocaleTimeString();
-
     Note.CreatDateShow = year+"年"+month+"月"+date+"日"+"　"+time;
     return ;
   }
@@ -76,4 +89,8 @@ export class InternNoteComponent implements OnInit {
     return ;
   }
 
+
+  Back(): void{
+    this.showCode = 5;
+  }
 }

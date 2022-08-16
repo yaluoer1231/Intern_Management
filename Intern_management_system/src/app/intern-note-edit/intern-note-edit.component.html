@@ -9,17 +9,28 @@
         <div>
             {{Notes.note}}
         </div>
-        <button class="Read" (click)= "Update = true">修改</button>  
+        <button class="Update" (click)= "Showcode = 1 ; SelectList()">修改</button>  
+        <button class="Close" (click)= "Back()">關閉</button> 
     </div>
     <div class = "Update" *ngIf= "Showcode == 1">
         <ul>
             <div class="Input">
-                <p class="title"><label for="Notes-name">標題： </label>
-                <input id="Notes-name" [(ngModel)]="Notes.noteTitle" placeholder="name"></p>
-                <p class="name"><label for="Notes-name">實習生姓名： </label>
-                <input id="Notes-name" [(ngModel)]="Notes.name" placeholder="name"></p>
+                <p class="title"><label for="Notes-title">標題： </label>
+                <input id="Notes-title" [(ngModel)]="Notes.noteTitle" placeholder="標題"></p>
+                
+                <!--<p class="name"><label for="Notes-name">實習生姓名： </label>
+                <input id="Notes-name" [(ngModel)]="Notes.name" placeholder="姓名"></p>-->
+                
+                <p class="name"><label>實習生姓名： </label>
+                    <select #internname>
+                        <option value = {{Notes.name}}>{{Notes.name}}</option>
+                        <option *ngFor = "let interns of SelectInterns" 
+                        value = {{interns.name}}> {{interns.name}} </option>
+                    </select>
+                </p>
+                
                 <p class="note"><label for="Notes-name">筆記內容： </label>
-                <input id="Notes-name" [(ngModel)]="Notes.note" placeholder="name"></p>
+                <input id="Notes-name" [(ngModel)]="Notes.note" placeholder=""></p>
                 <button type="Update" (click)= "save()">修改</button>
                  <button type="Back" (click)= "Back()">取消</button>
             </div>
@@ -35,9 +46,13 @@
     <div class = "Post" *ngIf= "Showcode == 3" >
             <p class="title"><label for="new-title">標題: </label>
             <input id="new-title" #interntitle></p>
+            
+            <select #internname>
+                <option>請選擇實習生</option>
+                <option *ngFor = "let interns of Interns"  value = {{interns.name}}>{{interns.name}}
+                </option>
+            </select>
 
-            <p class="name"><label for="new-name">實習生姓名: </label>
-            <input id="new-name" #internname></p>
             <p class="note"><label for="new-note">內文: </label>
             <input id="new-note" #internnote></p>
         <div class = "ButtonArea">

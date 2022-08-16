@@ -1,8 +1,10 @@
 import { Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import { Note } from '../Note_Fromat';
+import { Intern } from '../Intern_Fromat'
 import { InternNoteComponent } from '../intern-note/intern-note.component';
-import { NotesService } from '../notes.service';
 
+import { NotesService } from '../notes.service';
+import { InternService } from '../intern.service';
 
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
@@ -15,23 +17,33 @@ import { Location } from '@angular/common';
 export class InternNoteEditComponent implements OnInit {
 
   @Input() Notes? : Note;
-  @Input() Add? : Boolean;
   @Input() Showcode? : number;
 
 
   @Output() DateSwitch = new EventEmitter();
   @Output() DeleteNote = new EventEmitter();
   @Output() GoBack = new EventEmitter();
+  @Output() Get = new EventEmitter();
 
-  Update = false;
+  Interns : Intern[] = [];
+  SelectInterns : Intern[] = [];
 
   constructor(private route: ActivatedRoute,
     private notesService: NotesService,
+    private internService: InternService,
     private location: Location,
     private internNotecomponent: InternNoteComponent) { }
 
   ngOnInit(): void {
+    this.CheckInterns();
   }
+
+  CheckInterns(): void {
+    this.internService.getIntern()
+      .subscribe(Interns => {
+        this.Interns = Interns})
+  }
+
 
   save(): void {
     if (this.Notes && this.Notes.noteTitle) {
@@ -41,7 +53,7 @@ export class InternNoteEditComponent implements OnInit {
       this.notesService.putNote(this.Notes)
         .subscribe();
     }
-    this.Update = false;
+    this.GoBack.emit();
   }
 
   Post(name : string,noteTitle: string, note : string): void{
@@ -55,10 +67,16 @@ export class InternNoteEditComponent implements OnInit {
     this.notesService.postNote({name,noteTitle,note,dateCreate,dateModifited} as Note)
       .subscribe(Notes => {
         this.DateSwitch.emit(Notes);
-        this.notesService.postNote(Notes);
-      });
-    this.Add = false;
+        this.Get.emit();
+      })
+    this.GoBack.emit();
   }
+
+  SelectList(): void{
+    this.SelectInterns = this.Interns;
+    this.SelectInterns = this.SelectInterns.filter(h => h.name !== this.Notes?.name)
+  }
+  
 
   Delete(Note:Note): void{
     this.DeleteNote.emit(Note);
@@ -66,7 +84,7 @@ export class InternNoteEditComponent implements OnInit {
   }
 
   Back(): void{
-    this.Update = false;
+    this.GoBack.emit();
     this.Showcode = 5;
   }
 }
