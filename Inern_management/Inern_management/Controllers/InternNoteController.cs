@@ -41,6 +41,8 @@ namespace Inern_management.Controllers
         [HttpPost]
         public async Task<ActionResult<InternNote>> PostIntern(InternNote internNote)
         {
+            internNote.DateCreate = DateTime.Now;
+            internNote.DateModifited = internNote.DateCreate;
             await _context.InternNotes.AddAsync(internNote);
             await _context.SaveChangesAsync();
 
@@ -61,6 +63,7 @@ namespace Inern_management.Controllers
 
             try
             {
+                internNote.DateModifited = DateTime.Now;
                 await _context.SaveChangesAsync();
             }
             catch (DbUpdateConcurrencyException)

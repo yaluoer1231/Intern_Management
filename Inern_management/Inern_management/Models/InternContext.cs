@@ -58,11 +58,11 @@ namespace Inern_management.Models
                 entity.Property(e => e.Id).HasColumnName("id");
 
                 entity.Property(e => e.DateCreate)
-                    .HasColumnType("date")
+                    .HasColumnType("datetime")
                     .HasColumnName("dateCreate");
 
                 entity.Property(e => e.DateModifited)
-                    .HasColumnType("date")
+                    .HasColumnType("datetime")
                     .HasColumnName("dateModifited");
 
                 entity.Property(e => e.Name)

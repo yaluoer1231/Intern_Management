@@ -48,27 +48,22 @@ export class InternNoteEditComponent implements OnInit {
 
   save(): void {
     if (this.Notes && this.Notes.noteTitle) {
-      var EditDate = new Date();//產生新的日期與時間，以紀錄修改時間
-      this.Notes.dateModifited = EditDate;
       this.DateSwitch.emit(this.Notes)
       this.notesService.putNote(this.Notes)
-        .subscribe();
+        .subscribe(Notes => {
+          this.Get.emit();
+        });
     }
     this.GoBack.emit();
   }
 
   Post(name : string,noteTitle: string, note : string): void{
-    var EditDate = new Date();//產生新的日期與時間，以紀錄修改時間
-    var dateCreate = EditDate;
-    var dateModifited = EditDate;
     name = name.trim();
     noteTitle = noteTitle.trim();
     note = note.trim();
-    console.log("輸入前建立日期："+dateCreate)
     if (name == "請選擇實習生" || !noteTitle) { return; }
-    this.notesService.postNote({name,noteTitle,note,dateCreate,dateModifited} as Note)
+    this.notesService.postNote({name,noteTitle,note} as Note)
       .subscribe(Notes => {
-        this.DateSwitch.emit(Notes);
         this.Get.emit();
       })
     this.GoBack.emit();

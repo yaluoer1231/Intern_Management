@@ -8,7 +8,7 @@
             <th>操作按鈕</th>
         </tr>
         <tr *ngFor= "let note of ShowNote">
-            <td>{{note.noteTitle}}</td>
+            <td (click)= "onSelect(note,0)">{{note.noteTitle}}</td>
             <td>{{note.name}}</td>
             <td>{{note.CreatDateShow}}</td>
             <td>{{note.ModifitedDateShow}}</td>

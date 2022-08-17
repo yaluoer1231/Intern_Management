@@ -73,6 +73,7 @@ export class InternNoteComponent implements OnInit {
     var month = CreatDate.getMonth()+1;
     var date = CreatDate.getDate();
     var time = CreatDate.toLocaleTimeString();
+    
     Note.CreatDateShow = year+"年"+month+"月"+date+"日"+"　"+time;
     return ;
   }
