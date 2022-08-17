@@ -2,16 +2,17 @@
     <div class="read" *ngIf= "Showcode == 0">
         <h2>標題：{{Notes.noteTitle}}</h2>
         <a>實習生：{{Notes.name}}</a>
-        <div>
-            <p>建立時間：{{Notes.CreatDateShow}}</p>
-            <p>上次修改：{{Notes.ModifitedDateShow}}</p>
+        <div class = "date">
+            <a>建立時間：{{Notes.CreatDateShow}}</a>
+            <a>上次修改：{{Notes.ModifitedDateShow}}</a>
         </div>
-        <div>
-            {{Notes.note}}
+        <div type = "Note">
+            <a>{{Notes.note}}</a>
         </div>
-        <button class="Update" (click)= "Showcode = 1 ; SelectList()">修改</button>  
-        <button class="Close" (click)= "Back()">關閉</button> 
+        <button type="Update" (click)= "Showcode = 1 ; SelectList()">修改</button>  
+        <button type="Back" (click)= "Back()">關閉</button> 
     </div>
+
     <div class = "Update" *ngIf= "Showcode == 1">
         <ul>
             <div class="Input">
@@ -36,6 +37,7 @@
             </div>
         </ul>
     </div>
+
     <div class = Delete *ngIf = "Showcode == 2">
         <h2>確定刪除「{{Notes.noteTitle}}」這篇文章嗎?</h2>
         <div class = "ButtonArea">
@@ -43,7 +45,10 @@
             <button type="Back" (click)= "Back()">取消</button>
         </div>  
     </div>
+
     <div class = "Post" *ngIf= "Showcode == 3" >
+            <h2> 新增筆記</h2>
+
             <p class="title"><label for="new-title">標題: </label>
             <input id="new-title" #interntitle></p>
             

@@ -20,7 +20,6 @@ export class InternNoteEditComponent implements OnInit {
   @Input() Showcode? : number;
 
 
-  @Output() DateSwitch = new EventEmitter();
   @Output() DeleteNote = new EventEmitter();
   @Output() GoBack = new EventEmitter();
   @Output() Get = new EventEmitter();
@@ -48,7 +47,6 @@ export class InternNoteEditComponent implements OnInit {
 
   save(): void {
     if (this.Notes && this.Notes.noteTitle) {
-      this.DateSwitch.emit(this.Notes)
       this.notesService.putNote(this.Notes)
         .subscribe(Notes => {
           this.Get.emit();

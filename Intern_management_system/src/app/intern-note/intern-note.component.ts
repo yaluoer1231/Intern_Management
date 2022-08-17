@@ -9,7 +9,7 @@ import { noop } from 'rxjs';
 @Component({
   selector: 'app-intern-note',
   templateUrl: './intern-note.component.html',
-  styleUrls: ['./intern-note.component.scss']
+  styleUrls: ['./intern-note.component.scss','./button-table.scss']
 })
 export class InternNoteComponent implements OnInit {
 
@@ -29,14 +29,14 @@ export class InternNoteComponent implements OnInit {
   onSelect(Note: Note, Showcode : number): void {
     this.SelectNotes = Note;
     this.showCode = Showcode;
-    console.log(this.showCode);
   }
 
   getNotes(): void{
     this.notesService.getNote()
     .subscribe(Note => {
       for (var i = 0; i < Note.length; i++){
-        this.DateSwitch(Note[i]);
+        this.CreateDateSwitch(Note[i]);
+        this.ModifitedDateSwitch(Note[i]);
       }
       this.Notes = Note;
       this.GetShowNotes();
@@ -61,11 +61,6 @@ export class InternNoteComponent implements OnInit {
     this.GetShowNotes();
   }
 
-
-  DateSwitch(Note: Note): void{
-    this.CreateDateSwitch(Note);
-    this.ModifitedDateSwitch(Note);
-  }
 
   CreateDateSwitch(Note: Note): void{
     var CreatDate = new Date(Note.dateCreate);

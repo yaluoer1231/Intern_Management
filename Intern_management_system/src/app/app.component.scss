@@ -19,7 +19,7 @@ nav a{
     border-radius: 10px;
     border: 2px solid rgb(124, 58, 1);
     font-size: 1.3rem;
-
+    margin-left:0.5rem;
 }
 nav a:hover{
     background-color : rgb(254, 187, 71);
@@ -31,4 +31,8 @@ nav a:hover{
 }
 nav a.active {
     background-color: black;
+  }
+
+  .frist{
+    margin-left:0;
   }

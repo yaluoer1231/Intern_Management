@@ -8,7 +8,7 @@
             <th>操作按鈕</th>
         </tr>
         <tr *ngFor= "let note of ShowNote">
-            <td (click)= "onSelect(note,0)">{{note.noteTitle}}</td>
+            <td>{{note.noteTitle}}</td>
             <td>{{note.name}}</td>
             <td>{{note.CreatDateShow}}</td>
             <td>{{note.ModifitedDateShow}}</td>
@@ -26,8 +26,7 @@
     [Showcode] = "showCode" 
     (GoBack)= "Back()"
     (Get) = "getNotes()"
-    (DeleteNote)= "Delete($event)"
-    (DateSwitch)= "DateSwitch($event)">
+    (DeleteNote)= "Delete($event)">
 </app-intern-note-edit>
 </div>
 
