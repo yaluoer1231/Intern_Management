@@ -1,9 +1,10 @@
 <div class = "select-show">
+    請選擇實習生：
     <select #internname>
-        <option value = "顯示全部">顯示全部</option>
         <option *ngFor = "let interns of Interns"  value = {{interns.name}}>{{interns.name}}
-        </option>>
+        </option>
     </select>
+    <button class="Add" (click) = "SearchInternNote(internname.value);SelectShowCode = 2;showCode=5">確定</button>
 </div>
 
 <div class = "Note">
@@ -15,7 +16,7 @@
             <th >修改時間</th>
             <th>操作按鈕</th>
         </tr>
-        <ng-container *ngIf = "TestShow == true">
+        <ng-container *ngIf = "SelectShowCode == 0">
             <tr *ngFor= "let note of ShowNote">
                 <td class = "table-Notetitle">{{note.noteTitle}}</td>
                 <td>{{note.name}}</td>
@@ -27,8 +28,22 @@
                 </td>
             </tr>
         </ng-container>
-        <ng-container *ngIf ="TestShow == false">
+
+        <ng-container *ngIf ="SelectShowCode == 1">
             <tr *ngFor= "let note of SearchNote">
+                <td class = "table-Notetitle">{{note.noteTitle}}</td>
+                <td>{{note.name}}</td>
+                <td >{{note.CreatDateShow}}</td>
+                <td >{{note.ModifitedDateShow}}</td>
+                <td>
+                    <button class="Read" (click)= "onSelect(note,0)">閱讀</button>         
+                    <button class="Delete" (click)= "onSelect(note,2)">刪除</button>
+                </td>
+            </tr>
+        </ng-container>
+
+        <ng-container *ngIf = "SelectShowCode == 2">
+            <tr *ngFor= "let note of InternNote">
                 <td class = "table-Notetitle">{{note.noteTitle}}</td>
                 <td>{{note.name}}</td>
                 <td >{{note.CreatDateShow}}</td>
@@ -42,8 +57,8 @@
     </table>
 </div>
 <div class="Show_Area">
-    <button class="Show" (click)= "TestShow = true">依創建日期顯示</button>
-    <button class="Show" (click)= "TestShow = false">依修改日期顯示</button>
+    <button class="Show" (click)= "SelectShowCode = 0">依創建日期顯示</button>
+    <button class="Show" (click)= "SelectShowCode = 1">依修改日期顯示</button>
 </div>
 
 <div class = "NoteEdit">

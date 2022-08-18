@@ -1,16 +1,18 @@
 <div *ngIf= "Notes">
     <div class="read" *ngIf= "Showcode == 0">
-        <h2>{{Notes.noteTitle}}</h2>
+        <h2>【{{Notes.noteTitle}}】</h2>
         <p class = "name">實習生：{{Notes.name}}</p>
         <div class = "date">
             <a>建立時間：{{Notes.CreatDateShow}}</a>
             <a class = "ModifitedDateShow">上次修改：{{Notes.ModifitedDateShow}}</a>
         </div>
-        <div class = "Note">
-            <a>{{Notes.note}}</a>
+        <div class = "Note" rows = "6" cols = "90">
+            <span>{{Notes.note}}</span>
         </div>
+        <div class = "ButtonArea">
         <button type="Update" (click)= "Showcode = 1;SelectList()">修改</button>  
         <button type="Back" (click)= "Back()">關閉</button> 
+    </div>
     </div>
 
     <div class = "Update" *ngIf= "Showcode == 1">
@@ -35,8 +37,10 @@
                     <textarea [(ngModel)]="Notes.note" name = "new-note" rows = "6" cols = "90"  #internnote
                     placeholder="請輸入..."></textarea>
                 </div>
+                <div class = "ButtonArea">
                 <button type="Update" (click)= "save()">修改</button>
                  <button type="Back" (click)= "Back()">取消</button>
+                </div>
             </div>
         </ul>
     </div>

@@ -1,8 +1,16 @@
+.select-show{
+  text-align: center;
+  select {
+    margin-right: 1rem;
+    font-size: 1.2rem;
+  }
+}
+
+
 .Note{
     display: flex;
     justify-content: center;
 }
-
 
 .table-title{
   padding-left: 10rem;
@@ -13,6 +21,7 @@
   font-weight: bolder;
   font-size: 1.2rem;
   letter-spacing: 1rem;
+ 
 }
 
 .Note table { 
@@ -40,7 +49,9 @@
   }
 
 .NoteEdit {
-    background-color: rgba(255, 255, 255, 0.737);
+  margin-right: 15%;
+  margin-left: 15%;
+  background-color: rgba(255, 255, 255, 0.737);
   margin-bottom: 2rem;
   }
 

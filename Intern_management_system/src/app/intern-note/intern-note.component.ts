@@ -22,9 +22,10 @@ export class InternNoteComponent implements OnInit {
   Notes : Note[] = [];
   ShowNote : Note[] = [];
   SearchNote : Note[] = [];
+  InternNote : Note[] = [];
   SelectNotes? : Note;
-
-  TestShow : boolean = false;
+  
+  SelectShowCode : number = 1; //以代號顯示功能，0:依創建日期，1:依修改日期，2:找同名字並依照創建日期
 
   showCode? : number;//以代號顯示功能，0:READ，1:PUT，2:DELETE，3:POST，4:CLOSE
  
@@ -91,19 +92,14 @@ export class InternNoteComponent implements OnInit {
 
   SearchInternNote(intern : string): void {
     var Sort = 0;
-    if (intern == "顯示全部")
-      this.getNotes();
-    else{
-      this.notesService.getNote().subscribe(Note => {
-      for (var i = 1; i < Note.length; i++){
-        if (Note[i].name == intern)
-          {
-            this.SearchNote[Sort] = Note[i];
-            Sort += 1;
-          }
+    this.InternNote = []; // 每次查詢前必須先重製陣列
+    for (var i = 0; i < this.SearchNote.length; i++){
+      if (this.SearchNote[i].name == intern)
+        {
+          this.InternNote[Sort] = this.SearchNote[i];
+          Sort += 1;
         }
-      })
-    }
+      }
   }
 
 
