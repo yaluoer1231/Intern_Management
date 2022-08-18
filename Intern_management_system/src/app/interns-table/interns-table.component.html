@@ -1,6 +1,7 @@
 <div class = "interns">
      <table>
         <tr>
+            <th>鎖定</th>
             <th>序列</th>
             <th>姓名</th>
             <th>性別</th>
@@ -8,6 +9,7 @@
             <th>操作</th>
         </tr>
         <tr *ngFor = "let intern of Interns">
+            <td><button class="Delete">鎖定</button></td>
             <td>{{intern.sort}}</td>
             <td>{{intern.name}}</td>
             <td>{{intern.sex}}</td>
@@ -34,6 +36,7 @@
 
 <div class ="Button_Area">
     <button class="Add" (click)= "onSelect(Interns[0],3)" *ngIf = "showCode != 3">資料增加</button>
+    <button class="Add" *ngIf = "showCode != 3">介面</button>
 </div>
 
 
