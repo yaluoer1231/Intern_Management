@@ -23,6 +23,7 @@ export class InternNoteEditComponent implements OnInit {
   @Output() DeleteNote = new EventEmitter();
   @Output() GoBack = new EventEmitter();
   @Output() Get = new EventEmitter();
+  @Output() PutShow = new EventEmitter();
 
   Interns : Intern[] = [];
   SelectInterns : Intern[] = [];
@@ -67,9 +68,12 @@ export class InternNoteEditComponent implements OnInit {
     this.GoBack.emit();
   }
 
-  
+  CheckCode(): void{
+    console.log(this.Showcode);
+  }
 
   SelectList(): void{
+    this.PutShow.emit();
     this.SelectInterns = this.Interns;
     this.SelectInterns = this.SelectInterns.filter(h => h.name !== this.Notes?.name)
   }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit ,EventEmitter, Input, Output} from '@angular/core';
 import { Note } from '../Note_Fromat';
 
 import { InternService } from '../intern.service';
@@ -20,8 +20,10 @@ export class InternNoteComponent implements OnInit {
   SearchNote : Note[] = [];
   SelectNotes? : Note;
 
+  TestShow : boolean = false;
+
   showCode? : number;//以代號顯示功能，0:READ，1:PUT，2:DELETE，3:POST，4:CLOSE
-  PostShow = true;
+ 
 
   ngOnInit(): void {
     this.getNotes();
@@ -44,6 +46,15 @@ export class InternNoteComponent implements OnInit {
       this.SearchNotes();
     })
   }
+
+  PutShow(): void{
+    this.showCode = 1;
+  }
+
+  CheckCode(): void{
+    console.log(this.showCode);
+  }
+
 
   GetShowNotes(): void{
     for(var i = 0; i < this.Notes.length; i++){
@@ -68,11 +79,12 @@ export class InternNoteComponent implements OnInit {
 
 
   Delete(Note: Note): void{
-    if (this.Notes.length > 2){
+    if (this.Notes.length > 1){
       this.Notes = this.Notes.filter(h => h !== Note); //將與Note不同的資料都過濾出來
       this.ShowNote = this.ShowNote.filter(h => h !== Note);
       this.notesService.deleteNote(Note.id)
-        .subscribe();
+        .subscribe(Notes => {
+          this.getNotes()});
     }
     this.GetShowNotes();
   }

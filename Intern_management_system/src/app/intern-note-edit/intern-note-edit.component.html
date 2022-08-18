@@ -9,13 +9,14 @@
         <div type = "Note">
             <a>{{Notes.note}}</a>
         </div>
-        <button type="Update" (click)= "Showcode = 1 ; SelectList()">修改</button>  
+        <button type="Update" (click)= "Showcode = 1;SelectList()">修改</button>  
         <button type="Back" (click)= "Back()">關閉</button> 
     </div>
 
     <div class = "Update" *ngIf= "Showcode == 1">
         <ul>
             <div class="Input">
+                <h2>修改中</h2>
                 <p class="title"><label for="Notes-title">標題： </label>
                 <input id="Notes-title" [(ngModel)]="Notes.noteTitle" placeholder="標題"></p>
                 
@@ -58,6 +59,7 @@
                 </option>
             </select>
 
+            
             <p class="note"><label for="new-note">內文: </label>
             <input id="new-note" #internnote></p>
         <div class = "ButtonArea">
@@ -66,4 +68,8 @@
                 <button type="Back"  (click)= "Back()">取消</button>
         </div>
     </div>  
+</div>
+
+<div>
+    <button type = "post" (click)="CheckCode()">檢查</button>
 </div>

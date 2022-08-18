@@ -1,5 +1,5 @@
 <div class = "Note">
-    <table>
+    <table >
         <tr>
             <th>標題</th>
             <th>實習生姓名</th>
@@ -7,18 +7,35 @@
             <th>修改時間</th>
             <th>操作按鈕</th>
         </tr>
-        <tr *ngFor= "let note of SearchNote" >
-            <td>{{note.noteTitle}}</td>
-            <td>{{note.name}}</td>
-            <td>{{note.CreatDateShow}}</td>
-            <td>{{note.ModifitedDateShow}}</td>
-            <td>
-                <button class="Read" (click)= "onSelect(note,0)">閱讀</button>         
-                <button class="Delete" (click)= "onSelect(note,2)">刪除</button>
-            </td>
-        </tr>
-        
+        <ng-container *ngIf = "TestShow">
+            <tr *ngFor= "let note of ShowNote">
+                <td>{{note.noteTitle}}</td>
+                <td>{{note.name}}</td>
+                <td>{{note.CreatDateShow}}</td>
+                <td>{{note.ModifitedDateShow}}</td>
+                <td>
+                    <button class="Read" (click)= "onSelect(note,0)">閱讀</button>         
+                    <button class="Delete" (click)= "onSelect(note,2)">刪除</button>
+                </td>
+            </tr>
+        </ng-container>
+        <ng-container *ngIf = "TestShow == false">
+            <tr *ngFor= "let note of SearchNote">
+                <td>{{note.noteTitle}}</td>
+                <td>{{note.name}}</td>
+                <td>{{note.CreatDateShow}}</td>
+                <td>{{note.ModifitedDateShow}}</td>
+                <td>
+                    <button class="Read" (click)= "onSelect(note,0)">閱讀</button>         
+                    <button class="Delete" (click)= "onSelect(note,2)">刪除</button>
+                </td>
+            </tr>
+        </ng-container>
     </table>
+</div>
+<div class="Show_Area">
+    <button class="Show" (click)= "TestShow = true">正常顯示</button>
+    <button class="Show" (click)= "TestShow = false">照修改日期顯示</button>
 </div>
 
 <div class = "NoteEdit">
@@ -27,11 +44,13 @@
     [Showcode] = "showCode" 
     (GoBack)= "Back()"
     (Get) = "getNotes()"
-    (DeleteNote)= "Delete($event)">
+    (DeleteNote)= "Delete($event)"
+    (PutShow) = "PutShow()">
 </app-intern-note-edit>
 </div>
 
 <div class ="Button_Area">
     <button class="Add" (click)= "onSelect(Notes[0],3)">新增筆記</button>
+    <button class="Add" (click)= "CheckCode()">檢查</button>
 </div>
 
