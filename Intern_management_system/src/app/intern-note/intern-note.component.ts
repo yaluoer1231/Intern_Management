@@ -19,19 +19,20 @@ export class InternNoteComponent implements OnInit {
     private internService : InternService) {}
 
   Interns : Intern[] = [];
+  ShowInterns : Intern [] = [];
 
   Notes : Note[] = [];
   ShowNote : Note[] = [];
   SelectNotes? : Note;
   
-  SelectShowCode : number = 1; //以代號顯示功能，0:依創建日期，1:依修改日期，2:找同名字並依照創建日期
+  SelectShowCode : number = 0; //以代號顯示功能，0:依創建日期，1:依修改日期，2:找同名字並依照創建日期
 
   showCode? : number;//以代號顯示功能，0:READ，1:PUT，2:DELETE，3:POST，4:CLOSE
  
 
   ngOnInit(): void {
-    this.getNotes();
     this.getIntern();
+    this.getNotes();
   }
 
   onSelect(Note: Note, Showcode : number): void {
@@ -48,14 +49,22 @@ export class InternNoteComponent implements OnInit {
         this.ModifitedDateSwitch(Note[i]);
       }
       this.Notes = Note;
-      this.SearchNotes();
+      this.GetShowNotes();
     })
   }
 
   getIntern(): void{
+    var Num = 0;
+    this.ShowInterns = [];
     this.internService.getIntern()
       .subscribe(Interns => {
         this.Interns = Interns;
+        for (var i = 0; i < this.Interns.length ; i++){
+          if (this.Interns[i].lock == false){
+            this.ShowInterns[Num] = this.Interns[i];
+            Num += 1;
+          }
+        }
       })
   }
 
@@ -66,25 +75,38 @@ export class InternNoteComponent implements OnInit {
 
   GetShowNotes(): void{
     this.SelectShowCode = 0;
-    for(var i = 0; i < this.Notes.length; i++){
-      if (i != this.Notes.length-1)
-        this.ShowNote[i] = this.Notes[i+1]
+    var Num = 0;
+    this.ShowNote = [];
+    for(var i = 0; i < this.Notes.length-1; i++){
+      for(var j = 0; j < this.ShowInterns.length; j++){
+        if (this.Notes[i+1].name == this.ShowInterns[j].name){
+          this.ShowNote[Num] = this.Notes[i+1];
+          Num += 1;
+        }
+      }
     }
   }
 
+  CatchNote(): void{
+    
+  }
+
   SearchNotes(): void{
+    this.GetShowNotes();
+    var SaveNote : Note[] = [];
     this.SelectShowCode = 1;
-    this.ShowNote = [];
-    for (var i = 1; i < this.Notes.length; i++){
-      var NoteMain = new Date(this.Notes[i].dateModifited).getTime();
+    for (var i = 0; i < this.ShowNote.length; i++){
+      var NoteMain = new Date(this.ShowNote[i].dateModifited).getTime();
       var Test = 0;
-      for (var j = 1; j < this.Notes.length; j++){
-        var NoteSon = new Date(this.Notes[j].dateModifited).getTime();
+      for (var j = 0; j < this.ShowNote.length; j++){
+        var NoteSon = new Date(this.ShowNote[j].dateModifited).getTime();
           if (NoteMain < NoteSon)
             Test += 1;
       }
-      this.ShowNote[Test] = this.Notes[i];
+      SaveNote[Test] = this.ShowNote[i];
     }
+    console.log(SaveNote);
+    this.ShowNote = SaveNote;
   }
 
   SearchInternNote(intern : string): void {

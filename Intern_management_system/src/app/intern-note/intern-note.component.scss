@@ -49,11 +49,13 @@
   }
 
 .NoteEdit {
-  margin-right: 15%;
-  margin-left: 15%;
+  width: 60rem;
   background-color: rgba(255, 255, 255, 0.737);
   margin-bottom: 2rem;
-  }
+  
+  display: flex;
+  justify-content: center;
+}
 
   .Button_Area,.Show_Area{
     display: flex;

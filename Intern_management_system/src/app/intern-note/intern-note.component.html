@@ -1,7 +1,7 @@
 <div class = "select-show">
     請選擇實習生：
     <select #internname>
-        <option *ngFor = "let interns of Interns"  value = {{interns.name}}>{{interns.name}}
+        <option *ngFor = "let interns of ShowInterns"  value = {{interns.name}}>{{interns.name}}
         </option>
     </select>
     <button class="Add" (click) = "SearchInternNote(internname.value);showCode=5">確定</button>
@@ -26,32 +26,6 @@
                 <button class="Delete" (click)= "onSelect(note,2)">刪除</button>
             </td>
         </tr>
-
-         <!--<ng-container *ngIf ="SelectShowCode == 1">
-            <tr *ngFor= "let note of SearchNote">
-                <td class = "table-Notetitle">{{note.noteTitle}}</td>
-                <td>{{note.name}}</td>
-                <td >{{note.CreatDateShow}}</td>
-                <td >{{note.ModifitedDateShow}}</td>
-                <td>
-                    <button class="Read" (click)= "onSelect(note,0)">閱讀</button>         
-                    <button class="Delete" (click)= "onSelect(note,2)">刪除</button>
-                </td>
-            </tr>
-        </ng-container>
-
-        <ng-container *ngIf = "SelectShowCode == 2">
-            <tr *ngFor= "let note of InternNote">
-                <td class = "table-Notetitle">{{note.noteTitle}}</td>
-                <td>{{note.name}}</td>
-                <td >{{note.CreatDateShow}}</td>
-                <td >{{note.ModifitedDateShow}}</td>
-                <td>
-                    <button class="Read" (click)= "onSelect(note,0)">閱讀</button>         
-                    <button class="Delete" (click)= "onSelect(note,2)">刪除</button>
-                </td>
-            </tr>
-        </ng-container>-->
     </table>
 </div>
 <div class="Show_Area">
@@ -60,7 +34,7 @@
 </div>
 
 <div class = "NoteEdit">
-    <app-intern-note-edit 
+    <app-intern-note-edit class="edit"
     [Notes]= "SelectNotes" 
     [Showcode] = "showCode" 
     (GoBack)= "Back()"

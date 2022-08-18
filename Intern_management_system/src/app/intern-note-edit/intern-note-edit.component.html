@@ -6,9 +6,7 @@
             <a>建立時間：{{Notes.CreatDateShow}}</a>
             <a class = "ModifitedDateShow">上次修改：{{Notes.ModifitedDateShow}}</a>
         </div>
-        <div class = "Note" rows = "6" cols = "90">
-            <span>{{Notes.note}}</span>
-        </div>
+        <div class = "Note">{{Notes.note}} </div>
         <div class = "ButtonArea">
         <button type="Update" (click)= "Showcode = 1;SelectList()">修改</button>  
         <button type="Back" (click)= "Back()">關閉</button> 
