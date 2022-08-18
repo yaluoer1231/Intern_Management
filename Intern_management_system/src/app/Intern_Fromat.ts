@@ -6,4 +6,5 @@ export interface Intern{
     sexCode : number;
     sex  :string;
     eMail: string;
+    lock : boolean;
 }

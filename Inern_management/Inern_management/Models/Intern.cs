@@ -11,5 +11,6 @@ namespace Inern_management.Models
         public string Name { get; set; }
         public int SexCode { get; set; }
         public string EMail { get; set; }
+        public bool Lock { get; set; }
     }
 }

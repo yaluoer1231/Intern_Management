@@ -43,6 +43,8 @@ namespace Inern_management.Models
                     .HasColumnType("text")
                     .HasColumnName("e_mail");
 
+                entity.Property(e => e.Lock).HasColumnName("lock");
+
                 entity.Property(e => e.Name)
                     .IsRequired()
                     .HasColumnType("text")

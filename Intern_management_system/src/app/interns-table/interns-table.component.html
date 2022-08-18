@@ -1,20 +1,23 @@
 <div class = "interns">
      <table>
         <tr>
-            <th>鎖定</th>
+            <th *ngIf = "this.IsUser == false">鎖定</th>
             <th>序列</th>
             <th>姓名</th>
             <th>性別</th>
             <th>電子信箱</th>
-            <th>操作</th>
+            <th *ngIf = "this.IsUser == false">操作</th>
         </tr>
-        <tr *ngFor = "let intern of Interns">
-            <td><button class="Delete">鎖定</button></td>
+        <tr *ngFor = "let intern of ShowInterns">
+            <td *ngIf = "this.IsUser == false">
+                <button class="Delete" (click)= "IsLock(intern)" *ngIf = "intern.lock == false">鎖定</button>
+                <button class="Delete" (click)= "IsLock(intern)" *ngIf = "intern.lock == true">解除</button>
+            </td>
             <td>{{intern.sort}}</td>
             <td>{{intern.name}}</td>
             <td>{{intern.sex}}</td>
             <td>{{intern.eMail}}</td>
-            <td>
+            <td *ngIf = "this.IsUser == false">
                 <button class="Update" (click)= "onSelect(intern,1)">修改</button>         
                 <button class="Delete" (click)= "onSelect(intern,2)">刪除</button>
             </td>
@@ -33,8 +36,9 @@
         (GoBack) = "Back()"  >
     </app-intern-details>
 </div>
-<div>
-    <button class="Add" >介面</button>
+<div class ="Button_Area">
+    <button class="Add" (click) = "getIntern()">管理者介面</button>
+    <button class="Update" (click) = " getUnLockIntern()">使用者介面</button>
 </div>
 <div class ="Button_Area">
     <button class="Add" (click)= "onSelect(Interns[0],3)" *ngIf = "showCode != 3">資料增加</button>

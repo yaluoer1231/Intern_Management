@@ -12,7 +12,10 @@ import { InternService } from '../intern.service';
 export class InternsTableComponent implements OnInit {
 
   Interns : Intern[] = [];
-  LockInterns : Intern[] = [];
+  ShowInterns : Intern[] = [];
+
+  IsUser : boolean = true;
+
   selectedintern? : Intern;
   showCode = 0; //以代號顯示功能，0:關閉，1:PUT，2:DELETE，3:POST
   idShow = 0;
@@ -25,6 +28,7 @@ export class InternsTableComponent implements OnInit {
   }
 
   getIntern(): void{
+    this.IsUser = false;
     this.idShow = 0;
     this.internService.getIntern()
       .subscribe(Interns => {
@@ -33,7 +37,20 @@ export class InternsTableComponent implements OnInit {
           this.IdChange(Interns[i]);
         }
         this.Interns = Interns;
+        this.ShowInterns = Interns;
       })
+  }
+
+  getUnLockIntern(): void{
+    this.IsUser = true;
+    var Num = 0;
+    this.ShowInterns = [];
+    for (var i = 0; i < this.Interns.length; i ++){
+      if (this.Interns[i].lock == false){
+        this.ShowInterns[Num] = this.Interns[i];
+        Num += 1;
+      }
+    }
   }
 
   onSelect(intern: Intern,ShowCode : number): void {
@@ -65,6 +82,15 @@ export class InternsTableComponent implements OnInit {
       this.internService.deleteIntern(intern.id)
         .subscribe();
     }
+  }
+
+  IsLock(intern: Intern): void{
+    if (intern.lock == true)
+      intern.lock = false;
+    else
+      intern.lock = true;
+    this.internService.putIntern(intern)
+        .subscribe();
   }
   
 
