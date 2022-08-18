@@ -7,7 +7,7 @@
             <th>修改時間</th>
             <th>操作按鈕</th>
         </tr>
-        <tr *ngFor= "let note of ShowNote">
+        <tr *ngFor= "let note of SearchNote" >
             <td>{{note.noteTitle}}</td>
             <td>{{note.name}}</td>
             <td>{{note.CreatDateShow}}</td>
@@ -17,6 +17,7 @@
                 <button class="Delete" (click)= "onSelect(note,2)">刪除</button>
             </td>
         </tr>
+        
     </table>
 </div>
 

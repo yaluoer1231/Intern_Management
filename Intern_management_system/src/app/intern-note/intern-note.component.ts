@@ -17,6 +17,7 @@ export class InternNoteComponent implements OnInit {
 
   Notes : Note[] = [];
   ShowNote : Note[] = [];
+  SearchNote : Note[] = [];
   SelectNotes? : Note;
 
   showCode? : number;//以代號顯示功能，0:READ，1:PUT，2:DELETE，3:POST，4:CLOSE
@@ -40,8 +41,8 @@ export class InternNoteComponent implements OnInit {
       }
       this.Notes = Note;
       this.GetShowNotes();
+      this.SearchNotes();
     })
-    
   }
 
   GetShowNotes(): void{
@@ -50,6 +51,21 @@ export class InternNoteComponent implements OnInit {
         this.ShowNote[i] = this.Notes[i+1]
     }
   }
+
+  SearchNotes(): void{
+    var Test : number[]= [];
+    for (var i = 1; i < this.Notes.length; i++){
+      var NoteMain = new Date(this.Notes[i].dateModifited).getTime();
+      Test[i-1] = 0;
+      for (var j = 1; j < this.Notes.length; j++){
+        var NoteSon = new Date(this.Notes[j].dateModifited).getTime();
+          if (NoteMain < NoteSon)
+            Test[i-1] += 1;
+      }
+      this.SearchNote[Test[i-1]] = this.Notes[i];
+    }
+  }
+
 
   Delete(Note: Note): void{
     if (this.Notes.length > 2){
