@@ -1,18 +1,38 @@
+<div class = "select-show">
+    <select #internname>
+        <option value = "顯示全部">顯示全部</option>
+        <option *ngFor = "let interns of Interns"  value = {{interns.name}}>{{interns.name}}
+        </option>>
+    </select>
+</div>
+
 <div class = "Note">
     <table >
         <tr>
             <th class = "table-title">標題</th>
             <th>實習生姓名</th>
-            <th *ngIf = "TestShow">建立時間</th>
-            <th *ngIf = "TestShow == false">修改時間</th>
+            <th >建立時間</th>
+            <th >修改時間</th>
             <th>操作按鈕</th>
         </tr>
-        <ng-container >
+        <ng-container *ngIf = "TestShow == true">
             <tr *ngFor= "let note of ShowNote">
                 <td class = "table-Notetitle">{{note.noteTitle}}</td>
                 <td>{{note.name}}</td>
-                <td *ngIf = "TestShow">{{note.CreatDateShow}}</td>
-                <td *ngIf = "TestShow == false">{{note.ModifitedDateShow}}</td>
+                <td >{{note.CreatDateShow}}</td>
+                <td >{{note.ModifitedDateShow}}</td>
+                <td>
+                    <button class="Read" (click)= "onSelect(note,0)">閱讀</button>         
+                    <button class="Delete" (click)= "onSelect(note,2)">刪除</button>
+                </td>
+            </tr>
+        </ng-container>
+        <ng-container *ngIf ="TestShow == false">
+            <tr *ngFor= "let note of SearchNote">
+                <td class = "table-Notetitle">{{note.noteTitle}}</td>
+                <td>{{note.name}}</td>
+                <td >{{note.CreatDateShow}}</td>
+                <td >{{note.ModifitedDateShow}}</td>
                 <td>
                     <button class="Read" (click)= "onSelect(note,0)">閱讀</button>         
                     <button class="Delete" (click)= "onSelect(note,2)">刪除</button>

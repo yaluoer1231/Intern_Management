@@ -1,5 +1,6 @@
 import { Component, OnInit ,EventEmitter, Input, Output} from '@angular/core';
 import { Note } from '../Note_Fromat';
+import { Intern } from '../Intern_Fromat';
 
 import { InternService } from '../intern.service';
 import { NotesService } from '../notes.service';
@@ -13,7 +14,10 @@ import { noop } from 'rxjs';
 })
 export class InternNoteComponent implements OnInit {
 
-  constructor(private notesService : NotesService) {}
+  constructor(private notesService : NotesService,
+    private internService : InternService) {}
+
+  Interns : Intern[] = [];
 
   Notes : Note[] = [];
   ShowNote : Note[] = [];
@@ -27,6 +31,7 @@ export class InternNoteComponent implements OnInit {
 
   ngOnInit(): void {
     this.getNotes();
+    this.getIntern();
   }
 
   onSelect(Note: Note, Showcode : number): void {
@@ -45,6 +50,13 @@ export class InternNoteComponent implements OnInit {
       this.GetShowNotes();
       this.SearchNotes();
     })
+  }
+
+  getIntern(): void{
+    this.internService.getIntern()
+      .subscribe(Interns => {
+        this.Interns = Interns;
+      })
   }
 
   PutShow(): void{
@@ -74,6 +86,23 @@ export class InternNoteComponent implements OnInit {
             Test[i-1] += 1;
       }
       this.SearchNote[Test[i-1]] = this.Notes[i];
+    }
+  }
+
+  SearchInternNote(intern : string): void {
+    var Sort = 0;
+    if (intern == "顯示全部")
+      this.getNotes();
+    else{
+      this.notesService.getNote().subscribe(Note => {
+      for (var i = 1; i < Note.length; i++){
+        if (Note[i].name == intern)
+          {
+            this.SearchNote[Sort] = Note[i];
+            Sort += 1;
+          }
+        }
+      })
     }
   }
 
