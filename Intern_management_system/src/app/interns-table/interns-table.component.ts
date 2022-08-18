@@ -12,6 +12,7 @@ import { InternService } from '../intern.service';
 export class InternsTableComponent implements OnInit {
 
   Interns : Intern[] = [];
+  LockInterns : Intern[] = [];
   selectedintern? : Intern;
   showCode = 0; //以代號顯示功能，0:關閉，1:PUT，2:DELETE，3:POST
   idShow = 0;

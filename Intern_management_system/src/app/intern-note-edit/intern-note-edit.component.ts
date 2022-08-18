@@ -36,7 +36,6 @@ export class InternNoteEditComponent implements OnInit {
 
   ngOnInit(): void {
     this.CheckInterns();
-    console.log(this.Showcode);
   }
 
   CheckInterns(): void {
@@ -66,10 +65,6 @@ export class InternNoteEditComponent implements OnInit {
         this.Get.emit();
       })
     this.GoBack.emit();
-  }
-
-  CheckCode(): void{
-    console.log(this.Showcode);
   }
 
   SelectList(): void{
