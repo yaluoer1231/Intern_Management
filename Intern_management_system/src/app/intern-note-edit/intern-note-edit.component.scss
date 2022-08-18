@@ -1,18 +1,58 @@
 h2 {
     text-align: center;
+    font-size: 2.5rem;
 }
 p {
   height: 0.5rem;
 }
 
+.name {
+  font-size: 1.2rem;
+  margin-bottom: 3rem;
+}
+
 .date {
-    padding-left: 1rem;
+  margin-bottom: 1.5rem
+}
+
+.ModifitedDateShow {
+    padding-left: 5rem;
 }
 
 .Input,.Post,.read { 
   text-align: center;
   flex-direction: column;
   line-height: normal;
+}
+
+input[type="text"]{
+  padding-bottom: 2rem;
+}
+
+textarea {
+  resize:none
+}
+
+select,input{
+  height: 2rem;
+  font-size: 1rem;
+}
+
+
+.title{
+  margin-bottom: 3rem;
+  font-size: 1.5rem;
+}
+
+.select-intern{
+  margin-left: 5rem;
+  font-size: 1.5rem;
+ 
+}
+
+.Note{
+  width: 50rem;
+  height: 100%;
 }
 
 

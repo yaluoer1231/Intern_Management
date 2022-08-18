@@ -1,12 +1,12 @@
 <div *ngIf= "Notes">
     <div class="read" *ngIf= "Showcode == 0">
-        <h2>標題：{{Notes.noteTitle}}</h2>
-        <a>實習生：{{Notes.name}}</a>
+        <h2>{{Notes.noteTitle}}</h2>
+        <p class = "name">實習生：{{Notes.name}}</p>
         <div class = "date">
             <a>建立時間：{{Notes.CreatDateShow}}</a>
-            <a>上次修改：{{Notes.ModifitedDateShow}}</a>
+            <a class = "ModifitedDateShow">上次修改：{{Notes.ModifitedDateShow}}</a>
         </div>
-        <div type = "Note">
+        <div class = "Note">
             <a>{{Notes.note}}</a>
         </div>
         <button type="Update" (click)= "Showcode = 1;SelectList()">修改</button>  
@@ -17,22 +17,24 @@
         <ul>
             <div class="Input">
                 <h2>修改中</h2>
-                <p class="title"><label for="Notes-title">標題： </label>
-                <input id="Notes-title" [(ngModel)]="Notes.noteTitle" placeholder="標題"></p>
+                <p class="title"><label for="Notes-title">標題：</label>
+                <input id="Notes-title" [(ngModel)]="Notes.noteTitle" placeholder="請輸入標題...">
                 
                 <!--<p class="name"><label for="Notes-name">實習生姓名： </label>
                 <input id="Notes-name" [(ngModel)]="Notes.name" placeholder="姓名"></p>-->
                 
-                <p class="name"><label>實習生姓名： </label>
+                <a class="select-intern">實習生姓名：
                     <select #internname>
                         <option value = {{Notes.name}}>{{Notes.name}}</option>
                         <option *ngFor = "let interns of SelectInterns" 
                         value = {{interns.name}}> {{interns.name}} </option>
                     </select>
+                    </a>
                 </p>
-                
-                <p class="note"><label for="Notes-name">筆記內容： </label>
-                <input id="Notes-name" [(ngModel)]="Notes.note" placeholder=""></p>
+                <div class="note">
+                    <textarea [(ngModel)]="Notes.note" name = "new-note" rows = "6" cols = "90"  #internnote
+                    placeholder="請輸入..."></textarea>
+                </div>
                 <button type="Update" (click)= "save()">修改</button>
                  <button type="Back" (click)= "Back()">取消</button>
             </div>
@@ -50,26 +52,25 @@
     <div class = "Post" *ngIf= "Showcode == 3" >
             <h2> 新增筆記</h2>
 
-            <p class="title"><label for="new-title">標題: </label>
-            <input id="new-title" #interntitle></p>
+            <p class="title"><label for="new-title">標題： </label>
+            <input id="new-title"  placeholder="請輸入標題" #interntitle>
             
-            <select #internname>
-                <option>請選擇實習生</option>
-                <option *ngFor = "let interns of Interns"  value = {{interns.name}}>{{interns.name}}
-                </option>
-            </select>
-
-            
-            <p class="note"><label for="new-note">內文: </label>
-            <input id="new-note" #internnote></p>
+            <a class="select-intern">實習生姓名：
+                <select #internname>
+                        <option>請選擇實習生</option>
+                        <option *ngFor = "let interns of Interns"  value = {{interns.name}}>{{interns.name}}
+                        </option>
+                    </select>
+                    </a>
+            </p>
+            <div class="note">
+                <textarea name = "new-note" rows = "6" cols = "90"  #internnote
+                placeholder="請輸入..."></textarea>
+            </div>
         <div class = "ButtonArea">
             <button type="Post" class="add-button" 
                 (click)= "Post(internname.value,interntitle.value,internnote.value)">增加</button>
-                <button type="Back"  (click)= "Back()">取消</button>
+            <button type="Back"  (click)= "Back()">取消</button>
         </div>
     </div>  
-</div>
-
-<div>
-    <button type = "post" (click)="CheckCode()">檢查</button>
 </div>

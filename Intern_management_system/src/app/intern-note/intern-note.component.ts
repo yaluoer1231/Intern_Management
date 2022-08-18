@@ -97,7 +97,7 @@ export class InternNoteComponent implements OnInit {
     var date = CreatDate.getDate();
     var time = CreatDate.toLocaleTimeString();
     
-    Note.CreatDateShow = year+"年"+month+"月"+date+"日"+"　"+time;
+    Note.CreatDateShow = year+"/"+month+"/"+date+""+"　"+time;
     return ;
   }
 
@@ -108,7 +108,7 @@ export class InternNoteComponent implements OnInit {
     var date = ModifitedDate.getDate();
     var time = ModifitedDate.toLocaleTimeString();
 
-    Note.ModifitedDateShow = year+"年"+month+"月"+date+"日"+"　"+time;
+    Note.ModifitedDateShow = year+"/"+month+"/"+date+""+"　"+time;
     return ;
   }
 

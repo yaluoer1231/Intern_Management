@@ -1,30 +1,18 @@
 <div class = "Note">
     <table >
         <tr>
-            <th>標題</th>
+            <th class = "table-title">標題</th>
             <th>實習生姓名</th>
-            <th>建立時間</th>
-            <th>修改時間</th>
+            <th *ngIf = "TestShow">建立時間</th>
+            <th *ngIf = "TestShow == false">修改時間</th>
             <th>操作按鈕</th>
         </tr>
-        <ng-container *ngIf = "TestShow">
+        <ng-container >
             <tr *ngFor= "let note of ShowNote">
-                <td>{{note.noteTitle}}</td>
+                <td class = "table-Notetitle">{{note.noteTitle}}</td>
                 <td>{{note.name}}</td>
-                <td>{{note.CreatDateShow}}</td>
-                <td>{{note.ModifitedDateShow}}</td>
-                <td>
-                    <button class="Read" (click)= "onSelect(note,0)">閱讀</button>         
-                    <button class="Delete" (click)= "onSelect(note,2)">刪除</button>
-                </td>
-            </tr>
-        </ng-container>
-        <ng-container *ngIf = "TestShow == false">
-            <tr *ngFor= "let note of SearchNote">
-                <td>{{note.noteTitle}}</td>
-                <td>{{note.name}}</td>
-                <td>{{note.CreatDateShow}}</td>
-                <td>{{note.ModifitedDateShow}}</td>
+                <td *ngIf = "TestShow">{{note.CreatDateShow}}</td>
+                <td *ngIf = "TestShow == false">{{note.ModifitedDateShow}}</td>
                 <td>
                     <button class="Read" (click)= "onSelect(note,0)">閱讀</button>         
                     <button class="Delete" (click)= "onSelect(note,2)">刪除</button>
@@ -34,8 +22,8 @@
     </table>
 </div>
 <div class="Show_Area">
-    <button class="Show" (click)= "TestShow = true">正常顯示</button>
-    <button class="Show" (click)= "TestShow = false">照修改日期顯示</button>
+    <button class="Show" (click)= "TestShow = true">依創建日期顯示</button>
+    <button class="Show" (click)= "TestShow = false">依修改日期顯示</button>
 </div>
 
 <div class = "NoteEdit">
@@ -51,6 +39,6 @@
 
 <div class ="Button_Area">
     <button class="Add" (click)= "onSelect(Notes[0],3)">新增筆記</button>
-    <button class="Add" (click)= "CheckCode()">檢查</button>
+    <!--<button class="Add" (click)= "CheckCode()">檢查</button>-->
 </div>
 
