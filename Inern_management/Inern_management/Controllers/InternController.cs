@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Inern_management.Models;
 using Microsoft.EntityFrameworkCore;
 
+
 namespace Inern_management.Controllers
 {
     [Route("api/[controller]")]
@@ -14,6 +15,8 @@ namespace Inern_management.Controllers
     public class InternController : ControllerBase
     {
         private readonly InternContext _context;
+
+
 
         public InternController (InternContext context)
         {

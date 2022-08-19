@@ -2,6 +2,7 @@
 export interface Note{
     id: number,
     name: string,
+    nameId : number,
     noteTitle: string,
     note:  string,
     dateCreate: Date,

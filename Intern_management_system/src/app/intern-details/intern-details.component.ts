@@ -35,7 +35,8 @@ export class InternDetailsComponent implements OnInit {
 
   
   save(): void {
-    if (this.intern && this.intern.name && this.intern.sex) {
+    if (this.intern && this.intern.name && this.intern.sex 
+      && this.intern.name.length < 10 && this.intern.eMail.length < 50) {
       this.SexChange.emit(this.intern);
       this.internService.putIntern(this.intern)
         .subscribe();

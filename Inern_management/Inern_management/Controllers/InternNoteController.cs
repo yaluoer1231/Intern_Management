@@ -15,23 +15,30 @@ namespace Inern_management.Controllers
     {
         private readonly InternContext _context;
 
+
         public InternNoteController(InternContext context)
         {
             _context = context;
         }
-        //GET 所有
+
         [HttpGet]
         public async Task<ActionResult<IEnumerable<InternNote>>> GetIternNotes()
         {
-            var internNotes 
+            //比對和Intern相同資料ID的實習生名字後輸出需要的資料
+            var internNotes = from I in _context.Interns join N in _context.InternNotes
+                              on I.Id equals N.NameId where I.Lock == false orderby N.DateModifited descending
+                              select new {N.Id, I.Name, N.NameId, N.NoteTitle, N.Note, N.DateCreate, N.DateModifited };
             //var internNotes = _context.InternNotes.ToList();
             return Ok(internNotes);
         }
-        //GET 
+        
         [HttpGet("{id}")]
         public async Task<ActionResult<InternNote>> GetIternNote(int id)
-        {
-            var internNote = await _context.InternNotes.FindAsync(id);
+        {   
+            var internNote = from I in _context.Interns join N in _context.InternNotes
+                             on I.Id equals N.NameId where N.NameId == id orderby N.DateCreate descending
+                             select new { N.Id, I.Name, N.NameId, N.NoteTitle,N.Note, N.DateCreate, N.DateModifited };
+            //var internNote = await _context.InternNotes.FindAsync(id);
 
             if (internNote == null) return NotFound();
 

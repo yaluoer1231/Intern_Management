@@ -55,12 +55,12 @@ export class InternNoteEditComponent implements OnInit {
     this.GoBack.emit();
   }
 
-  Post(name : string,noteTitle: string, note : string): void{
-    name = name.trim();
+  Post(nameid : string,noteTitle: string, note : string): void{
+    var nameId = parseInt(nameid);
     noteTitle = noteTitle.trim();
     note = note.trim();
-    if (name == "請選擇實習生" || !noteTitle) { return; }
-    this.notesService.postNote({name,noteTitle,note} as Note)
+    if (nameId < 0 || !noteTitle) { return; }
+    this.notesService.postNote({nameId,noteTitle,note} as Note)
       .subscribe(Notes => {
         this.Get.emit();
       })

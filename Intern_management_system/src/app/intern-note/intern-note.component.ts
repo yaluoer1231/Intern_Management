@@ -50,7 +50,7 @@ export class InternNoteComponent implements OnInit {
         this.ModifitedDateSwitch(Note[i]);
       }
       this.Notes = Note;
-      this.GetShowNotes();
+      this.ShowNote = Note;
     })
   }
 
@@ -70,18 +70,9 @@ export class InternNoteComponent implements OnInit {
 
   GetShowNotes(): void{
     this.SelectShowCode = 0;
-    this.ShowNote = this.Notes.filter(h => h.id != 1);
-    for(var i = 0; i < this.LockInterns.length; i++){
-      this.ShowNote = this.ShowNote.filter(h => h.name !== this.LockInterns[i].name)
-    }
-  }
-
-  CatchNote(): void{
-    
   }
 
   SearchNotes(): void{
-    this.GetShowNotes();
     var SaveNote : Note[] = [];
     this.SelectShowCode = 1;
     for (var i = 0; i < this.ShowNote.length; i++){
@@ -99,16 +90,17 @@ export class InternNoteComponent implements OnInit {
 
   SearchInternNote(intern : string): void {
     this.SelectShowCode = 2;
-    var Sort = 0;
-    this.ShowNote = []; // 每次查詢前必須先重製陣列
-    for (var i = 1; i < this.Notes.length; i++){
-      console.log(this.Notes[i].name);
-      if (this.Notes[i].name == intern)
-        {
-          this.ShowNote[Sort] = this.Notes[i];
-          Sort += 1;
-        }
+    var Sort =  parseInt(intern);
+    this.notesService.getInternNote(Sort)
+    .subscribe(Note => {
+      for (var i = 0; i < Note.length; i++){
+        this.CreateDateSwitch(Note[i]);
+        this.ModifitedDateSwitch(Note[i]);
       }
+      this.ShowNote = Note;
+    })
+    /*
+    this.ShowNote = this.Notes.filter(h => h.nameId == Sort);*/
   }
 
 
@@ -123,7 +115,7 @@ export class InternNoteComponent implements OnInit {
     this.GetShowNotes();
   }
 
-  SwitchDate(SetDate : Date, ShowDate: string): void{ //無法理解的內容
+  SwitchDate(SetDate : Date, ShowDate: string): void{ //查詢angular date pipe
     var CreatDate = new Date(SetDate);
     var year = CreatDate.getFullYear();
     var month = CreatDate.getMonth()+1;

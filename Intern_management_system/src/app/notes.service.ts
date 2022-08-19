@@ -22,6 +22,11 @@ export class NotesService {
     return this.http.get<Note[]>(`${this.InternUrl}InternNote`);
   }
 
+  //GET指定資料
+  getInternNote(Id : number): Observable<Note[]>{
+    return this.http.get<Note[]>(`${this.InternUrl}InternNote/${Id}`)
+  }
+  
   //PUT
   putNote(Note: Note): Observable<any>{
     return this.http.put(`${this.InternUrl}InternNote/${Note.id}`, Note);

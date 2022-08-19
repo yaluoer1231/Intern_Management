@@ -24,10 +24,10 @@
                 <input id="Notes-name" [(ngModel)]="Notes.name" placeholder="姓名"></p>-->
                 
                 <a class="select-intern">實習生姓名：
-                    <select #internname>
-                        <option value = {{Notes.name}}>{{Notes.name}}</option>
+                    <select>
+                        <option value = {{Notes.nameId}}>{{Notes.name}}</option>
                         <option *ngFor = "let interns of SelectInterns" 
-                        value = {{interns.name}}> {{interns.name}} </option>
+                        value = {{interns.id}}> {{interns.name}} </option>
                     </select>
                     </a>
                 </p>
@@ -59,8 +59,8 @@
             
             <a class="select-intern">實習生姓名：
                 <select #internname>
-                        <option>請選擇實習生</option>
-                        <option *ngFor = "let interns of Interns"  value = {{interns.name}}>{{interns.name}}
+                        <option value = "請選擇實習生">請選擇實習生</option>
+                        <option *ngFor = "let interns of Interns"  value = {{interns.id}}>{{interns.name}}
                         </option>
                     </select>
                     </a>

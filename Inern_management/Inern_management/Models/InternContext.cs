@@ -67,10 +67,7 @@ namespace Inern_management.Models
                     .HasColumnType("datetime")
                     .HasColumnName("dateModifited");
 
-                entity.Property(e => e.Name)
-                    .IsRequired()
-                    .HasColumnType("text")
-                    .HasColumnName("name");
+                entity.Property(e => e.NameId).HasColumnName("name_id");
 
                 entity.Property(e => e.Note)
                     .HasColumnType("text")
