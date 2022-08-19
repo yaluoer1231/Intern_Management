@@ -1,7 +1,7 @@
 <div class = "select-show">
     請選擇實習生：
     <select #internname>
-        <option *ngFor = "let interns of ShowInterns"  value = {{interns.name}}>{{interns.name}}
+        <option *ngFor = "let interns of UnLockInterns"  value = {{interns.name}}>{{interns.name}}
         </option>
     </select>
     <button class="Add" (click) = "SearchInternNote(internname.value);showCode=5">確定</button>

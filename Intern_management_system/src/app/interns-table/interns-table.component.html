@@ -25,6 +25,11 @@
     </table>
 </div>
 
+<div class ="Button_Area">
+    <button class="Add" (click) = "getIntern(); IsUser= false">管理者介面</button>
+    <button class="Update" (click) = " getUnLockIntern(); showCode = 0">使用者介面</button>
+</div>
+
 <div class = "detail">
     <app-intern-details 
         [intern]="selectedintern" 
@@ -36,10 +41,7 @@
         (GoBack) = "Back()"  >
     </app-intern-details>
 </div>
-<div class ="Button_Area">
-    <button class="Add" (click) = "getIntern()">管理者介面</button>
-    <button class="Update" (click) = " getUnLockIntern()">使用者介面</button>
-</div>
+
 <div class ="Button_Area">
     <button class="Add" (click)= "onSelect(Interns[0],3)" *ngIf = "showCode != 3">資料增加</button>
 </div>

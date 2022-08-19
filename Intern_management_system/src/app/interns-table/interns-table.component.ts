@@ -43,14 +43,7 @@ export class InternsTableComponent implements OnInit {
 
   getUnLockIntern(): void{
     this.IsUser = true;
-    var Num = 0;
-    this.ShowInterns = [];
-    for (var i = 0; i < this.Interns.length; i ++){
-      if (this.Interns[i].lock == false){
-        this.ShowInterns[Num] = this.Interns[i];
-        Num += 1;
-      }
-    }
+    this.ShowInterns = this.Interns.filter(h => h.lock != true);
   }
 
   onSelect(intern: Intern,ShowCode : number): void {

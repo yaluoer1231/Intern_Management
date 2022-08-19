@@ -18,7 +18,8 @@ export class InternNoteComponent implements OnInit {
   constructor(private notesService : NotesService,
     private internService : InternService) {}
 
-  Interns : Intern[] = [];
+  UnLockInterns : Intern[] = [];
+  LockInterns : Intern[] = [];
   ShowInterns : Intern [] = [];
 
   Notes : Note[] = [];
@@ -54,17 +55,11 @@ export class InternNoteComponent implements OnInit {
   }
 
   getIntern(): void{
-    var Num = 0;
     this.ShowInterns = [];
     this.internService.getIntern()
       .subscribe(Interns => {
-        this.Interns = Interns;
-        for (var i = 0; i < this.Interns.length ; i++){
-          if (this.Interns[i].lock == false){
-            this.ShowInterns[Num] = this.Interns[i];
-            Num += 1;
-          }
-        }
+        this.UnLockInterns = Interns.filter(h => h.lock == false);
+        this.LockInterns = Interns.filter(h => h.lock == true);
       })
   }
 
@@ -75,15 +70,9 @@ export class InternNoteComponent implements OnInit {
 
   GetShowNotes(): void{
     this.SelectShowCode = 0;
-    var Num = 0;
-    this.ShowNote = [];
-    for(var i = 0; i < this.Notes.length-1; i++){
-      for(var j = 0; j < this.ShowInterns.length; j++){
-        if (this.Notes[i+1].name == this.ShowInterns[j].name){
-          this.ShowNote[Num] = this.Notes[i+1];
-          Num += 1;
-        }
-      }
+    this.ShowNote = this.Notes.filter(h => h.id != 1);
+    for(var i = 0; i < this.LockInterns.length; i++){
+      this.ShowNote = this.ShowNote.filter(h => h.name !== this.LockInterns[i].name)
     }
   }
 
@@ -105,7 +94,6 @@ export class InternNoteComponent implements OnInit {
       }
       SaveNote[Test] = this.ShowNote[i];
     }
-    console.log(SaveNote);
     this.ShowNote = SaveNote;
   }
 

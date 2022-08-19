@@ -19,14 +19,15 @@ namespace Inern_management.Controllers
         {
             _context = context;
         }
-
+        //GET 所有
         [HttpGet]
         public async Task<ActionResult<IEnumerable<InternNote>>> GetIternNotes()
         {
-            var internNotes = _context.InternNotes.ToList();
+            var internNotes 
+            //var internNotes = _context.InternNotes.ToList();
             return Ok(internNotes);
         }
-
+        //GET 
         [HttpGet("{id}")]
         public async Task<ActionResult<InternNote>> GetIternNote(int id)
         {
