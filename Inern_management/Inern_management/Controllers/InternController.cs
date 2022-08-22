@@ -88,18 +88,21 @@ namespace Inern_management.Controllers
         [HttpDelete("{id}")]
         public async Task<ActionResult<Intern>> DeleteItern(int id)
         {
-            var drink = _context.Interns.Where(t => t.Id == id).FirstOrDefault();
+            var intern = _context.Interns.Where(t => t.Id == id).FirstOrDefault();
+            var internNote = _context.InternNotes.Where(n => n.NameId == id).FirstOrDefault();
 
-            if (drink == null)
+
+            if (intern == null)
             {
                 return NotFound();
             }
             else
             {
-                _context.Interns.Remove(drink);
+                _context.Interns.Remove(intern);
+                if (internNote != null)
+                    _context.InternNotes.Remove(internNote);
                 await _context.SaveChangesAsync();
                 return Ok();
-
             }
         }
         private bool TodoInternExists(int id)

@@ -17,10 +17,12 @@
                  <button type="Back" (click)= "Back()">取消</button></div>
         </ul>
     </div>
-    <div class = "Update" *ngIf= "showCode == 1.5 ">
-        <h2>請務必填寫姓名或性別！</h2>
+    <div class = "Update" *ngIf= "showCode == 1.5 || showCode == 3.5">
+        <h2 *ngIf = "ErrorPost == true">請務必填寫姓名和信箱！</h2>
+        <h2 *ngIf = "NoName == true">請輸入正確的姓名！</h2>
+        <h2 *ngIf = "NoEmail == true">請輸入正確的電子信箱！</h2>
         <div class = "ButtonArea">
-            <button type="Uppage" (click)= "UpPage()">返回</button>
+            <button type="Back" (click)= "UpPage()">返回</button>
         </div>  
     </div>
 

@@ -16,11 +16,11 @@
             <th *ngIf = "SelectShowCode != 0">修改時間</th>
             <th>操作按鈕</th>
         </tr>
-        <tr *ngFor= "let note of ShowNote">
+        <tr *ngFor= "let note of Notes">
             <td class = "table-Notetitle">{{note.noteTitle}}</td>
             <td>{{note.name}}</td>
-            <td *ngIf = "SelectShowCode != 1">{{note.CreatDateShow}}</td>
-            <td *ngIf = "SelectShowCode != 0">{{note.ModifitedDateShow}}</td>
+            <td *ngIf = "SelectShowCode != 1">{{note.dateCreate |date:'yyyy-MM-dd  hh:mm:ss'}}</td>
+            <td *ngIf = "SelectShowCode != 0">{{note.dateModifited |date:'yyyy-MM-dd hh:mm:ss'}}</td>
             <td>
                 <button class="Read" (click)= "onSelect(note,0)">閱讀</button>         
                 <button class="Delete" (click)= "onSelect(note,2)">刪除</button>
@@ -29,7 +29,7 @@
     </table>
 </div>
 <div class="Show_Area">
-    <button class="Show" (click)= "GetShowNotes()">依創建日期顯示</button>
+    <button class="Show" (click)= "getNotes()">依創建日期顯示</button>
     <button class="Show" (click)= "SearchNotes()">依修改日期顯示</button>
 </div>
 
@@ -46,6 +46,5 @@
 
 <div class ="Button_Area">
     <button class="Add" (click)= "onSelect(Notes[0],3)">新增筆記</button>
-    <!--<button class="Add" (click)= "CheckCode()">檢查</button>-->
 </div>
 

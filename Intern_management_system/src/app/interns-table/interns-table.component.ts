@@ -73,7 +73,7 @@ export class InternsTableComponent implements OnInit {
     if (this.Interns.length > 1){
       this.Interns = this.Interns.filter(h => h !== intern);
       this.internService.deleteIntern(intern.id)
-        .subscribe();
+        .subscribe(Note => this.getIntern());
     }
   }
 

@@ -4,9 +4,8 @@ export interface Note{
     name: string,
     nameId : number,
     noteTitle: string,
+    eMail: string,
     note:  string,
     dateCreate: Date,
-    CreatDateShow : string,
     dateModifited: Date,
-    ModifitedDateShow : string,
 }

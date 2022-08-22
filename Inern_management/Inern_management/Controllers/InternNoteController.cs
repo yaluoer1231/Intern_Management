@@ -16,6 +16,7 @@ namespace Inern_management.Controllers
         private readonly InternContext _context;
 
 
+
         public InternNoteController(InternContext context)
         {
             _context = context;
@@ -26,22 +27,26 @@ namespace Inern_management.Controllers
         {
             //比對和Intern相同資料ID的實習生名字後輸出需要的資料
             var internNotes = from I in _context.Interns join N in _context.InternNotes
-                              on I.Id equals N.NameId where I.Lock == false orderby N.DateModifited descending
-                              select new {N.Id, I.Name, N.NameId, N.NoteTitle, N.Note, N.DateCreate, N.DateModifited };
+                              on I.Id equals N.NameId where I.Lock == false && I.Id == N.NameId orderby N.DateCreate descending
+                              select new {N.Id, I.Name, N.NameId, N.NoteTitle, I.EMail, N.Note, N.DateCreate, N.DateModifited };
             //var internNotes = _context.InternNotes.ToList();
             return Ok(internNotes);
         }
-        
+
+
         [HttpGet("{id}")]
         public async Task<ActionResult<InternNote>> GetIternNote(int id)
-        {   
+        {
+               
             var internNote = from I in _context.Interns join N in _context.InternNotes
-                             on I.Id equals N.NameId where N.NameId == id orderby N.DateCreate descending
-                             select new { N.Id, I.Name, N.NameId, N.NoteTitle,N.Note, N.DateCreate, N.DateModifited };
+                             on I.Id equals N.NameId orderby N.DateModifited descending
+                             select new { N.Id, I.Name, N.NameId, N.NoteTitle, I.EMail, N.Note, N.DateCreate,N.DateModifited };
             //var internNote = await _context.InternNotes.FindAsync(id);
-
+            
             if (internNote == null) return NotFound();
-
+                
+            if (id != 0)
+                internNote = internNote.Where(I => I.NameId == id);
             return Ok(internNote);
         }
 

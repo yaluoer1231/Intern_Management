@@ -42,15 +42,10 @@ export class InternNoteComponent implements OnInit {
   }
 
   getNotes(): void{
+    this.SelectShowCode = 0;
     this.notesService.getNote()
     .subscribe(Note => {
-      for (var i = 0; i < Note.length; i++){
-        //this.SwitchDate(Note[i].dateCreate,Note[i].CreatDateShow);
-        this.CreateDateSwitch(Note[i]);
-        this.ModifitedDateSwitch(Note[i]);
-      }
       this.Notes = Note;
-      this.ShowNote = Note;
     })
   }
 
@@ -67,85 +62,26 @@ export class InternNoteComponent implements OnInit {
     this.showCode = 1;
   }
 
-
-  GetShowNotes(): void{
-    this.SelectShowCode = 0;
-  }
-
   SearchNotes(): void{
-    var SaveNote : Note[] = [];
     this.SelectShowCode = 1;
-    for (var i = 0; i < this.ShowNote.length; i++){
-      var NoteMain = new Date(this.ShowNote[i].dateModifited).getTime();
-      var Test = 0;
-      for (var j = 0; j < this.ShowNote.length; j++){
-        var NoteSon = new Date(this.ShowNote[j].dateModifited).getTime();
-          if (NoteMain < NoteSon)
-            Test += 1;
-      }
-      SaveNote[Test] = this.ShowNote[i];
-    }
-    this.ShowNote = SaveNote;
+    this.notesService.getInternNote(0)
+    .subscribe(Note => this.Notes = Note)
   }
 
   SearchInternNote(intern : string): void {
     this.SelectShowCode = 2;
     var Sort =  parseInt(intern);
     this.notesService.getInternNote(Sort)
-    .subscribe(Note => {
-      for (var i = 0; i < Note.length; i++){
-        this.CreateDateSwitch(Note[i]);
-        this.ModifitedDateSwitch(Note[i]);
-      }
-      this.ShowNote = Note;
-    })
-    /*
-    this.ShowNote = this.Notes.filter(h => h.nameId == Sort);*/
+    .subscribe(Note => this.Notes = Note)
   }
 
 
   Delete(Note: Note): void{
     if (this.Notes.length > 1){
       this.Notes = this.Notes.filter(h => h !== Note); //將與Note不同的資料都過濾出來
-      this.ShowNote = this.ShowNote.filter(h => h !== Note);
       this.notesService.deleteNote(Note.id)
-        .subscribe(Notes => {
-          this.getNotes()});
+        .subscribe(Notes => this.getNotes());
     }
-    this.GetShowNotes();
-  }
-
-  SwitchDate(SetDate : Date, ShowDate: string): void{ //查詢angular date pipe
-    var CreatDate = new Date(SetDate);
-    var year = CreatDate.getFullYear();
-    var month = CreatDate.getMonth()+1;
-    var date = CreatDate.getDate();
-    var time = CreatDate.toLocaleTimeString();
-    
-    ShowDate = year+"/"+month+"/"+date+""+"　"+time;
-    return ;
-  }
-
-  CreateDateSwitch(Note: Note): void{
-    var CreatDate = new Date(Note.dateCreate);
-    var year = CreatDate.getFullYear();
-    var month = CreatDate.getMonth()+1;
-    var date = CreatDate.getDate();
-    var time = CreatDate.toLocaleTimeString();
-    
-    Note.CreatDateShow = year+"/"+month+"/"+date+""+"　"+time;
-    return ;
-  }
-
-  ModifitedDateSwitch(Note: Note): void{
-    var ModifitedDate = new Date(Note.dateModifited);
-    var year = ModifitedDate.getFullYear();
-    var month = ModifitedDate.getMonth()+1;
-    var date = ModifitedDate.getDate();
-    var time = ModifitedDate.toLocaleTimeString();
-
-    Note.ModifitedDateShow = year+"/"+month+"/"+date+""+"　"+time;
-    return ;
   }
 
 
