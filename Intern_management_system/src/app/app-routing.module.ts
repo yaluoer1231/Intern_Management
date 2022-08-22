@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { InternsTableComponent } from './interns-table/interns-table.component';
-import { InternDetailsComponent } from './intern-details/intern-details.component';
-import { InternNoteComponent } from './intern-note/intern-note.component';
+import { InternsTableComponent } from './intern/interns-table/interns-table.component';
+import { InternDetailsComponent } from './intern/intern-details/intern-details.component';
+import { InternNoteComponent } from './Note/intern-note/intern-note.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/interns-table', pathMatch: 'full' },
-  { path: 'interns-table', component: InternsTableComponent  },
-  { path: 'intern-note', component: InternNoteComponent  },
+  { path: '', redirectTo: '/intern/interns-table', pathMatch: 'full' },
+  { path: 'intern/interns-table', component: InternsTableComponent  },
+  { path: 'Note/intern-note', component: InternNoteComponent  },
 ];
 
 @NgModule({

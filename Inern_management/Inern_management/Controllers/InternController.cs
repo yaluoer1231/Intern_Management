@@ -29,11 +29,12 @@ namespace Inern_management.Controllers
         public async Task<ActionResult<IEnumerable<Intern>>> GetIterns()
         {
             var intern = _context.Interns.ToList();
+
             return Ok(intern);
         }
         
         [HttpGet("{id}")]
-        public async Task<ActionResult<Intern>> GetItern(int id)
+        public async Task<ActionResult<Intern>> GetItern([FromRoute(Name = "id")] int id)
         {
             var intern = await _context.Interns.FindAsync(id);
 
@@ -44,7 +45,7 @@ namespace Inern_management.Controllers
         
         //POST
         [HttpPost]
-        public async Task<ActionResult<Intern>> PostIntern(Intern intern)
+        public async Task<ActionResult<Intern>> PostIntern([FromBody]Intern intern)
         {
             await _context.Interns.AddAsync(intern);
             await _context.SaveChangesAsync();

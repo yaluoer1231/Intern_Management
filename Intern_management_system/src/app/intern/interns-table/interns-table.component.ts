@@ -11,10 +11,10 @@ import { InternService } from '../intern.service';
 })
 export class InternsTableComponent implements OnInit {
 
-  Interns : Intern[] = [];
-  ShowInterns : Intern[] = [];
+  interns : Intern[] = [];
+  showInterns : Intern[] = [];
 
-  IsUser : boolean = true;
+  isUser : boolean = true;
 
   selectedintern? : Intern;
   showCode = 0; //以代號顯示功能，0:關閉，1:PUT，2:DELETE，3:POST
@@ -28,33 +28,34 @@ export class InternsTableComponent implements OnInit {
   }
 
   getIntern(): void{
-    this.IsUser = false;
+    this.isUser = false;
     this.idShow = 0;
     this.internService.getIntern()
       .subscribe(Interns => {
         for (var i = 0;i <= Interns.length-1;i++){ //迴圈找陣列，Interns.length-1為陣列長度，檢索從0開始
-          this.SexChange(Interns[i]);
-          this.IdChange(Interns[i]);
+          this.sexChange(Interns[i]);
+          this.idChange(Interns[i]);
         }
-        this.Interns = Interns;
-        this.ShowInterns = Interns;
+        this.interns = Interns;
+        this.showInterns = Interns;
+        
       })
   }
 
   getUnLockIntern(): void{
-    this.IsUser = true;
-    this.ShowInterns = this.Interns.filter(h => h.lock != true);
+    this.isUser = true;
+    this.showInterns = this.interns.filter(h => h.lock != true);
   }
 
   onSelect(intern: Intern,ShowCode : number): void {
       this.selectedintern = intern;
       this.showCode = ShowCode;
-      if (this.showCode == 2 && this.Interns.length <= 1)
+      if (this.showCode == 2 && this.interns.length <= 1)
         this.showCode = 2.5;
   }
 
   //將資料庫的性別代號轉換成文字
-  SexChange(intern: Intern): void{
+  sexChange(intern: Intern): void{
     if (intern.sexCode == 1)
       intern.sex = "男";
     else if (intern.sexCode == 2)
@@ -64,20 +65,20 @@ export class InternsTableComponent implements OnInit {
     return ;
   }
 
-  IdChange(intern: Intern){
+  idChange(intern: Intern){
     this.idShow = this.idShow+1
     intern.sort = this.idShow;
   }
 
-  Delete(intern: Intern): void{
-    if (this.Interns.length > 1){
-      this.Interns = this.Interns.filter(h => h !== intern);
+  delete(intern: Intern): void{
+    if (this.interns.length > 1){
+      this.interns = this.interns.filter(h => h !== intern);
       this.internService.deleteIntern(intern.id)
         .subscribe(Note => this.getIntern());
     }
   }
 
-  IsLock(intern: Intern): void{
+  isLock(intern: Intern): void{
     if (intern.lock == true)
       intern.lock = false;
     else
@@ -87,7 +88,7 @@ export class InternsTableComponent implements OnInit {
   }
   
 
-  Back(): void{
+  back(): void{
     this.showCode = 0;
   }
 }

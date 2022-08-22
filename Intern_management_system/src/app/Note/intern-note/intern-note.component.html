@@ -1,0 +1,54 @@
+<div class = "select-show">
+    請選擇實習生：
+    <select #internname onchange="searchInternNote(this)">
+        <option [value]="0">顯示全部</option>
+        <option *ngFor="let interns of unLockInterns"  [value]="interns.id">{{ interns.name }}
+        </option>
+    </select>
+   <button class="Add" (click)="searchInternNote(internname.value); showCode=5">確定</button>
+    <span class="dateSort"> 全體查詢：
+        <select #dateSort onchange="searchInternNote(value)">
+            <option [value]="0" >依修改日期 新→舊</option>
+            <option [value]="-1">依修改日期 舊→新</option>
+            <option [value]="-2">依實習生序號 高→低</option>
+            <option [value]="-3">依實習生序號 低→高</option>
+        </select>
+        <button class="Add" (click)="searchInternNote(dateSort.value); showCode=5">排序</button>
+    </span>
+</div>
+
+<div class = "Note">
+    <table >
+        <tr>
+            <th class="table-title">標題</th>
+            <th>實習生姓名</th>
+            <th>最後修改</th>
+            <th>操作按鈕</th>
+        </tr>
+        <tr *ngFor="let note of notes">
+            <td class ="table-Notetitle">．{{ note.noteTitle }}</td>
+            <td>{{ note.name }}</td>
+            <td>{{ note.dateModifited | date:'yyyy-MM-dd hh:mm:ss'}}</td>
+            <td>
+                <button class="Read" (click)="onSelect(note, 0)">閱讀</button>         
+                <button class="Delete" (click)="onSelect(note, 2)">刪除</button>
+            </td>
+        </tr>
+    </table>
+</div>
+
+<div class = "NoteEdit">
+    <app-intern-note-edit class="edit"
+    [notes]="selectNotes" 
+    [showcode]="showCode" 
+    (backPage)="back()"
+    (refreshPage)="getNotes()"
+    (deleteNote)="delete($event)"
+    (putShow)="putShow()">
+</app-intern-note-edit>
+</div>
+
+<div class="Button_Area">
+    <button class="Add" (click)="onSelect(notes[0], 3)">新增筆記</button>
+</div>
+

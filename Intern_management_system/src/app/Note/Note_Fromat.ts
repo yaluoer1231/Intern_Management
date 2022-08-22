@@ -4,7 +4,7 @@ export interface Note{
     name: string,
     nameId : number,
     noteTitle: string,
-    eMail: string,
+    email: string,
     note:  string,
     dateCreate: Date,
     dateModifited: Date,

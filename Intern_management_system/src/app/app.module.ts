@@ -5,12 +5,12 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
 import { HttpClientModule } from '@angular/common/http';
-import { InternDetailsComponent } from './intern-details/intern-details.component';4
+import { InternDetailsComponent } from './intern/intern-details/intern-details.component';4
 import { FormsModule } from '@angular/forms';
-import { InternsTableComponent } from './interns-table/interns-table.component';
+import { InternsTableComponent } from './intern/interns-table/interns-table.component';
 import { SexPipe } from './sex.pipe';
-import { InternNoteComponent } from './intern-note/intern-note.component';
-import { InternNoteEditComponent } from './intern-note-edit/intern-note-edit.component';
+import { InternNoteComponent } from './Note/intern-note/intern-note.component';
+import { InternNoteEditComponent } from './Note/intern-note-edit/intern-note-edit.component';
 
 @NgModule({
   declarations: [

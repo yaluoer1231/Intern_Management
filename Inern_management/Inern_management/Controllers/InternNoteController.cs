@@ -23,12 +23,11 @@ namespace Inern_management.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<InternNote>>> GetIternNotes()
+        public async Task<ActionResult<IEnumerable<InternNoteDTO>>> GetIternNotes()
         {
             //比對和Intern相同資料ID的實習生名字後輸出需要的資料
-            var internNotes = from I in _context.Interns join N in _context.InternNotes
-                              on I.Id equals N.NameId where I.Lock == false && I.Id == N.NameId orderby N.DateCreate descending
-                              select new {N.Id, I.Name, N.NameId, N.NoteTitle, I.EMail, N.Note, N.DateCreate, N.DateModifited };
+            var internNotes = GetNoteDTO();
+            
             //var internNotes = _context.InternNotes.ToList();
             return Ok(internNotes);
         }
@@ -37,16 +36,24 @@ namespace Inern_management.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<InternNote>> GetIternNote(int id)
         {
-               
-            var internNote = from I in _context.Interns join N in _context.InternNotes
-                             on I.Id equals N.NameId orderby N.DateModifited descending
-                             select new { N.Id, I.Name, N.NameId, N.NoteTitle, I.EMail, N.Note, N.DateCreate,N.DateModifited };
+
+            var internNote = GetNoteDTO();
             //var internNote = await _context.InternNotes.FindAsync(id);
             
             if (internNote == null) return NotFound();
-                
-            if (id != 0)
+
+            
+            if (id == 0)
+                internNote = internNote.OrderByDescending(x => x.DateModifited);
+            else if (id == -1)
+                internNote = internNote.OrderBy(x => x.DateModifited);
+            else if (id == -2)
+                internNote = internNote.OrderBy(x => x.NameId);
+            else if (id == -3)
+                internNote = internNote.OrderByDescending(x => x.NameId);
+            else
                 internNote = internNote.Where(I => I.NameId == id);
+
             return Ok(internNote);
         }
 
@@ -118,6 +125,25 @@ namespace Inern_management.Controllers
         private bool TodoInternExists(int id)
         {
             return _context.InternNotes.Any(e => e.Id == id);
+        }
+
+        private IQueryable<InternNoteDTO> GetNoteDTO()
+        {
+            var NoteDTO = from I in _context.Interns
+                          join N in _context.InternNotes on I.Id equals N.NameId
+                          where I.Lock == false
+                          orderby N.DateModifited descending
+                          select new InternNoteDTO(){ 
+                              Id = N.Id, 
+                              Name = I.Name, 
+                              NameId = N.NameId, 
+                              NoteTitle = N.NoteTitle, 
+                              Email = I.EMail,
+                              Note = N.Note, 
+                              DateCreate = N.DateCreate, 
+                              DateModifited = N.DateModifited 
+                          };
+            return NoteDTO;
         }
     }
 }
