@@ -1,0 +1,40 @@
+.top-menu {
+    height: 85px;
+    width: 100%;
+    background-color: rgb(209, 124, 63);
+    box-shadow: -9px 12px 10px -7px;
+    border-bottom-right-radius: 15px;
+    border-bottom-left-radius: 15px;
+    display: flex;
+    flex-direction: row;
+    text-align: center;
+}
+.left{
+    height: 100%;
+    width: 25%;
+}
+.middle{
+    height: 100%;
+    width: 50%;
+}
+.right{
+    height: 100%;
+    width: 25%;
+    display: flex;
+    align-items: center; 
+    justify-content: right;
+    padding-right: 20px;
+}
+
+.main{
+    height: 100%;
+    //background-color: rgba(255, 255, 255, 0.608);
+    margin-top : 3rem; 
+    margin-right: 100px;
+    margin-left: 100px;
+    border-radius: 25px;
+    text-align: center;
+    padding: 1%;
+    //box-shadow: 7px 14px 14px -3px;
+    
+}

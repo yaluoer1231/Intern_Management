@@ -1,11 +1,27 @@
+.interns{
+    display: flex;
+    justify-content: center;
+}
 
+li{
+  height: 65px;
+  width: 100%;
+  background-color: rgba(255, 255, 255, 0.8);
+  box-shadow: 11px 8px 13px -11px;
+  border-radius: 15px;
+  padding-left: 2rem;
+  padding-right: 2rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center; 
+}
 
 .interns table { 
-    border:1px solid #000; 
     font-size:16px; 
+    text-align:center;
+    border:1px solid #000; 
     width:200px;
     border:1px solid #000;
-    text-align:center;
     border-collapse:collapse;
     margin-bottom: 2rem;
   } 
@@ -23,7 +39,7 @@
     padding:5px;
     background-color:#ffffff
   }
-  
+
 .detail {
   background-color: rgba(255, 255, 255, 0.737);
   margin-bottom: 2rem;

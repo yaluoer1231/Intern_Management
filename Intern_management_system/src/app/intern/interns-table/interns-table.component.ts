@@ -7,7 +7,7 @@ import { InternService } from '../intern.service';
 @Component({
   selector: 'app-interns-table',
   templateUrl: './interns-table.component.html',
-  styleUrls: ['./interns-table.component.scss','./button-table.scss']
+  styleUrls: ['./interns-table.component.scss','./button-table.scss','/intern-layouts.scss']
 })
 export class InternsTableComponent implements OnInit {
 

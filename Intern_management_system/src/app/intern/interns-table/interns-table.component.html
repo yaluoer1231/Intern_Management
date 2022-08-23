@@ -1,27 +1,71 @@
-<div class="interns">
-     <table>
-        <tr>
-            <th *ngIf="this.isUser == false">鎖定</th>
-            <th>序列</th>
-            <th>姓名</th>
-            <th>性別</th>
-            <th>電子信箱</th>
-            <th *ngIf="this.isUser == false">操作</th>
-        </tr>
-        <tr *ngFor="let intern of showInterns">
-            <td *ngIf="this.isUser == false">
-                <button class="Delete" (click)="isLock(intern)" *ngIf="intern.lock == false">鎖定</button>
-                <button class="Delete" (click)="isLock(intern)" *ngIf="intern.lock == true">解除</button>
-            </td>
-            <td>{{intern.sort}}</td>
-            <td>{{intern.name}}</td>
-            <td>{{intern.sex}}</td>
-            <td>{{intern.eMail}}</td>
-            <td *ngIf="this.isUser == false">
+
+<!--<h1 class="text-center">實習生資料<h1>
+
+<div class="card-group">
+    <div class="card" style="width: 18rem;" *ngFor="let intern of showInterns">
+        <img src="" class="card-img-top h3" alt="{{ intern.sort }}.{{ intern.name }}">
+        <div class="card-body" >
+        <h5 class="card-title">{{ intern.sex }}</h5>
+        <p class="card-text h6">{{ intern.eMail }}</p>
+        <a class="btn btn-primary" (click)="onSelect(intern, 1)">修改</a>
+        </div>
+    </div>
+</div>-->
+
+<div>
+    <ul *ngFor="let intern of showInterns">
+        <li>
+            <button class="Delete" (click)="isLock(intern)" *ngIf="intern.lock == false">鎖定</button>
+            <button class="Delete" (click)="isLock(intern)" *ngIf="intern.lock == true">解除</button>
+            <p>{{ intern.sort }}. {{ intern.name }}
+            <p>　性別：{{ intern.sex }} 
+            <p>　信箱：{{ intern.eMail }} 
+            <p class="buttonForUpDel" style="text-align: right;">
                 <button class="Update" (click)="onSelect(intern, 1)">修改</button>         
                 <button class="Delete" (click)="onSelect(intern, 2)">刪除</button>
-            </td>
-        </tr>
+        </li>
+    </ul>
+</div>
+<!--<div class= "interns">
+    <div class="internDate-select">
+
+    </div>
+
+    <div class="internDate-edit" >
+
+    </div>
+</div>-->
+
+<div class= "interns">
+    
+     <table>
+        <thead>
+            <tr>
+                <th  *ngIf="this.isUser == false">鎖定</th>
+                <th >序列</th>
+                <th >姓名</th>
+                <th >性別</th>
+                <th >電子信箱</th>
+                <th  *ngIf="this.isUser == false">操作</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let intern of showInterns">
+                
+                <td *ngIf="this.isUser == false">
+                    <button class="Delete" (click)="isLock(intern)" *ngIf="intern.lock == false">鎖定</button>
+                    <button class="Delete" (click)="isLock(intern)" *ngIf="intern.lock == true">解除</button>
+                </td>
+                <td>{{intern.sort}}</td>
+                <td>{{intern.name}}</td>
+                <td>{{intern.sex}}</td>
+                <td>{{intern.eMail}}</td>
+                <td *ngIf="this.isUser == false">
+                    <button class="Update" (click)="onSelect(intern, 1)">修改</button>         
+                    <button class="Delete" (click)="onSelect(intern, 2)">刪除</button>
+                </td>
+            </tr>
+        </tbody>
     </table>
 </div>
 

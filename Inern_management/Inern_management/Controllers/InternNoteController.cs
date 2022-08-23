@@ -22,42 +22,41 @@ namespace Inern_management.Controllers
             _context = context;
         }
 
+        //全部列出(除鎖定的)
         [HttpGet]
         public async Task<ActionResult<IEnumerable<InternNoteDTO>>> GetIternNotes()
         {
             //比對和Intern相同資料ID的實習生名字後輸出需要的資料
             var internNotes = GetNoteDTO();
             
-            //var internNotes = _context.InternNotes.ToList();
             return Ok(internNotes);
         }
 
-
+        //條件查詢
         [HttpGet("{id}")]
         public async Task<ActionResult<InternNote>> GetIternNote(int id)
         {
 
             var internNote = GetNoteDTO();
-            //var internNote = await _context.InternNotes.FindAsync(id);
             
-            if (internNote == null) return NotFound();
+            if (internNote == null) return NotFound();//如果沒有直接回傳404錯誤
 
             
-            if (id == 0)
+            if (id == 0)        //依修改日期新到舊排序
                 internNote = internNote.OrderByDescending(x => x.DateModifited);
-            else if (id == -1)
+            else if (id == -1)  //依修改日期舊到新排序
                 internNote = internNote.OrderBy(x => x.DateModifited);
-            else if (id == -2)
+            else if (id == -2)  //依實習生序號低到高排序
                 internNote = internNote.OrderBy(x => x.NameId);
-            else if (id == -3)
+            else if (id == -3)  //依實習生序號高到低排序
                 internNote = internNote.OrderByDescending(x => x.NameId);
-            else
+            else                //查詢其中一位的實習生的筆記
                 internNote = internNote.Where(I => I.NameId == id);
 
             return Ok(internNote);
         }
 
-        //POST
+        //POST：新增
         [HttpPost]
         public async Task<ActionResult<InternNote>> PostIntern(InternNote internNote)
         {
@@ -70,7 +69,7 @@ namespace Inern_management.Controllers
         }
 
 
-        //PUT
+        //PUT：修改
         [HttpPut("{id}")]
         public async Task<ActionResult<InternNote>> PutIntern(int id, InternNote internNote)
         {
@@ -103,7 +102,7 @@ namespace Inern_management.Controllers
             return NoContent();
         }
 
-        //DELETE
+        //DELETE：匯入文章Id刪除對應文章
         [HttpDelete("{id}")]
         public async Task<ActionResult<InternNote>> DeleteIternNote(int id)
         {
@@ -121,6 +120,7 @@ namespace Inern_management.Controllers
 
             }
         }
+
 
         private bool TodoInternExists(int id)
         {
