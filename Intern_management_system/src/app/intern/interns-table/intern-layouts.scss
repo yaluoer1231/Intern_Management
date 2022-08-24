@@ -1,16 +1,22 @@
 .internDate-select{
-    height: 800px;
-    width:25%;
-    background-color: black;
+    width:40%;
+    border-right-style: inset ;
+    text-align: left;
+    padding-right: 1rem;
 }
 
 .internDate-edit{
-    height: 800px;
-    width: 75%;
-    background-color: rgb(255, 255, 255);
+    width: 60%;
+    padding-left: 1rem;
 }
 
 .interns{
+    height: 487px;
     display: flex;
     flex-direction: row;
+    justify-content: center;
+    border-radius: 10px;
+    padding: 1rem;
+    background-color: rgba(255, 255, 255, 0.8);
+    box-shadow: 11px 8px 13px -11px;
 }

@@ -38,7 +38,6 @@ export class InternsTableComponent implements OnInit {
         }
         this.interns = Interns;
         this.showInterns = Interns;
-        
       })
   }
 

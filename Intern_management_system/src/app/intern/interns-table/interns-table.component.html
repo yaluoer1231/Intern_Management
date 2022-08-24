@@ -12,31 +12,38 @@
     </div>
 </div>-->
 
-<div>
-    <ul *ngFor="let intern of showInterns">
-        <li>
-            <button class="Delete" (click)="isLock(intern)" *ngIf="intern.lock == false">鎖定</button>
-            <button class="Delete" (click)="isLock(intern)" *ngIf="intern.lock == true">解除</button>
-            <p>{{ intern.sort }}. {{ intern.name }}
-            <p>　性別：{{ intern.sex }} 
-            <p>　信箱：{{ intern.eMail }} 
-            <p class="buttonForUpDel" style="text-align: right;">
-                <button class="Update" (click)="onSelect(intern, 1)">修改</button>         
-                <button class="Delete" (click)="onSelect(intern, 2)">刪除</button>
-        </li>
-    </ul>
-</div>
-<!--<div class= "interns">
-    <div class="internDate-select">
 
+<div class= "interns">
+    <div class="internDate-select">
+        <div class="title">實習生資料查詢系統</div>
+        <div class="List">
+            <ul *ngFor="let intern of showInterns">
+                <li (click)="onSelect(intern, 1)">
+                    <p class="Lock">
+                    <button class="Delete" (click)="isLock(intern)" *ngIf="intern.lock == false">鎖定</button>
+                    <button class="Delete" (click)="isLock(intern)" *ngIf="intern.lock == true">解除</button>
+                    <p class="Sort"> {{ intern.sort }}.
+                    <p class="Name">{{ intern.name }}
+                    <p class="Sex">性別：{{ intern.sex }} 
+                </li>
+            </ul>
+        </div>
     </div>
 
     <div class="internDate-edit" >
-
+        <app-intern-details 
+            [intern]="selectedintern" 
+            [showCode]="showCode" 
+            (sexChange)="sexChange($event)" 
+            (goSort)="idChange($event)"
+            (goDelete)="delete($event)"
+            (refreshPage)="getIntern()"
+            (backPage)="back()">
+        </app-intern-details>
     </div>
-</div>-->
+</div>
 
-<div class= "interns">
+<div class= "interns" style="margin-top: 2rem">
     
      <table>
         <thead>

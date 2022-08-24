@@ -1,20 +1,54 @@
-.interns{
-    display: flex;
-    justify-content: center;
+.title{
+  text-align: center;
+  font-size: 30px;
+  padding-bottom: 0.8rem;
+  border-bottom-style: inset;
+}
+.List{
+  margin-top: 10px;
+  height: 400px;
+  overflow-y: auto;
+}
+
+ul{
+  padding-left: 0;
+  margin-bottom: 0;
+  margin-top: 0;
 }
 
 li{
-  height: 65px;
-  width: 100%;
-  background-color: rgba(255, 255, 255, 0.8);
-  box-shadow: 11px 8px 13px -11px;
-  border-radius: 15px;
-  padding-left: 2rem;
-  padding-right: 2rem;
   display: flex;
   flex-direction: row;
-  align-items: center; 
+  align-items: center;  
+  text-align:center ;
+  padding-right: 1rem;
+  padding-left: 1rem;
+  border-radius: 10px;
 }
+
+span{  
+  display: flex;
+  flex-direction: row;
+}
+li:hover{
+  background-color: rgba(131, 131, 131, 0.515);
+}
+
+.Lock{
+  width: 20%;
+}
+.Sort{
+  width: 10%;
+}
+.Name{
+  width: 55%;
+  font-size:20px; 
+  text-align: left;
+}
+.Sex{
+  width: 15%;
+}
+
 
 .interns table { 
     font-size:16px; 
