@@ -23,8 +23,8 @@ export class InternDetailsComponent implements OnInit {
   @Output() goSort = new EventEmitter();
   @Output() refreshPage = new EventEmitter();
 
-  eMailFromat =  /[_a-zA-Z\d\-\.]+@[_a-zA-Z\d\-]+(\.[_a-zA-Z\d\-]+)+$/;
-  nameFromat =/^[\u4e00-\u9fa5]{2,4}$/;
+  eMailFromat = /[_a-zA-Z\d\-\.]+@[_a-zA-Z\d\-]+(\.[_a-zA-Z\d\-]+)+$/;
+  nameFromat = /^[\u4e00-\u9fa5]{2,4}$/;
 
   noName : Boolean = false;
   noEmail : Boolean = false;
@@ -48,19 +48,21 @@ export class InternDetailsComponent implements OnInit {
     if (this.intern)
     {
       this.originakCode = 1;
-
       if (!this.intern.name || !this.intern.eMail){
-        this.showCode = 1.5
+        this.showCode = 5;
         this.errorPost = true;
       }
-      if (this.nameFromat.test(this.intern.name)){
-        this.showCode = 1.5
+      if (!this.nameFromat.test(this.intern.name)) { 
         this.noName = true;
+        this.showCode = 5;
       }
-      if (this.eMailFromat.test(this.intern.eMail)){
+  
+      if (!this.eMailFromat.test(this.intern.eMail)) { 
         this.noEmail = true;
-        this.showCode = 1.5;
+        this.showCode = 5;
       }
+
+      if (this.showCode == 5){return;}
 
       if (this.showCode == 1){
         this.sexChange.emit(this.intern);
@@ -79,33 +81,34 @@ export class InternDetailsComponent implements OnInit {
     this.backPage.emit();
   }
 
-  post(name : string,SexCode : string, eMail : string): void{
+  post(name : string,SexCode : string, eMail : string,
+        born: string, lineId : string, phonenumber: string): void{
     name = name.trim();
-    const sexCode = Number(SexCode); 
     eMail = eMail.trim();
-
     this.originakCode = 3;
 
     if (!name || !eMail){
-      this.showCode = 3.5;
+      this.showCode = 5;
       this.errorPost = true;
+      this.fromatTest(name,eMail)
       return;
     }
 
-    if (!this.nameFromat.test(name)) { 
-      this.noName = true;
-      this.showCode = 3.5;
-      return;
-    }
 
-    if (!this.eMailFromat.test(eMail)) { 
-      this.noEmail = true;
-      this.showCode = 3.5;
-      return;
-    }
+    this.fromatTest(name,eMail);
+
+    if (this.showCode == 5){return;}
+
+    lineId = lineId.trim();
+    phonenumber = phonenumber.trim();
+    
+    const sexCode = Number(SexCode); 
+    var borndate = new Date(born);
+
+
 
     if (this.showCode = 3){
-    this.internService.postIntern({name,sexCode,eMail} as Intern)
+    this.internService.postIntern({name,sexCode,eMail,borndate,lineId,phonenumber} as Intern)
       .subscribe(intern => {
         this.sexChange.emit(intern);
         this.refreshPage.emit();
@@ -114,6 +117,18 @@ export class InternDetailsComponent implements OnInit {
     }
     else{
       return;
+    }
+  }
+
+  fromatTest(name: string,eMail: string): void{
+    if (!this.nameFromat.test(name)) { 
+      this.noName = true;
+      this.showCode = 5;
+    }
+
+    if (!this.eMailFromat.test(eMail)) { 
+      this.noEmail = true;
+      this.showCode = 5;
     }
   }
 

@@ -7,7 +7,7 @@ import { InternService } from '../intern.service';
 @Component({
   selector: 'app-interns-table',
   templateUrl: './interns-table.component.html',
-  styleUrls: ['./interns-table.component.scss','./button-table.scss','/intern-layouts.scss']
+  styleUrls: ['./interns-table.component.scss','./button-table.scss','./intern-layouts.scss']
 })
 export class InternsTableComponent implements OnInit {
 
@@ -35,6 +35,7 @@ export class InternsTableComponent implements OnInit {
         for (var i = 0;i <= Interns.length-1;i++){ //迴圈找陣列，Interns.length-1為陣列長度，檢索從0開始
           this.sexChange(Interns[i]);
           this.idChange(Interns[i]);
+          Interns[i].borndate = new Date(Interns[i].borndate);
         }
         this.interns = Interns;
         this.showInterns = Interns;
@@ -70,10 +71,14 @@ export class InternsTableComponent implements OnInit {
   }
 
   delete(intern: Intern): void{
-    if (this.interns.length > 1){
+    if (this.interns.length > 5){
       this.interns = this.interns.filter(h => h !== intern);
       this.internService.deleteIntern(intern.id)
         .subscribe(Note => this.getIntern());
+    }
+    else{
+      this.selectedintern = intern;
+      this.showCode = 5
     }
   }
 

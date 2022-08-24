@@ -17,6 +17,9 @@
     <div class="internDate-select">
         <div class="title">實習生資料查詢系統</div>
         <div class="List">
+            <div class="Button_Area">
+                <button class="Add" (click)="onSelect(interns[0], 3)">新增資料</button>
+            </div>
             <ul *ngFor="let intern of showInterns">
                 <li (click)="onSelect(intern, 4)">
                     <p class="Lock">
@@ -41,60 +44,6 @@
             (backPage)="back()">
         </app-intern-details>
     </div>
-</div>
-
-<div class= "interns" style="margin-top: 2rem">
-    
-     <table>
-        <thead>
-            <tr>
-                <th  *ngIf="this.isUser == false">鎖定</th>
-                <th >序列</th>
-                <th >姓名</th>
-                <th >性別</th>
-                <th >電子信箱</th>
-                <th  *ngIf="this.isUser == false">操作</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let intern of showInterns">
-                
-                <td *ngIf="this.isUser == false">
-                    <button class="Delete" (click)="isLock(intern)" *ngIf="intern.lock == false">鎖定</button>
-                    <button class="Delete" (click)="isLock(intern)" *ngIf="intern.lock == true">解除</button>
-                </td>
-                <td>{{intern.sort}}</td>
-                <td>{{intern.name}}</td>
-                <td>{{intern.sex}}</td>
-                <td>{{intern.eMail}}</td>
-                <td *ngIf="this.isUser == false">
-                    <button class="Update" (click)="onSelect(intern, 1)">修改</button>         
-                    <button class="Delete" (click)="onSelect(intern, 2)">刪除</button>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-</div>
-
-<div class="Button_Area">
-    <button class="Add" (click)="getIntern(); isUser= false">管理者介面</button>
-    <button class="Update" (click)="getUnLockIntern(); showCode = 0">使用者介面</button>
-</div>
-
-<div class = "detail">
-    <app-intern-details 
-        [intern]="selectedintern" 
-        [showCode]="showCode" 
-        (sexChange)="sexChange($event)" 
-        (goSort)="idChange($event)"
-        (goDelete)="delete($event)"
-        (refreshPage)="getIntern()"
-        (backPage)="back()"  >
-    </app-intern-details>
-</div>
-
-<div class="Button_Area">
-    <button class="Add" (click)="onSelect(interns[0], 3)" *ngIf ="showCode != 3">資料增加</button>
 </div>
 
 

@@ -1,18 +1,17 @@
 h2{
   width: 100%;
+  margin: 0;
 }
 
 
 .Input { 
-  text-align: center;
+  text-align: left;
   flex-direction: column;
   line-height: normal;
 }
 
-.Post{ 
+.Error{
   text-align: center;
-  flex-direction: column;
-  line-height: normal;
 }
 
 .Search{
@@ -40,8 +39,7 @@ h2{
     color:#fff;
   }
 }
-
-.ButtonArea {
-  margin-top: 2rem;
-  text-align: center;
+.inputdate{
+  width: 200px;
 }
+

@@ -39,18 +39,38 @@ namespace Inern_management.Models
 
                 entity.Property(e => e.Id).HasColumnName("id");
 
+                entity.Property(e => e.Borndate)
+                    .HasColumnType("date")
+                    .HasColumnName("borndate");
+
                 entity.Property(e => e.EMail)
                     .HasColumnType("text")
                     .HasColumnName("e_mail");
 
-                entity.Property(e => e.Lock).HasColumnName("lock");
+                entity.Property(e => e.LineId)
+                    .HasMaxLength(50)
+                    .IsUnicode(false)
+                    .HasColumnName("line_id");
+
+                entity.Property(e => e.Lock)
+                    .HasColumnName("lock")
+                    .HasComment("鎖定，鎖定後就不會顯示該實習生的任何內容，除管理者");
 
                 entity.Property(e => e.Name)
                     .IsRequired()
-                    .HasColumnType("text")
-                    .HasColumnName("name");
+                    .HasMaxLength(5)
+                    .IsUnicode(false)
+                    .HasColumnName("name")
+                    .HasComment("實習生姓名");
 
-                entity.Property(e => e.SexCode).HasColumnName("sex_code");
+                entity.Property(e => e.Phonenumber)
+                    .HasMaxLength(15)
+                    .IsUnicode(false)
+                    .HasColumnName("phonenumber");
+
+                entity.Property(e => e.SexCode)
+                    .HasColumnName("sex_code")
+                    .HasComment("實習生性別，1為男生，2為女生");
             });
 
             modelBuilder.Entity<InternNote>(entity =>
@@ -75,7 +95,8 @@ namespace Inern_management.Models
 
                 entity.Property(e => e.NoteTitle)
                     .IsRequired()
-                    .HasColumnType("text")
+                    .HasMaxLength(15)
+                    .IsUnicode(false)
                     .HasColumnName("noteTitle");
             });
 
