@@ -1,0 +1,39 @@
+.title{
+    text-align: center;
+    font-size: 30px;
+    padding-bottom: 0.8rem;
+    border-bottom-style: inset;
+    display: flex;
+    flex-direction: row;
+    button[type="delete"] {
+      margin-right: 0;
+    }
+    p{
+      margin: 0;
+    }
+  }
+.back{
+    width: 25%;
+    text-align: left;
+}
+.function{
+    width: 50%;
+    text-align: center;
+}
+.titlebutton{
+    width: 25%;
+    text-align: right;
+}
+
+.NoticeText{
+  height: 20px;
+  text-align: center;
+  font-size: 25px;
+  margin-bottom: 2rem;
+}
+
+.Show{
+  margin-top: 10px;
+  height: 400px;
+  overflow-y: auto;
+}

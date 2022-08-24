@@ -1,7 +1,25 @@
-<div *ngIf="intern"> 
+<div class="title" *ngIf="intern && showCode != 0">
+    <p class="back"><button type="Back" (click)="back()">關閉</button>
+        <p class="function" *ngIf="showCode == 1">資料修改
+        <p class="function" *ngIf="showCode == 2">刪除警告
+        <p class="function" *ngIf="showCode == 3">新增資料
+        <p class="function" *ngIf="showCode == 4">查詢結果
+    <p class="titlebutton">
+        <button type="Update" (click)="showCode=1">修改</button>         
+        <button type="Delete" (click)="showCode=2">刪除</button>
+    </p>
+</div>
+
+<div class="NoticeText" *ngIf="intern">
+    <p *ngIf="showCode == 1">正在修改{{intern.sort}}號「{{intern.name}}」的資料
+    <p *ngIf="showCode == 2">確定刪除「{{intern.name}}」嗎?
+    <p *ngIf="showCode == 3">新增資料
+    <p *ngIf="showCode == 4">【{{ intern.name }}】的個人資料
+</div>
+
+<div class="Show" *ngIf="intern"> 
     <div class="Update" *ngIf="showCode == 1">
         <ul>
-            <h2>正在修改{{intern.sort}}號「{{intern.name}}」的資料</h2>
             <div class="Input">
                 <p class="name"><label for="intern-name">實習生姓名： </label>
                 <input id="intern-name" [(ngModel)]="intern.name" placeholder="name"></p>
@@ -27,7 +45,6 @@
     </div>
 
     <div class="Delete" *ngIf="showCode == 2 ">
-            <h2>確定刪除「{{intern.name}}」嗎?</h2>
         <div clas ="ButtonArea">
             <button type="Delete" (click)="delete(intern)">確定</button>
             <button type="Back" (click)="back()">取消</button>
@@ -42,9 +59,9 @@
     </div>
 
 
-    <div class="Post" *ngIf="showCode == 3 ">
+    <div class="Post" *ngIf="showCode == 3">
         <h2>請輸入實習生的資料</h2>
-            <p class="name"><label for="new-intern">實習生姓名: </label>
+            <p class="name"><label for="new-intern">: </label>
             <input id="new-intern" #internName></p>
 
             <p class="Another"><label for="new-intern">性別: </label>
@@ -60,5 +77,32 @@
                 <button type="Back"  (click)="back()">取消</button>
         </div>
     </div>  
+    <div class="Search" *ngIf="showCode==4">
+        <table>
+            <tbody>
+                <tr>
+                    <td class="subtitle">性別</td>
+                    <td class="internData">{{ intern.sex }}</td>
+                </tr>
+
+                <tr>
+                    <td class="subtitle">生日</td>
+                    <td class="internData">1996/12/31</td>
+                </tr>
+                
+                <tr>
+                    <td class="subtitle">Line ID</td>
+                    <td class="internData">yaluoer</td>
+                </tr>
+                <tr>
+                    <td class="subtitle">連絡電話</td>
+                    <td class="internData">0972753601</td>
+                </tr>
+                <tr>
+                    <td class="subtitle">E-Mail</td>
+                    <td class="internData">{{ intern.eMail }}</td>
+                </tr>
+            </tbody>
+        </table>
 </div>
 

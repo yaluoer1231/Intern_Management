@@ -18,7 +18,7 @@
         <div class="title">實習生資料查詢系統</div>
         <div class="List">
             <ul *ngFor="let intern of showInterns">
-                <li (click)="onSelect(intern, 1)">
+                <li (click)="onSelect(intern, 4)">
                     <p class="Lock">
                     <button class="Delete" (click)="isLock(intern)" *ngIf="intern.lock == false">鎖定</button>
                     <button class="Delete" (click)="isLock(intern)" *ngIf="intern.lock == true">解除</button>

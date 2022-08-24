@@ -3,6 +3,9 @@
     border-right-style: inset ;
     text-align: left;
     padding-right: 1rem;
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
 }
 
 .internDate-edit{

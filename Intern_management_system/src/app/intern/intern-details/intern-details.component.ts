@@ -10,7 +10,7 @@ import { ReturnStatement } from '@angular/compiler';
 @Component({
   selector: 'app-intern-details',
   templateUrl: './intern-details.component.html',
-  styleUrls: ['./intern-details.component.scss']
+  styleUrls: ['./intern-details.component.scss','./button.scss','./details-layouts.scss']
 })
 export class InternDetailsComponent implements OnInit {
 
