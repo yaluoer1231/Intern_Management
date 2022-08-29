@@ -19,32 +19,32 @@ ul{
   margin-top: 0;
 }
 
-li{
+li,.intern{
   display: flex;
   flex-direction: row;
   align-items: center;  
   text-align:center ;
   padding-right: 1rem;
   padding-left: 1rem;
-  border-radius: 10px;
 }
 
-span{  
-  display: flex;
-  flex-direction: row;
+.intern{
+  padding-left: 0rem;
+  border-radius: 10px;
 }
-li:hover{
+.intern:hover{
   background-color: rgba(131, 131, 131, 0.515);
 }
 
 .Lock{
   width: 88px;
+  padding-right: 0.5rem;
 }
 .Sort{
   width: 44px;
 }
 .Name{
-  width: 242px;
+  width: 220px;
   font-size:20px; 
   text-align: left;
 }
@@ -55,4 +55,5 @@ li:hover{
 h3{
   height: 487px;
   line-height: 487px;
+  color: rgba(169, 128, 81, 0.648);
 }

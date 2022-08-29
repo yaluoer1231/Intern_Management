@@ -1,0 +1,33 @@
+.NoteArea{
+    height: 487px;
+    flex-direction: row;
+    justify-content: center;
+    border-radius: 10px;
+    padding: 1rem;
+    background-color: rgba(255, 255, 255, 0.8);
+    box-shadow: 11px 8px 13px -11px;
+}
+.SelectAll{
+    height: 50px;
+    line-height: 50px;
+    padding-bottom: 0.1rem;
+    border-bottom-style: inset;
+    display: flex;
+    flex-direction: row;
+}
+.left,.right{
+    width: 15%;
+}
+.right{
+    text-align: right;
+    padding-right: 1rem;
+}
+.middle{
+    width: 70%;
+}
+
+
+.Note{
+    height: 400px;
+    overflow-y: auto;
+}

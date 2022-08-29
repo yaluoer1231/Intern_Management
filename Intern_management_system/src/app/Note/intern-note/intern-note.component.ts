@@ -11,7 +11,7 @@ import { SafeResourceUrl } from '@angular/platform-browser';
 @Component({
   selector: 'app-intern-note',
   templateUrl: './intern-note.component.html',
-  styleUrls: ['./intern-note.component.scss','./button-table.scss']
+  styleUrls: ['./intern-note.component.scss','./button-table.scss','./note-layouts.scss']
 })
 export class InternNoteComponent implements OnInit {
 
@@ -22,7 +22,7 @@ export class InternNoteComponent implements OnInit {
   notes : Note[] = [];
 
   selectShowCode : number = 0; //以代號顯示功能，0:依修改日期，1:找同名字並依照創建日期
-  showCode? : number;//以代號顯示功能，0:READ，1:PUT，2:DELETE，3:POST，4:CLOSE
+  showCode : number = 4;//以代號顯示功能，0:READ，1:PUT，2:DELETE，3:POST，4:CLOSE
 
   selectNotes? : Note;
 
@@ -73,6 +73,6 @@ export class InternNoteComponent implements OnInit {
   }
 
   back(): void{
-    this.showCode = 5;
+    this.showCode = 4;
   }
 }

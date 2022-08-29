@@ -23,12 +23,9 @@ export class InternDetailsComponent implements OnInit {
   @Output() goDelete = new EventEmitter();
   @Output() goSort = new EventEmitter();
   @Output() refreshPage = new EventEmitter();
+  @Output() changeCode = new EventEmitter();
 
-  //輸入錯誤時的資料暫存區
-  setIntern? : Intern;
-  //E-Mail和姓名格式的檢測
-  eMailFromat = /[_a-zA-Z\d\-\.]+@[_a-zA-Z\d\-]+(\.[_a-zA-Z\d\-]+)+$/;
-  nameFromat = /^[\u4e00-\u9fa5]{2,4}$/;
+
   //該輸入的資料有空白或是錯誤時使用
   noName : Boolean = false;
   noEmail : Boolean = false;
@@ -61,14 +58,19 @@ export class InternDetailsComponent implements OnInit {
 
   ngOnInit(): void {
     this.setYYMM();
-    this.setIntern = this.intern;
   }
   
+  setCode(num: number): void{
+    this.changeCode.emit(num);
+  }
+
   put(): void{
     if(this.intern){
+      this.setCode(1);
       this.selectYear = this.intern.borndate.getFullYear();
       this.selectMonth = this.intern.borndate.getMonth()+1;
       this.selectDay = this.intern.borndate.getDate();
+      this.setDD();
     }
   }
 
@@ -76,8 +78,6 @@ export class InternDetailsComponent implements OnInit {
     if (this.intern)
     {
       name = name.trim();
-      this.setIntern = this.intern;
-      this.setIntern.name = name;
       if (!name || !this.intern.eMail){
         this.showCode = 5;
         this.errorPost = true;
@@ -104,7 +104,7 @@ export class InternDetailsComponent implements OnInit {
   }
 
   delete(intern:Intern): void{
-    if (this.internLength! > 5){
+    if (this.internLength! > 1){
       this.goDelete.emit(intern);
       this.backPage.emit();
     }
@@ -135,12 +135,8 @@ export class InternDetailsComponent implements OnInit {
     const sexCode = Number(SexCode); 
     var borndate = new Date(this.showDate);
 
-    if (this.showCode == 5){
-      this.setIntern = ({name,sexCode,eMail,borndate,lineId,phonenumber} as Intern);
-      return;
-    }
 
-    if (this.showCode = 3){
+    if (this.showCode == 3){
     this.internService.postIntern({name,sexCode,eMail,borndate,lineId,phonenumber} as Intern)
       .subscribe(intern => {
         this.sexChange.emit(intern);
@@ -153,13 +149,16 @@ export class InternDetailsComponent implements OnInit {
     }
   }
 
-  fromatTest(name: string,eMail: string): void{
-    if (!this.nameFromat.test(name)) { 
+  fromatTest(name: string,eMail: string): void{   
+    //E-Mail和姓名格式的檢測
+    var eMailFromat = /[_a-zA-Z\d\-\.]+@[_a-zA-Z\d\-]+(\.[_a-zA-Z\d\-]+)+$/;
+    var nameFromat = /^[\u4e00-\u9fa5]{2,4}$/;
+    if (!nameFromat.test(name)) { 
       this.noName = true;
       this.showCode = 5;
     }
 
-    if (!this.eMailFromat.test(eMail)) { 
+    if (!eMailFromat.test(eMail)) { 
       this.noEmail = true;
       this.showCode = 5;
     }
@@ -183,7 +182,7 @@ export class InternDetailsComponent implements OnInit {
       for(var i = 0; i < 100 ; i++)
         this.year[i] = this.dateNow - i;
       }
-    else  {
+    else if (this.showCode == 3){
       this.day = [];
       this.showDate = "";
     }

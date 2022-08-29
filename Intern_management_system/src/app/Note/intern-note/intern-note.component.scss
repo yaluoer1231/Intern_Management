@@ -1,56 +1,61 @@
-.select-show{
-  text-align: center;
-  margin-bottom: 2rem;
-  select {
-    margin-right: 1rem;
-    font-size: 1.2rem;
-  }
-}
-
 .dateSort{
   margin-left: 3rem;
 }
 
 
-.Note{
-    display: flex;
-    justify-content: center;
+ul{
+  padding-left: 2rem;
+  padding-right: 2rem;
+}
+li{
+  display: flex;
+  flex-direction: row;
+  padding: 0;
 }
 
-.table-title{
-  padding-left: 10rem;
-  padding-right: 10rem;
+.ListTitle p{
+    margin: 0;
+    font-size: 20px;
+    margin-bottom: 0.5rem;
+    border-bottom-style: inset;
+    border-width: 4px;
+    
 }
-
-.table-Notetitle{
+.NoteIntern{
+  width: 150px;
+}
+.Notetitle{
+  width: 600px;
   font-weight: bolder;
-  font-size: 1.2rem;
-  text-align: left;
+  
+}
+.NoteDateModifited{
+  width: 250px;
+}
+.ButtonContorl{
+  width: 250px;
 }
 
-.Note table { 
-    border:1px solid #000; 
-    font-size:16px; 
-    width:200px;
-    border:1px solid #000;
-    text-align:center;
-    border-collapse:collapse;
-    margin-bottom: 2rem;
-  } 
-    th { 
-    background-color: #a54a00;
-    white-space:nowrap; 
-    padding:10px;
-    border:1px solid #000;
-    color:#fff;
-  } 
-    td { 
-    border:1px solid rgb(5, 2, 2);
-    white-space:nowrap; 
-    text-align: center;
-    padding:5px;
-    background-color:#ffffff
+.ListNote {
+  height: 40px;
+  line-height: 40px;
+  font-size: 1.2rem;
+  padding-bottom: 4px;
+  padding-top: 4px;
+  border-bottom-style: inset;
+  border-width: 2px;
+  .Notetitle{
+    font-weight: bolder;
+    font-size: 1.2rem;
+    text-align: left;
   }
+  .Notetitle:hover{
+    background-color: rgba(131, 131, 131, 0.515);
+  }
+  p{
+    margin: 0;
+  }
+}
 
 .NoteEdit {
   width: 60rem;
@@ -60,8 +65,3 @@
   display: flex;
   justify-content: center;
 }
-
-  .Button_Area,.Show_Area{
-    display: flex;
-    justify-content: center;
-  }

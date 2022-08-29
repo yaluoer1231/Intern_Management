@@ -21,13 +21,14 @@
                 <button class="Add" (click)="onSelect(interns[0], 3)">新增資料</button>
             </div>
             <ul *ngFor="let intern of showInterns">
-                <li (click)="onSelect(intern, 4)">
+                <li>
                     <p class="Lock">
                     <button class="Delete" (click)="isLock(intern)" *ngIf="intern.lock == false">鎖定</button>
                     <button class="Delete" (click)="isLock(intern)" *ngIf="intern.lock == true">解除</button>
-                    <p class="Sort"> {{ intern.sort }}.
-                    <p class="Name">{{ intern.name }}
-                    <p class="Sex">性別：{{ intern.sex }} 
+                    <div class="intern" (click)="onSelect(intern, 4)">
+                        <p class="Sort"> {{ intern.sort }}.
+                        <p class="Name">{{ intern.name }}
+                        <p class="Sex">性別：{{ intern.sex }} </div>
                 </li>
             </ul>
         </div>
@@ -39,6 +40,7 @@
             [intern]="selectedintern" 
             [showCode]="showCode" 
             [internLength]="internLength"
+            (changeCode)="setShowCode($event)"
             (sexChange)="sexChange($event)" 
             (goSort)="idChange($event)"
             (goDelete)="delete($event)"
@@ -46,6 +48,7 @@
             (backPage)="back()">
         </app-intern-details>
     </div>
+    
 </div>
 
 

@@ -18,7 +18,7 @@ export class InternsTableComponent implements OnInit {
 
   selectedintern? : Intern;
   internLength = 0;
-  showCode = 0; //以代號顯示功能，0:關閉，1:PUT，2:DELETE，3:POST
+  showCode = 0; //以代號顯示功能，0:關閉，1:PUT，2:DELETE，3:POST，4：SELECT
   idShow = 0;
 
 
@@ -49,9 +49,13 @@ export class InternsTableComponent implements OnInit {
   }
 
   onSelect(intern: Intern,ShowCode : number): void {
+    if (this.showCode == ShowCode && this.selectedintern == intern)
+      this.showCode = 0;
+    else {
       this.selectedintern = intern;
       this.internLength = this.interns.length;
       this.showCode = ShowCode;
+    }
   }
 
   //將資料庫的性別代號轉換成文字
@@ -71,13 +75,11 @@ export class InternsTableComponent implements OnInit {
   }
 
   delete(intern: Intern): void{
-    if (this.interns.length > 5){
+    if (this.interns.length > 1){
       this.interns = this.interns.filter(h => h !== intern);
       this.internService.deleteIntern(intern.id)
         .subscribe(Note => this.getIntern());
     }
-    else
-      this.showCode = 6
   }
 
   isLock(intern: Intern): void{
@@ -88,9 +90,12 @@ export class InternsTableComponent implements OnInit {
     this.internService.putIntern(intern)
         .subscribe();
   }
-  
 
   back(): void{
     this.showCode = 0;
+  }
+
+  setShowCode(num : number): void{
+    this.showCode = num;
   }
 }

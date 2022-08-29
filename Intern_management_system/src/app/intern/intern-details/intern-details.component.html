@@ -14,7 +14,7 @@
     
         <p class="titlebutton" *ngIf="showCode != 3 && showCode != 5">
             <button type="Update" (click)="showCode=1; put()">修改</button>
-            <button type="Delete" (click)="showCode=2">刪除</button>
+            <button type="Delete" (click)="showCode=2; setCode(2);">刪除</button>
     </p>
 </div>
 
