@@ -57,8 +57,7 @@ export class InternNoteComponent implements OnInit {
     var Sort =  parseInt(intern);
     this.selectShowCode = 1;
     this.notesService.getInternNote(Sort)
-      .subscribe(Note => this.notes = Note)
-    
+      .subscribe(Note => this.notes = Note);
   }
 
   delete(Note: Note): void{

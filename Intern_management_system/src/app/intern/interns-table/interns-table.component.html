@@ -34,9 +34,11 @@
     </div>
 
     <div class="internDate-edit" >
+        <h3 class="notice" *ngIf="showCode == 0">請點擊左側實習生查看資料</h3>
         <app-intern-details 
             [intern]="selectedintern" 
             [showCode]="showCode" 
+            [internLength]="internLength"
             (sexChange)="sexChange($event)" 
             (goSort)="idChange($event)"
             (goDelete)="delete($event)"
