@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+https://go.microsoft.com/fwlink/?LinkID=208121. 
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <_PublishTargetUrl>D:\Desktop\Project\Inern_management\Inern_management\bin\Release\netcoreapp3.1\publish\</_PublishTargetUrl>
+    <History>True|2022-08-31T09:27:08.4479939Z;True|2022-08-31T17:11:23.6063621+08:00;True|2022-08-31T17:04:47.8984082+08:00;True|2022-08-31T17:04:03.8197114+08:00;True|2022-08-31T16:59:42.9254081+08:00;True|2022-08-31T16:49:35.7315633+08:00;</History>
+    <TimeStampOfAssociatedLegacyPublishXmlFile />
+  </PropertyGroup>
+  <ItemGroup>
+    <EFMigrations Include="Inern_management.Models.InternContext">
+      <Value>
+      </Value>
+    </EFMigrations>
+    <EFMigrations Include="Inern_management.Models.SqlDbContext">
+      <Value>
+      </Value>
+    </EFMigrations>
+  </ItemGroup>
+</Project>

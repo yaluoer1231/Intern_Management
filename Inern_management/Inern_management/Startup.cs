@@ -30,17 +30,17 @@ namespace Inern_management
         {
             services.AddDbContext<InternContext>(opt => opt
             .UseSqlServer("Server=DESKTOP-VPN7M0U;Database=Intern_management;" +
-            "Trusted_Connection=True"));
+            "Trusted_Connection=True;User ID=sa;Password=YESking1231"));
             services.AddControllers();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            if (env.IsDevelopment())
-            {
+            //if (env.IsDevelopment())
+            //{
                 app.UseDeveloperExceptionPage();
-            }
+            //}
 
             app.UseCors(x => x
                     .AllowAnyMethod()

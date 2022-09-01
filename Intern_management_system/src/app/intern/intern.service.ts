@@ -4,13 +4,15 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 
 import { Intern } from './Intern_Fromat';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class InternService {
-  InternUrl = 'https://localhost:44388/api/';
-
+  //InternUrl ='http://localhost:81/api/';
+  InternUrl = environment.apiHost + 'https://localhost:44388/api/';
+  
   constructor(private http: HttpClient) { }
 
   //GET全部

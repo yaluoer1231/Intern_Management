@@ -6,6 +6,7 @@ import { InternsTableComponent } from '../interns-table/interns-table.component'
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { ReturnStatement } from '@angular/compiler';
+import { ValidationErrors } from '@angular/forms';
 
 @Component({
   selector: 'app-intern-details',
@@ -25,6 +26,19 @@ export class InternDetailsComponent implements OnInit {
   @Output() refreshPage = new EventEmitter();
   @Output() changeCode = new EventEmitter();
 
+  //與表單欄位綁定
+  name = '';
+  borndate = '';
+  lineId = '';
+  phonenumber = '';
+  eMail = '';
+
+  //錯誤訊息
+  nameError = '';
+  bornError = '';
+  lineIdError = '';
+  phonenumberError = '';
+  eMailError = '';
 
   //該輸入的資料有空白或是錯誤時使用
   noName : Boolean = false;
@@ -40,10 +54,6 @@ export class InternDetailsComponent implements OnInit {
   selectYear = 0;
   selectMonth = 0;
   selectDay = 0;
-  //是否修改過生日
-  upDateYear = false;
-  upDateMonth = false;
-  upDateDay = false;
   //將選擇的年月日變成輸出用的個式
   showDate = "";
   //當有錯誤發生時暫時紀錄原來使用的功能代號
@@ -62,6 +72,24 @@ export class InternDetailsComponent implements OnInit {
   
   setCode(num: number): void{
     this.changeCode.emit(num);
+  }
+
+  //表格辨識
+  insuredNameChange(name : string, errors: ValidationErrors| null): void{
+    this.name = name;
+    this.nameError = this.getNameErrorMessage(errors);
+  }
+
+  private getNameErrorMessage(errors: ValidationErrors| null): string{
+    let errorMessage = '';
+    var nameFromat = /^[\u4e00-\u9fa5]{2,4}$/;
+    if(errors?.['required']){
+      errorMessage = '必填' 
+    }
+    else if(errors?.['minlength'] || errors?.['miaxlength']||!nameFromat.test(this.name)){
+      errorMessage = '請輸入正確的姓名'
+    }
+    return errorMessage;
   }
 
   put(): void{
@@ -114,40 +142,6 @@ export class InternDetailsComponent implements OnInit {
 
   }
 
-  post(name : string,SexCode : string, eMail : string,
-        lineId : string, phonenumber: string): void{
-    name = name.trim();
-    eMail = eMail.trim();
-    this.originakCode = 3;
-
-    if (!name || !eMail){
-      this.showCode = 5;
-      this.errorPost = true;
-      this.fromatTest(name,eMail)
-      return;
-    }
-
-    this.fromatTest(name,eMail);
-
-    lineId = lineId.trim();
-    phonenumber = phonenumber.trim();
-    
-    const sexCode = Number(SexCode); 
-    var borndate = new Date(this.showDate);
-
-
-    if (this.showCode == 3){
-    this.internService.postIntern({name,sexCode,eMail,borndate,lineId,phonenumber} as Intern)
-      .subscribe(intern => {
-        this.sexChange.emit(intern);
-        this.refreshPage.emit();
-      });
-      this.backPage.emit();
-    }
-    else{
-      return;
-    }
-  }
 
   fromatTest(name: string,eMail: string): void{   
     //E-Mail和姓名格式的檢測

@@ -1,0 +1,94 @@
+<div *ngIf="transIntern">
+    <form #form="ngForm" (ngSubmit)="post()">
+        <ul>
+            <p class="name"><label for="new-intern">實習生姓名：</label>
+                <input class="inputdate" 
+                        id="new-intern"
+                        name="name"
+                        placeholder="請輸入姓名" 
+                        maxlength="8"
+                        minlength="2" 
+                        pattern="[\u4e00-\u9fa5]{2,4}" 
+                        required 
+                        #namengModel="ngModel" 
+                        [ngModel]="name" 
+                        (ngModelChange)="insuredNameChange(namengModel.value,namengModel.errors)">　
+                    <span class="error-message">{{ nameError }}</span>
+                </p>
+
+                <p class="Another"><label for="intern-sex">性別： </label>
+                    <input type="radio" name="sex"
+                            #sexngModel="ngModel" [(ngModel)]="sexCode" [value]="1">男
+                    <input type="radio" name="sex"
+                            #sexngModel="ngModel" [(ngModel)]="sexCode" [value]="2">女</p>
+
+                <p class="Borndate"><label for="intern-borndate">生日：
+                    <select [(ngModel)]="selectYear" name="year">
+                        <option [value]="0">請選擇</option>
+                        <option *ngFor="let yyyy of year" [value]="yyyy">{{ yyyy }}</option>
+                    </select>／
+                    <select [(ngModel)]="selectMonth" name="month"
+                            *ngIf="selectYear != 0" (ngModelChange)="setDate($event)">
+                        <option [value]="0">請選擇</option>
+                        <option *ngFor="let mm of month" [value]="mm">{{ mm }}</option>
+                    </select>／
+                    <select [(ngModel)]="selectDay" name="day"
+                            *ngIf="selectMonth != 0">
+                        <option [value]="0">請選擇</option>
+                        <option *ngFor="let dd of day" [value]="dd">{{ dd }}</option>
+                    </select>
+                    <span class="error-message">{{ borndateError }}</span>
+                </label>
+                    </p>
+            
+
+                <p class="name"><label for="intern-line">Line ID：</label>
+                <input class="inputdate"
+                        name="lineId"
+                        id="intern-name"
+                        placeholder="Line Id"
+                        maxlength="50"
+                        minlength="6"
+                        pattern="[\d|a-zA-Z]+"
+                        #linengModel="ngModel"
+                        required [ngModel]="lineId" 
+                        (ngModelChange)="insuredLineChange(linengModel.value,linengModel.errors)">　
+                    <span class="error-message">{{ lineIdError }}</span>
+                </p>
+            
+                <p class="name"><label for="intern-phone">連絡電話：</label>
+                <input class="inputdate"
+                        name="phonenumber"
+                        id="intern-name"
+                        placeholder="手機或市話"
+                        maxlength="15"
+                        pattern="(09)[0-9]{8}"
+                        #phonengModel="ngModel"
+                        required [ngModel] = "phonenumber" 
+                        (ngModelChange)="insuredPhoneChange(phonengModel.value,phonengModel.errors)">　
+                        <span class="error-message">{{ phonenumberError }}</span>
+                </p>
+
+
+                <p class="Another"><label for="new-intern">電子信箱：</label>
+                <input class="inputdate"
+                        name="eMail"
+                        id="new-intern"
+                        placeholder="e-mail"
+                        maxlength="50"
+                        minlength="2"
+                        pattern="[_a-zA-Z\d\-\.]+@[_a-zA-Z\d\-]+(\.[_a-zA-Z\d\-]+)+"
+                        #eMailngModel="ngModel" 
+                        required [ngModel]="eMail" 
+                        (ngModelChange)="insuredEMailChange(eMailngModel.value,eMailngModel.errors)">　
+                    <span class="error-message">{{ eMailError }}</span>
+                </p>
+        </ul>
+        <div class="ButtonArea">
+                <button type="Post"
+                        class="add-button" 
+                        [disabled]="form.invalid">增加</button>
+                <button type="Back" (click)="back()">取消</button>
+        </div>
+    </form>
+</div>

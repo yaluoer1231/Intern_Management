@@ -37,8 +37,6 @@ export class InternNoteComponent implements OnInit {
     .subscribe(Note => {
       this.notes = Note;
     })
-    
-    console.log("TE");
   }
 
   getIntern(): void{

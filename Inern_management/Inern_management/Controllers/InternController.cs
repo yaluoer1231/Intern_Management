@@ -28,9 +28,15 @@ namespace Inern_management.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Intern>>> GetIterns()
         {
-            var intern = _context.Interns.ToList();
+            try
+            {
+                var intern = _context.Interns.ToList();
 
-            return Ok(intern);
+                return Ok(intern);
+            } catch (Exception e)
+            {
+                return StatusCode(500, new { message = e });
+            }
         }
         
         [HttpGet("{id}")]

@@ -7,9 +7,6 @@
         <p class="function" *ngIf="showCode == 2">刪除警告
         <p class="function" *ngIf="showCode == 3">新增資料
         <p class="function" *ngIf="showCode == 4">查詢結果
-
-            
-        <p class="function" *ngIf="showCode == 5">輸入錯誤！!
         <p class="function" *ngIf="showCode == 6">無法刪除
     
         <p class="titlebutton" *ngIf="showCode != 3 && showCode != 5">
@@ -20,13 +17,10 @@
 
 <div class="NoticeText" *ngIf="intern">
     <p *ngIf="showCode == 1">正在修改{{intern.sort}}號「{{intern.name}}」的資料
-    <p> <h2 *ngIf="errorPost">請務必填寫姓名和信箱！</h2>
-        <h2 *ngIf="noName">請輸入正確的姓名！</h2>
-        <h2 *ngIf="noEmail">請輸入正確的電子信箱！</h2>
     <p *ngIf="showCode == 2">確定刪除「{{intern.name}}」嗎?
-    <p *ngIf="showCode == 6">資料表不得為空，無法刪除「{{intern.name}}」
     <p *ngIf="showCode == 3">請輸入實習生的資料
     <p *ngIf="showCode == 4">【{{ intern.name }}】的個人資料
+    <p *ngIf="showCode == 6">資料表不得為空，無法刪除「{{intern.name}}」
 </div>
 
 <div class="Show" *ngIf="intern"> 
@@ -88,84 +82,14 @@
 
     <div class="Post" *ngIf="showCode == 3">
         <div class="Input">
-            <ul>
-                <p class="name"><label for="new-intern">實習生姓名：</label>
-                    <input class="inputdate" id="new-intern" placeholder="name" #internName></p>
-
-                <p class="Another"><label for="new-intern">性別：</label>
-                    <input type="radio" name="sex" value="1" #internSex checked>男
-                    <input type="radio" name="sex" value="2" #internSex>女</p>
-
-                <p class="name"><label for="intern-borndate">生日：</label>
-                    <select #selectyear>
-                        <option (click)="setYYMM(); selectYear = 0">請選擇</option>
-                        <option *ngFor="let year of year"
-                                (click)="setYYMM(); selectYear = year">{{ year }}</option>
-                    </select>／
-                    
-                    <select>
-                        <option (click)="selectMonth = 0; setDD()">請選擇</option>
-                        <option *ngFor="let month of month" 
-                        (click)="selectMonth = month; setDD()">{{ month }}</option>
-                    </select>／
-                    
-                    <select>
-                        <option (click)="selectDay = 0; setDD()">請選擇</option>
-                        <option *ngFor="let day of day" 
-                        (click)="selectDay = day; setDate()">{{ day }}</option>
-                    </select>
-                    </p>
-
-                <p class="name"><label for="intern-line">Line ID：</label>
-                    <input class="inputdate" id="intern-name" placeholder="Line Id" #internLine></p>
-                
-                <p class="name"><label for="intern-phone">連絡電話：</label>
-                    <input class="inputdate" id="intern-name" placeholder="手機或市話" #internPhone></p>
-
-
-                <p class="Another"><label for="new-intern">電子信箱：</label>
-                    <input class="inputdate" id="new-intern" placeholder="e-mail" #internEmail></p>
-            </ul>
-        </div>
-        <div class="ButtonArea">
-            <button type="Post" class="add-button" 
-                (click)="post(internName.value, internSex.value, internEmail.value,
-                                 internLine.value, internPhone.value)">增加</button>
-            <button type="Back"  (click)="back()">取消</button>
+            <app-post   [transIntern]="intern" 
+                        (refreshPage)="back()" 
+                        (backPage)="back()"></app-post>
         </div>
     </div>  
 
     <div class="Search" *ngIf="showCode==4">
-        <table>
-            <tbody>
-                <tr>
-                    <td class="subtitle">性別</td>
-                    <td class="internData">{{ intern.sex }}</td>
-                </tr>
-
-                <tr>
-                    <td class="subtitle">生日</td>
-                    <td class="internData">{{ intern.borndate | date: 'yyyy/MM/dd' }}</td>
-                </tr>
-                
-                <tr>
-                    <td class="subtitle">Line ID</td>
-                    <td class="internData">{{ intern.lineId }}</td>
-                </tr>
-                <tr>
-                    <td class="subtitle">連絡電話</td>
-                    <td class="internData">{{ intern.phonenumber }}</td>
-                </tr>
-                <tr>
-                    <td class="subtitle">E-Mail</td>
-                    <td class="internData">{{ intern.eMail }}</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-    
-    <div class="Error" *ngIf= "showCode == 5 ">
-        <button type="Back" (click)="upPage()">返回</button>
+        <app-search [intern]="intern"></app-search>
     </div>
 
     <div class="UnDelete" *ngIf= "showCode == 6 ">

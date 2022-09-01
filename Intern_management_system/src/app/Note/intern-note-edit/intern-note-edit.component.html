@@ -3,8 +3,8 @@
         <h2>【{{ notes.noteTitle }}】</h2>
         <p class="name">實習生：{{ notes.name }} &emsp; 信箱：{{ notes.email }}</p>
         <div class="date">
-            <span>建立時間：{{ notes.dateCreate | date: 'yyyy-MM-dd  hh:mm:ss' }}</span>
-            <span class = "ModifitedDateShow">上次修改：{{ notes.dateModifited | date:'yyyy-MM-dd  hh:mm:ss' }}</span>
+            <span>建立時間：{{ notes.dateCreate | date: 'yyyy-MM-dd  ahh:mm:ss' }}</span>
+            <span class = "ModifitedDateShow">上次修改：{{ notes.dateModifited | date:'yyyy-MM-dd  a hh:mm:ss' }}</span>
         </div>
         <div class="Note">{{notes.note}} </div>
         <div class="ButtonArea">

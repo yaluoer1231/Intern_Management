@@ -1,0 +1,26 @@
+<table *ngIf="intern">
+    <tbody>
+        <tr>
+            <td class="subtitle">性別</td>
+            <td class="internData">{{ intern.sex }}</td>
+        </tr>
+
+        <tr>
+            <td class="subtitle">生日</td>
+            <td class="internData">{{ intern.borndate | date: 'yyyy/MM/dd' }}</td>
+        </tr>
+        
+        <tr>
+            <td class="subtitle">Line ID</td>
+            <td class="internData">{{ intern.lineId }}</td>
+        </tr>
+        <tr>
+            <td class="subtitle">連絡電話</td>
+            <td class="internData">{{ intern.phonenumber }}</td>
+        </tr>
+        <tr>
+            <td class="subtitle">E-Mail</td>
+            <td class="internData">{{ intern.eMail }}</td>
+        </tr>
+    </tbody>
+</table>

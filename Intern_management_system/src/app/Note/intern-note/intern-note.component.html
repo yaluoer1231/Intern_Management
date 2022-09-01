@@ -1,7 +1,6 @@
 <div class="title"></div>
     
 <div class="NoteArea">
-    
     <div class="SelectAll">
         <div class="left"></div>
         <div class="middle">
@@ -11,7 +10,7 @@
                 <option *ngFor="let interns of unLockInterns"  [value]="interns.id">{{ interns.name }}
                 </option>
             </select>
-            <button class="Add" (click)="searchInternNote(internname.value); showCode=5">確定</button>
+            <button class="Add" (click)="searchInternNote(internname.value); showCode=4">確定</button>
             <span class="dateSort"> 全體查詢：
                 <select #dateSort>
                     <option [value]="0">依修改日期 新→舊</option>
@@ -19,7 +18,7 @@
                     <option [value]="-2">依實習生序號 高→低</option>
                     <option [value]="-3">依實習生序號 低→高</option>
                 </select>
-                <button class="Add" (click)="searchInternNote(dateSort.value); showCode=5">排序</button>
+                <button class="Add" (click)="searchInternNote(dateSort.value); showCode=4">排序</button>
             </span>
         </div>
         <div class="right">
@@ -37,11 +36,12 @@
                     <p class="ButtonContorl">操作
                 </li>
                 <li *ngFor="let note of notes" class="ListNote">
-                    <p class="NoteIntern">{{ note.name }}
-                    <p class="Notetitle" (click)="onSelect(note, 0)">{{ note.noteTitle }}
-                    <p class="NoteDateModifited">{{ note.dateModifited }}
-                    <p class="ButtonContorl">
-                        <button class="Read" (click)="onSelect(note, 0)">閱讀</button>         
+                    <div class="ClickArea">
+                        <p class="NoteIntern">{{ note.name }}
+                        <p class="Notetitle" (click)="onSelect(note, 0)">{{ note.noteTitle }}
+                        <p class="NoteDateModifited">{{ note.dateModifited | date : ' yyyy-MM-dd　a hh:mm' }}
+                    </div>
+                    <p class="ButtonContorl">    
                         <button class="Delete" (click)="onSelect(note, 2)">刪除</button>
                 </li>
             </ul>
@@ -57,10 +57,5 @@
             </app-intern-note-edit>
         </div>
     </div>
-</div>
-
-
-<div class="Button_Area">
-    
 </div>
 
