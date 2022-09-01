@@ -21,6 +21,7 @@ export class InternNoteComponent implements OnInit {
   unLockInterns : Intern[] = [];
   notes : Note[] = [];
 
+  searchInternId = 0;
   selectShowCode : number = 0; //以代號顯示功能，0:依修改日期，1:找同名字並依照創建日期
   showCode : number = 4;//以代號顯示功能，0:READ，1:PUT，2:DELETE，3:POST，4:CLOSE
 

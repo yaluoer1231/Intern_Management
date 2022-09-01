@@ -8,7 +8,7 @@
                         placeholder="請輸入姓名" 
                         maxlength="8"
                         minlength="2" 
-                        pattern="[\u4e00-\u9fa5]{2,4}" 
+                        pattern="[\u4e00-\u9fa5]{2,4}"
                         required 
                         #namengModel="ngModel" 
                         [ngModel]="name" 
@@ -28,16 +28,14 @@
                         <option *ngFor="let yyyy of year" [value]="yyyy">{{ yyyy }}</option>
                     </select>／
                     <select [(ngModel)]="selectMonth" name="month"
-                            *ngIf="selectYear != 0" (ngModelChange)="setDate($event)">
+                            (ngModelChange)="setDate($event)">
                         <option [value]="0">請選擇</option>
                         <option *ngFor="let mm of month" [value]="mm">{{ mm }}</option>
                     </select>／
-                    <select [(ngModel)]="selectDay" name="day"
-                            *ngIf="selectMonth != 0">
+                    <select [(ngModel)]="selectDay" name="day">
                         <option [value]="0">請選擇</option>
                         <option *ngFor="let dd of day" [value]="dd">{{ dd }}</option>
                     </select>
-                    <span class="error-message">{{ borndateError }}</span>
                 </label>
                     </p>
             
@@ -63,6 +61,7 @@
                         placeholder="手機或市話"
                         maxlength="15"
                         pattern="(09)[0-9]{8}"
+                        pattern2="(\d{2,3}-?|\(\d{2,3}\))\d{3,4}-?\d{4}"
                         #phonengModel="ngModel"
                         required [ngModel] = "phonenumber" 
                         (ngModelChange)="insuredPhoneChange(phonengModel.value,phonengModel.errors)">　

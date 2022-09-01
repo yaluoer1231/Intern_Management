@@ -2,23 +2,25 @@
     
 <div class="NoteArea">
     <div class="SelectAll">
-        <div class="left"></div>
+        <div class="left">
+            <button type="Back" *ngIf="showCode != 4" 
+                    (click)="back()">關閉</button>
+        </div>
         <div class="middle">
-            請選擇實習生：
-            <select #internname>
-                <option [value]="0">顯示全部</option>
-                <option *ngFor="let interns of unLockInterns"  [value]="interns.id">{{ interns.name }}
-                </option>
-            </select>
-            <button class="Add" (click)="searchInternNote(internname.value); showCode=4">確定</button>
-            <span class="dateSort"> 全體查詢：
-                <select #dateSort>
+            <span *ngIf="showCode == 4">請選擇實習生：
+                <select #internname [ngModel]="searchInternId" (ngModelChange)="searchInternNote(internname.value)">
+                    <option [value]="0">顯示全部</option>
+                    <option *ngFor="let interns of unLockInterns"  [value]="interns.id">{{ interns.name }}
+                    </option>
+                </select>
+            </span>
+            <span class="dateSort" *ngIf="showCode == 4"> 全體查詢：
+                <select #dateSort [ngModel]="searchInternId" (ngModelChange)="searchInternNote(dateSort.value)">
                     <option [value]="0">依修改日期 新→舊</option>
                     <option [value]="-1">依修改日期 舊→新</option>
                     <option [value]="-2">依實習生序號 高→低</option>
                     <option [value]="-3">依實習生序號 低→高</option>
                 </select>
-                <button class="Add" (click)="searchInternNote(dateSort.value); showCode=4">排序</button>
             </span>
         </div>
         <div class="right">

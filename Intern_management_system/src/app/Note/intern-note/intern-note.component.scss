@@ -8,6 +8,7 @@ ul{
   padding-right: 2rem;
 }
 li{
+  width: 1170px;
   display: flex;
   flex-direction: row;
   padding: 0;
@@ -19,7 +20,6 @@ li{
     margin-bottom: 0.5rem;
     border-bottom-style: inset;
     border-width: 4px;
-    
 }
 .NoteIntern{
   width: 150px;
@@ -31,7 +31,8 @@ li{
   width: 250px;
 }
 .ButtonContorl{
-  width: 250px;
+  width: 170px;
+  margin: 0;
 }
 
 .ListNote {

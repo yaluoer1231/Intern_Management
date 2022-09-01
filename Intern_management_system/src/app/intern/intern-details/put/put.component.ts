@@ -5,24 +5,18 @@ import { InternService } from '../../intern.service';
 import { ValidationErrors } from '@angular/forms';
 
 @Component({
-  selector: 'app-post',
-  templateUrl: './post.component.html',
-  styleUrls: ['./post.component.scss','../button.scss']
+  selector: 'app-put',
+  templateUrl: './put.component.html',
+  styleUrls: ['./put.component.scss','../button.scss']
 })
-export class PostComponent implements OnInit {
-
-  @Input() transIntern? : Intern;
+export class PutComponent implements OnInit {
+  
+  @Input() intern? : Intern;
 
   @Output() refreshPage = new EventEmitter();
   @Output() backPage = new EventEmitter();
-  intern? : Intern;
 
-  name = '';
-  date = '';
-  sexCode = 1;
-  lineId = '';
-  phonenumber = '';
-  eMail = '';
+  originalIntern? : Intern;
 
   nameError = "";
   borndateError = "";
@@ -36,36 +30,43 @@ export class PostComponent implements OnInit {
   year : number[] = [];
   month : number[] = [1,2,3,4,5,6,7,8,9,10,11,12];
   day : number[] = [];
-  //選擇的年月日
+  //選擇的生日年月日
   selectYear = 0;
-  selectMonth : number = 0;
+  selectMonth = 0;
   selectDay = 0;
-
+  //原本的生日年月日
+  originalYear = 0;
+  originalMonth = 0;
+  originalDay = 0;
+  
   constructor(private internService : InternService) { }
 
   ngOnInit(): void {
+    if (this.intern){
+      this.originalIntern = this.intern;
+      this.originalYear = this.originalIntern.borndate.getFullYear();
+      this.originalMonth = this.originalIntern.borndate.getMonth()+1;
+      this.originalDay = this.originalIntern.borndate.getDate();
+      this.setDate(this.originalMonth)
+      this.selectYear = this.originalYear;
+      this.selectDay = this.originalDay;
+    }
     for (var i = 0; i < 100 ; i++)
       this.year[i] = this.dateNow-i;
+    console.log(typeof this.originalYear)
   }
-
-  post(): void{
-    var name = this.name;
-    var eMail = this.eMail.trim();
-    var lineId = this.lineId.trim();
-    var phonenumber = this.phonenumber.trim();
-    const sexCode = Number(this.sexCode);
-    this.date = this.selectYear+"-"+this.selectMonth+"-"+this.selectDay;
-    var borndate = new Date(this.date)
-
-    this.internService.postIntern({name,sexCode,eMail,borndate,lineId,phonenumber} as Intern)
-      .subscribe(intern =>
-        this.refreshPage.emit()
-      );
-  }
-
+  
   back(): void{
     this.backPage.emit();
   }
+
+  update():void{
+    if (this.intern)
+      this.internService.putIntern(this.intern)
+        .subscribe(intern => this.refreshPage.emit());
+    this.back();
+  }
+
 
   setDate(num : number): void{
     this.selectMonth = Number(num);
@@ -89,26 +90,20 @@ export class PostComponent implements OnInit {
       this.day[i] = i+1
   }
 
-  
-
   //姓名驗證
   insuredNameChange(name : string, error : ValidationErrors| null): void{
-    this.name = name.trim();
+    this.intern!.name = name.trim();
 
     this.nameError = '';
     if(error?.['required'])
       this.nameError = '必填';
     else if(error?.['minlength'] || error?.['miaxlength']|| error?.['pattern'])
-      this.nameError = '請輸入正確的姓名'
-  }
-
-  //生日驗證
-  insuredBornDateChange(Date : number, error: ValidationErrors| null): void{
+      this.nameError = '請輸入正確的姓名';
   }
 
   //LineID驗證
   insuredLineChange(lineId : string, error : ValidationErrors| null): void{
-    this.lineId = lineId.trim();
+    this.intern!.lineId = lineId.trim();
 
     this.lineIdError = '';
     if(error?.['minlength'] || error?.['miaxlength'] || error?.['pattern'])
@@ -117,7 +112,7 @@ export class PostComponent implements OnInit {
 
   //電話驗證
   insuredPhoneChange(phone : string, error : ValidationErrors| null): void{
-    this.phonenumber = phone.trim();
+    this.intern!.phonenumber = phone.trim();
 
     this.phonenumberError = '';
     if (error?.['minlength'] || error?.['miaxlength'] || error?.['pattern'])
@@ -126,7 +121,7 @@ export class PostComponent implements OnInit {
 
   //E-Mail驗證
   insuredEMailChange(eMail : string, error : ValidationErrors| null): void{
-    this.eMail = eMail.trim();
+    this.intern!.eMail = eMail.trim();
 
     this.eMailError = '';
     if(error?.['required'])

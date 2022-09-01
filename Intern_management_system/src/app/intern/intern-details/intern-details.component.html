@@ -10,7 +10,7 @@
         <p class="function" *ngIf="showCode == 6">無法刪除
     
         <p class="titlebutton" *ngIf="showCode != 3 && showCode != 5">
-            <button type="Update" (click)="showCode=1; put()">修改</button>
+            <button type="Update" (click)="showCode=1; setCode(1)">修改</button>
             <button type="Delete" (click)="showCode=2; setCode(2);">刪除</button>
     </p>
 </div>
@@ -25,52 +25,9 @@
 
 <div class="Show" *ngIf="intern"> 
     <div class="Update" *ngIf="showCode == 1">
-        <ul>
-            <div class="Input">
-                <p class="name"><label for="intern-name">實習生姓名：</label>
-                    <input class="inputdate" id="intern-name" placeholder="name" [value]="intern.name" #name></p>
-
-                <p class="Another"><label for="intern-sex">性別： </label>
-                    <input type="radio" name="sex" [(ngModel)]="intern.sexCode" value=1>男
-                    <input type="radio" name="sex" [(ngModel)]="intern.sexCode" value=2>女</p>
-
-                <p class="name"><label for="intern-borndate">生日：</label>
-                    <select #selectyear>
-                        <option (click)="selectYear == intern.borndate.getFullYear()" 
-                        value="{{ intern.borndate.getFullYear() }}">{{ intern.borndate.getFullYear() }}</option>
-                        <option value="">————</option>
-                        <option *ngFor="let year of year"
-                                (click)="setYYMM(); selectYear = year" value="year">{{ year }}</option>
-                    </select>／
-                    
-                    <select>
-                        <option (click)="selectMonth = intern.borndate.getMonth()+1; setDD()" 
-                        value="{{ intern.borndate.getMonth()+1 }}">{{ intern.borndate.getMonth()+1 }}</option>
-                        <option value="">————</option>
-                        <option *ngFor="let month of month" 
-                        (click)="selectMonth = month; setDD()">{{ month }}</option>
-                    </select>／
-                    
-                    <select>
-                        <option (click)="selectDay = intern.borndate.getDate()" 
-                        value="{{ intern.borndate.getDate()}}">{{ intern.borndate.getDate() }}</option>
-                        <option value="">————</option>
-                        <option *ngFor="let day of day" 
-                        (click)="selectDay = day">{{ day }}</option>
-                    </select>
-
-                <p class="name"><label for="intern-line">Line ID：</label>
-                    <input class="inputdate" id="intern-name" [(ngModel)]="intern.lineId" placeholder="Line Id"></p>
-                
-                <p class="name"><label for="intern-phone">連絡電話：</label>
-                    <input class="inputdate" id="intern-name" [(ngModel)]="intern.phonenumber" placeholder="手機或市話"></p>
-
-                <p class="Another"><label for="intern-name">電子信箱：</label>
-                    <input class="inputdate" id="intern-name" [(ngModel)]="intern.eMail" placeholder="email"></p>
-                </div>
-        </ul>
-        <div class="ButtonArea"><button type="Update" (click)= "save(name.value)">修改</button>
-            <button type="Back" (click)="back()">取消</button></div>
+        <app-put    [intern]="intern"
+                    (refreshPage)="back()" 
+                    (backPage)="back()"></app-put>
     </div>
 
     <div class="Delete" *ngIf="showCode == 2 ">
