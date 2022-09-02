@@ -26,11 +26,13 @@ export class InternDetailsComponent implements OnInit {
   @Output() refreshPage = new EventEmitter();
   @Output() changeCode = new EventEmitter();
 
+  
+
   //當有錯誤發生時暫時紀錄原來使用的功能代號
   constructor(private route: ActivatedRoute,
-    private internService: InternService,
-    private location: Location,
-    private internstablecomponent: InternsTableComponent) { }
+              private internService: InternService,
+              private location: Location,
+              private internstablecomponent: InternsTableComponent) { }
 
   
 
@@ -42,12 +44,8 @@ export class InternDetailsComponent implements OnInit {
   }
 
   delete(intern:Intern): void{
-    if (this.internLength! > 1){
       this.goDelete.emit(intern);
       this.backPage.emit();
-    }
-    else
-      this.showCode = 6;
   }
 
   back(): void{

@@ -5,18 +5,18 @@ import { InternService } from '../../intern.service';
 import { ValidationErrors } from '@angular/forms';
 
 @Component({
-  selector: 'app-put',
-  templateUrl: './put.component.html',
-  styleUrls: ['./put.component.scss','../button.scss']
+  selector: 'app-intern-form-edit',
+  templateUrl: './intern-form-edit.component.html',
+  styleUrls: ['./intern-form-edit.component.scss','../button.scss']
 })
-export class PutComponent implements OnInit {
-  
+export class InternFormEditComponent implements OnInit {
+
   @Input() intern? : Intern;
+  @Input() isPost : Boolean = false;
+  @Input() isPut : Boolean = false;
 
   @Output() refreshPage = new EventEmitter();
   @Output() backPage = new EventEmitter();
-
-  originalIntern? : Intern;
 
   nameError = "";
   borndateError = "";
@@ -34,30 +34,47 @@ export class PutComponent implements OnInit {
   selectYear = 0;
   selectMonth = 0;
   selectDay = 0;
-  //原本的生日年月日
-  originalYear = 0;
-  originalMonth = 0;
-  originalDay = 0;
   
   constructor(private internService : InternService) { }
 
   ngOnInit(): void {
-    if (this.intern){
-      this.originalIntern = this.intern;
-      this.originalYear = this.originalIntern.borndate.getFullYear();
-      this.originalMonth = this.originalIntern.borndate.getMonth()+1;
-      this.originalDay = this.originalIntern.borndate.getDate();
-      this.setDate(this.originalMonth)
-      this.selectYear = this.originalYear;
-      this.selectDay = this.originalDay;
+    if (this.intern && this.isPut){
+      this.selectYear = this.intern.borndate.getFullYear();
+      this.setDate(this.intern.borndate.getMonth()+1);
+      this.selectDay = this.intern.borndate.getDate();
+      this.month = this.month.filter(h => h != this.selectMonth)
     }
     for (var i = 0; i < 100 ; i++)
       this.year[i] = this.dateNow-i;
-    console.log(typeof this.originalYear)
   }
   
+  editDate(): string {
+    return (this.selectYear+"-"+this.selectMonth+"-"+this.selectDay)
+  }
+
   back(): void{
-    this.backPage.emit();
+    this.selectYear = 0;
+    this.selectMonth = 0;
+    this.selectDay = 0;
+
+    if (!this.isPost && !this.isPut) 
+      this.backPage.emit();
+    this.isPost = false;
+    this.isPut = false;
+  }
+
+  isPostOrPut(): void{
+    this.intern!.borndate = new Date(this.editDate());
+    if (this.isPost){
+      this.internService.postIntern(this.intern!)
+      .subscribe(intern =>
+        this.refreshPage.emit());
+    }
+    if (this.isPut){
+      this.internService.putIntern(this.intern!)
+        .subscribe(intern => this.refreshPage.emit()); 
+    }
+    this.back();
   }
 
   update():void{
@@ -90,6 +107,7 @@ export class PutComponent implements OnInit {
       this.day[i] = i+1
   }
 
+  
   //姓名驗證
   insuredNameChange(name : string, error : ValidationErrors| null): void{
     this.intern!.name = name.trim();
@@ -113,11 +131,11 @@ export class PutComponent implements OnInit {
   //電話驗證
   insuredPhoneChange(phone : string, error : ValidationErrors| null): void{
     this.intern!.phonenumber = phone.trim();
-
     this.phonenumberError = '';
-    if (error?.['minlength'] || error?.['miaxlength'] || error?.['pattern'])
+    if (error?.['minlength'] || error?.['miaxlength'] )
       this.phonenumberError = '輸入錯誤'
   }
+
 
   //E-Mail驗證
   insuredEMailChange(eMail : string, error : ValidationErrors| null): void{
@@ -129,4 +147,5 @@ export class PutComponent implements OnInit {
     else if(error?.['minlength'] || error?.['miaxlength']|| error?.['pattern'])
       this.eMailError = '請輸入正確的電子信箱'
   }
+
 }

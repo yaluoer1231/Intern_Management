@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { PutComponent } from './put.component';
+import { InternFormEditComponent } from './intern-form-edit.component';
 
-describe('PutComponent', () => {
-  let component: PutComponent;
-  let fixture: ComponentFixture<PutComponent>;
+describe('InternFormEditComponent', () => {
+  let component: InternFormEditComponent;
+  let fixture: ComponentFixture<InternFormEditComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ PutComponent ]
+      declarations: [ InternFormEditComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(PutComponent);
+    fixture = TestBed.createComponent(InternFormEditComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

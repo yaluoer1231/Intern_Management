@@ -7,7 +7,6 @@
         <p class="function" *ngIf="showCode == 2">刪除警告
         <p class="function" *ngIf="showCode == 3">新增資料
         <p class="function" *ngIf="showCode == 4">查詢結果
-        <p class="function" *ngIf="showCode == 6">無法刪除
     
         <p class="titlebutton" *ngIf="showCode != 3 && showCode != 5">
             <button type="Update" (click)="showCode=1; setCode(1)">修改</button>
@@ -20,14 +19,14 @@
     <p *ngIf="showCode == 2">確定刪除「{{intern.name}}」嗎?
     <p *ngIf="showCode == 3">請輸入實習生的資料
     <p *ngIf="showCode == 4">【{{ intern.name }}】的個人資料
-    <p *ngIf="showCode == 6">資料表不得為空，無法刪除「{{intern.name}}」
 </div>
 
 <div class="Show" *ngIf="intern"> 
     <div class="Update" *ngIf="showCode == 1">
-        <app-put    [intern]="intern"
-                    (refreshPage)="back()" 
-                    (backPage)="back()"></app-put>
+        <app-intern-form-edit   [intern]="intern"
+                                [isPut]="true"
+                                (refreshPage)="back()" 
+                                (backPage)="back()"></app-intern-form-edit>
     </div>
 
     <div class="Delete" *ngIf="showCode == 2 ">
@@ -39,17 +38,15 @@
 
     <div class="Post" *ngIf="showCode == 3">
         <div class="Input">
-            <app-post   [transIntern]="intern" 
-                        (refreshPage)="back()" 
-                        (backPage)="back()"></app-post>
+            <app-intern-form-edit   [intern]="intern"
+                                    [isPost]="true"
+                                    (refreshPage)="back()" 
+                                    (backPage)="back()"></app-intern-form-edit>
         </div>
     </div>  
 
     <div class="Search" *ngIf="showCode==4">
         <app-search [intern]="intern"></app-search>
     </div>
-
-    <div class="UnDelete" *ngIf= "showCode == 6 ">
-        <button type="Back" (click)="back()">關閉</button>
-    </div>
+    
 </div>

@@ -12,8 +12,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { InternNoteComponent } from './Note/intern-note/intern-note.component';
 import { InternNoteEditComponent } from './Note/intern-note-edit/intern-note-edit.component';
 import { SearchComponent } from './intern/intern-details/search/search.component';
-import { PostComponent } from './intern/intern-details/post/post.component';
-import { PutComponent } from './intern/intern-details/put/put.component';
+import { InternFormEditComponent } from './intern/intern-details/intern-form-edit/intern-form-edit.component';
+import { InputDirectiveDirective } from './input-directive.directive';
 
 @NgModule({
   declarations: [
@@ -23,8 +23,8 @@ import { PutComponent } from './intern/intern-details/put/put.component';
     InternNoteComponent,
     InternNoteEditComponent,
     SearchComponent,
-    PostComponent,
-    PutComponent,
+    InternFormEditComponent,
+    InputDirectiveDirective,
   ],
   imports: [
     BrowserModule,

@@ -5,13 +5,14 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 
 import { Note } from './Note_Fromat';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class NotesService {
 
-  InternUrl = 'https://localhost:44388/api/';
+  InternUrl = environment.apiHost + 'https://localhost:44388/api/';
 
   constructor(private http: HttpClient) { }
 

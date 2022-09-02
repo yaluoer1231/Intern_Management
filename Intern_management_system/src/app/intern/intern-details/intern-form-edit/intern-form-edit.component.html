@@ -1,5 +1,5 @@
 <div *ngIf="intern">
-<form #form="ngForm">
+<form #form="ngForm" (ngSubmit)="isPostOrPut()">
     <p class="name"><label for="intern-name">實習生姓名：</label>
         <input class="inputdate" 
                 id="intern-name" 
@@ -23,18 +23,29 @@
 
     <p class="Borndate"><label for="intern-borndate">生日：</label>
         <select [(ngModel)]="selectYear" name="year">
-            <option [value]="originalYear">{{ originalYear }}</option>
-            <option value="">————</option>
+            <option [value]="intern.borndate.getFullYear()" 
+                    *ngIf="isPut">{{ intern.borndate.getFullYear() }}</option>
+            <option value="" *ngIf="isPut">————</option>
+
+            <option [value]="0" *ngIf="isPost">請選擇</option>
             <option *ngFor="let yyyy of year" [value]="yyyy">{{ yyyy }}</option>
         </select>／
+
         <select [(ngModel)]="selectMonth" name="month" (ngModelChange)="setDate($event)">
-            <option [value]="originalMonth">{{ originalMonth }}</option>
-            <option value="">————</option>
+            <option [value]="intern.borndate.getMonth()+1"  
+                    *ngIf="isPut">{{ intern.borndate.getMonth()+1 }}</option>
+            <option value=""  *ngIf="isPut">————</option>
+
+            <option [value]="0" *ngIf="isPost">請選擇</option>
             <option *ngFor="let mm of month" [value]="mm">{{ mm }}</option>
         </select>／
+
         <select [(ngModel)]="selectDay" name="day">
-            <option [value]="originalDay">{{ originalDay }}</option>
-            <option value="">————</option>
+            <option [value]="intern.borndate.getDate()"  
+                    *ngIf="isPut">{{ intern.borndate.getDate() }}</option>
+            <option value="" *ngIf="isPut">————</option>
+
+            <option [value]="0" *ngIf="isPost">請選擇</option>
             <option *ngFor="let dd of day" [value]="dd">{{ dd }}</option>
         </select>
 
@@ -59,7 +70,6 @@
                 placeholder="手機或市話"
                 maxlength="15"
                 pattern="(09)[0-9]{8}"
-                pattern2="(\d{2,3}-?|\(\d{2,3}\))\d{3,4}-?\d{4}"
                 #phonengModel="ngModel"
                 required [ngModel]="intern.phonenumber" 
                 (ngModelChange)="insuredPhoneChange(phonengModel.value,phonengModel.errors)">　
@@ -74,16 +84,15 @@
                 placeholder="e-mail"
                 maxlength="50"
                 minlength="2"
-                pattern="[_a-zA-Z\d\-\.]+@[_a-zA-Z\d\-]+(\.[_a-zA-Z\d\-]+)+"
                 #eMailngModel="ngModel" 
                 required [ngModel]="intern.eMail" 
                 (ngModelChange)="insuredEMailChange(eMailngModel.value,eMailngModel.errors)">　
-            <span class="error-message">{{ eMailError }}</span>
+            <span class="error-message" appInputDirective>{{ eMailngModel.errors | json }}</span>
         </p>
     <div class="ButtonArea">
             <button type="Post"
                     class="add-button"
-                    [disabled]="form.invalid">增加</button>
+                    [disabled]="form.invalid">確定</button>
             <button type="Back" (click)="back()">取消</button>
     </div>
 </form>

@@ -12,6 +12,17 @@ import { InternService } from '../intern.service';
 export class InternsTableComponent implements OnInit {
 
   interns : Intern[] = [];
+
+  emptyIntern : Intern= { //Post傳輸用
+    id : 0,
+    name : '',
+    sexCode : 1,
+    borndate : new Date(),
+    lineId: '',
+    phonenumber: '',
+    eMail: '',
+  }
+
   showInterns : Intern[] = [];
 
   isUser : boolean = true;
@@ -75,11 +86,9 @@ export class InternsTableComponent implements OnInit {
   }
 
   delete(intern: Intern): void{
-    if (this.interns.length > 1){
-      this.interns = this.interns.filter(h => h !== intern);
-      this.internService.deleteIntern(intern.id)
+    this.interns = this.interns.filter(h => h !== intern);
+    this.internService.deleteIntern(intern.id)
         .subscribe(Note => this.getIntern());
-    }
   }
 
   isLock(intern: Intern): void{
