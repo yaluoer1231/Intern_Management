@@ -24,6 +24,9 @@ export class InternFormEditComponent implements OnInit {
   phonenumberError = "";
   eMailError = "";
 
+  areaCode = [2,3,37,4,49,5,6,7,8,89,82,826,836];
+  selectArea = 0;
+
   //捕捉今年的時間
   dateNow : number = new Date().getFullYear();
   //年月日陣列
@@ -43,6 +46,11 @@ export class InternFormEditComponent implements OnInit {
       this.setDate(this.intern.borndate.getMonth()+1);
       this.selectDay = this.intern.borndate.getDate();
       this.month = this.month.filter(h => h != this.selectMonth)
+      //去除電話中的特殊符號，留下數字在切割
+      this.intern.phonenumber = this.intern.phonenumber.replace(/[^0-9]/ig,"");
+      this.selectArea = Number(this.intern.phonenumber.replace(/[^0-9]/ig,"").slice(0,2));
+      if (this.selectArea != 9)
+        this.intern.phonenumber = this.intern.phonenumber.slice(2,10);
     }
     for (var i = 0; i < 100 ; i++)
       this.year[i] = this.dateNow-i;
@@ -65,6 +73,7 @@ export class InternFormEditComponent implements OnInit {
 
   isPostOrPut(): void{
     this.intern!.borndate = new Date(this.editDate());
+    this.isCellOrTell();
     if (this.isPost){
       this.internService.postIntern(this.intern!)
       .subscribe(intern =>
@@ -132,8 +141,15 @@ export class InternFormEditComponent implements OnInit {
   insuredPhoneChange(phone : string, error : ValidationErrors| null): void{
     this.intern!.phonenumber = phone.trim();
     this.phonenumberError = '';
-    if (error?.['minlength'] || error?.['miaxlength'] )
+    if (error?.['minlength'] || error?.['miaxlength'] || error?.['validatePhoneNumber'])
       this.phonenumberError = '輸入錯誤'
+  }
+
+  isCellOrTell(): void{
+    if (this.selectArea == 9)
+      return;
+    else
+      this.intern!.phonenumber="0" + this.selectArea + this.intern!.phonenumber.replace(/[^0-9]/ig,"");
   }
 
 
@@ -144,7 +160,7 @@ export class InternFormEditComponent implements OnInit {
     this.eMailError = '';
     if(error?.['required'])
       this.eMailError = '必填' 
-    else if(error?.['minlength'] || error?.['miaxlength']|| error?.['pattern'])
+    else if(error?.['minlength'] || error?.['miaxlength']|| error?.['email'])
       this.eMailError = '請輸入正確的電子信箱'
   }
 

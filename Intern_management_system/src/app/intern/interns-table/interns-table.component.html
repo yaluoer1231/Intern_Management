@@ -24,7 +24,7 @@
                 <li>
                     <p class="Lock">
                     <button class="Delete" (click)="isLock(intern)" *ngIf="intern.lock == false">鎖定</button>
-                    <button class="Delete" (click)="isLock(intern)" *ngIf="intern.lock == true">解除</button>
+                    <button class="Delete" (click)="isLock(intern)" *ngIf="intern.lock == true">解除</button></p>
                     <div class="intern" (click)="onSelect(intern, 4)">
                         <p class="Sort"> {{ intern.sort }}.
                         <p class="Name">{{ intern.name }}

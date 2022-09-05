@@ -64,16 +64,27 @@
         </p>
     
         <p class="name"><label for="intern-phone">連絡電話：</label>
-        <input class="inputdate"
+        <select [(ngModel)]="selectArea" name="areaCode" style="margin-right:0.5rem">
+            <option [value]="0">區碼</option>
+            <option *ngFor="let Area of areaCode" [value]="Area">0{{ Area }}</option>
+            <option [value]="">——</option>
+            <option [value]="9">手機</option>
+        </select>
+        <input  *ngIf="selectArea > 0"
+                class="inputdate"
                 name="phonenumber"
                 id="intern-name"
-                placeholder="手機或市話"
+                placeholder="請輸入電話號碼"
                 maxlength="15"
-                pattern="(09)[0-9]{8}"
                 #phonengModel="ngModel"
-                required [ngModel]="intern.phonenumber" 
+                inputDirective
+                [ngModel]="intern.phonenumber" 
                 (ngModelChange)="insuredPhoneChange(phonengModel.value,phonengModel.errors)">　
-                <span class="error-message">{{ phonenumberError }}</span>
+                <span class="error-message">
+                    <!--<ng-container *ngIf="phonengModel.errors?.['required']">此為避田欄位</ng-container>
+                    <ng-container *ngIf="phonengModel.errors?.['validateEmail']">信箱格是錯誤</ng-container>-->
+                    {{ phonenumberError }}
+                </span>
         </p>
 
 
@@ -85,9 +96,10 @@
                 maxlength="50"
                 minlength="2"
                 #eMailngModel="ngModel" 
-                required [ngModel]="intern.eMail" 
+                required email
+                [ngModel]="intern.eMail" 
                 (ngModelChange)="insuredEMailChange(eMailngModel.value,eMailngModel.errors)">　
-            <span class="error-message" appInputDirective>{{ eMailngModel.errors | json }}</span>
+            <span class="error-message">{{ eMailError }}</span>
         </p>
     <div class="ButtonArea">
             <button type="Post"

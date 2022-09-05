@@ -4,7 +4,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
-
 import { HttpClientModule } from '@angular/common/http';
 import { InternDetailsComponent } from './intern/intern-details/intern-details.component';
 import { InternsTableComponent } from './intern/interns-table/interns-table.component';

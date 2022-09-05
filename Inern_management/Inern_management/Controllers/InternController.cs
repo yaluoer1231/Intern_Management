@@ -30,7 +30,8 @@ namespace Inern_management.Controllers
         {
             try
             {
-                var intern = _context.Interns.ToList();
+
+                var intern = _context.Interns;
 
                 return Ok(intern);
             } catch (Exception e)

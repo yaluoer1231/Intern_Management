@@ -48,6 +48,7 @@ export class InternsTableComponent implements OnInit {
           this.sexChange(Interns[i]);
           this.idChange(Interns[i]);
           Interns[i].borndate = new Date(Interns[i].borndate);
+          this.phoneNumberChange(Interns[i])
         }
         this.interns = Interns;
         this.showInterns = Interns;
@@ -85,6 +86,15 @@ export class InternsTableComponent implements OnInit {
     intern.sort = this.idShow;
   }
 
+  phoneNumberChange(intern: Intern){
+    if (intern.phonenumber.slice(0,2)=="09")
+      intern.phonenumber = intern.phonenumber.slice(0,4)
+                            +"-"+intern.phonenumber.slice(4,7)+"-"+intern.phonenumber.slice(7,10);
+    else
+      intern.phonenumber = "("+intern.phonenumber.slice(0,2) +")"
+                            +intern.phonenumber.slice(2,6)+"-"+intern.phonenumber.slice(6,10);
+  }
+
   delete(intern: Intern): void{
     this.interns = this.interns.filter(h => h !== intern);
     this.internService.deleteIntern(intern.id)
@@ -102,6 +112,15 @@ export class InternsTableComponent implements OnInit {
 
   back(): void{
     this.showCode = 0;
+    this.emptyIntern = { //Post傳輸用
+      id : 0,
+      name : '',
+      sexCode : 1,
+      borndate : new Date(),
+      lineId: '',
+      phonenumber: '',
+      eMail: '',
+    }
   }
 
   setShowCode(num : number): void{
