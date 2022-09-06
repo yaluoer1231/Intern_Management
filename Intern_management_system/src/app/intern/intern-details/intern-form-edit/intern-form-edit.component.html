@@ -64,7 +64,8 @@
         </p>
     
         <p class="name"><label for="intern-phone">連絡電話：</label>
-        <select [(ngModel)]="selectArea" name="areaCode" style="margin-right:0.5rem">
+        <select [(ngModel)]="selectArea" name="areaCode" style="margin-right:0.5rem"
+                (ngModelChange)="clearPhoneNumber()">
             <option [value]="0">區碼</option>
             <option *ngFor="let Area of areaCode" [value]="Area">0{{ Area }}</option>
             <option [value]="">——</option>
@@ -78,6 +79,7 @@
                 maxlength="15"
                 #phonengModel="ngModel"
                 inputDirective
+                [value]="selectArea"
                 [ngModel]="intern.phonenumber" 
                 (ngModelChange)="insuredPhoneChange(phonengModel.value,phonengModel.errors)">　
                 <span class="error-message">

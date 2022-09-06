@@ -11,7 +11,8 @@ import { environment } from 'src/environments/environment';
 })
 export class InternService {
   //InternUrl ='http://localhost:81/api/';
-  InternUrl = environment.apiHost + 'https://localhost:44388/api/';
+  //InternUrl = environment.apiHost + 'https://localhost:44388/api/';
+  InternUrl = `${environment.api}`;
   
   constructor(private http: HttpClient) { }
 

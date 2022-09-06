@@ -24,7 +24,7 @@ export class InternFormEditComponent implements OnInit {
   phonenumberError = "";
   eMailError = "";
 
-  areaCode = [2,3,37,4,49,5,6,7,8,89,82,826,836];
+  areaCode = [2,3,37,4,49,5,6,7,8,82,89,826,836];
   selectArea = 0;
 
   //捕捉今年的時間
@@ -40,59 +40,40 @@ export class InternFormEditComponent implements OnInit {
   
   constructor(private internService : InternService) { }
 
+  //初始化
   ngOnInit(): void {
-    if (this.intern && this.isPut){
+    if (this.intern && this.isPut){ //如果是修改，必須賦予欄位該資料原本的內容
       this.selectYear = this.intern.borndate.getFullYear();
       this.setDate(this.intern.borndate.getMonth()+1);
       this.selectDay = this.intern.borndate.getDate();
       this.month = this.month.filter(h => h != this.selectMonth)
-      //去除電話中的特殊符號，留下數字在切割
+
+      //去除電話中的特殊符號
       this.intern.phonenumber = this.intern.phonenumber.replace(/[^0-9]/ig,"");
-      this.selectArea = Number(this.intern.phonenumber.replace(/[^0-9]/ig,"").slice(0,2));
-      if (this.selectArea != 9)
-        this.intern.phonenumber = this.intern.phonenumber.slice(2,10);
+      this.findInternArea(this.intern);
     }
     for (var i = 0; i < 100 ; i++)
       this.year[i] = this.dateNow-i;
   }
   
-  editDate(): string {
-    return (this.selectYear+"-"+this.selectMonth+"-"+this.selectDay)
-  }
-
-  back(): void{
-    this.selectYear = 0;
-    this.selectMonth = 0;
-    this.selectDay = 0;
-
-    if (!this.isPost && !this.isPut) 
-      this.backPage.emit();
-    this.isPost = false;
-    this.isPut = false;
-  }
-
-  isPostOrPut(): void{
-    this.intern!.borndate = new Date(this.editDate());
-    this.isCellOrTell();
-    if (this.isPost){
-      this.internService.postIntern(this.intern!)
-      .subscribe(intern =>
-        this.refreshPage.emit());
+  findInternArea(intern :Intern): void{
+    var area = intern.phonenumber;
+    for(var i = 0; i < this.areaCode.length; i++){
+      if (Number(area?.slice(0,3)) == this.areaCode[i]){
+        this.selectArea = Number(area.slice(0,3));
+        intern.phonenumber = area.slice(3,10);
+      }
+      else if (Number(area?.slice(0,4)) == this.areaCode[i]){
+        this.selectArea = Number(area.slice(0,4))
+        intern.phonenumber = area.slice(4,9);
+      }
+      else  {
+        this.selectArea = Number(area.slice(0,2))
+        if (this.selectArea != 9)
+          intern.phonenumber = area.slice(2,10);
+      }
     }
-    if (this.isPut){
-      this.internService.putIntern(this.intern!)
-        .subscribe(intern => this.refreshPage.emit()); 
-    }
-    this.back();
   }
-
-  update():void{
-    if (this.intern)
-      this.internService.putIntern(this.intern)
-        .subscribe(intern => this.refreshPage.emit());
-    this.back();
-  }
-
 
   setDate(num : number): void{
     this.selectMonth = Number(num);
@@ -115,8 +96,51 @@ export class InternFormEditComponent implements OnInit {
     for(var i = 0; i < days; i++)
       this.day[i] = i+1
   }
+  
+  //儲存、修改與上一頁等表單控制
+  isPostOrPut(): void{ //儲存或修改
+    this.intern!.borndate = new Date(this.editDate());
+    this.isCellOrTell();
+    if (this.isPost){
+      this.internService.postIntern(this.intern!)
+      .subscribe(intern =>
+        this.refreshPage.emit());
+    }
+    if (this.isPut){
+      this.internService.putIntern(this.intern!)
+        .subscribe(intern => this.refreshPage.emit()); 
+    }
+    this.back();
+  }
+
+  editDate(): string { //將選擇的生日年月日轉成輸出用的格式
+    return (this.selectYear+"-"+this.selectMonth+"-"+this.selectDay)
+  }
+
+  clearPhoneNumber():void{ //選擇其他區碼時清空輸入的號碼
+    this.intern!.phonenumber = "";
+  }
+
+  isCellOrTell(): void{   //將號碼轉成輸出用的格式
+    this.intern!.phonenumber = this.intern!.phonenumber.replace(/[^0-9]/ig,"");
+    if (this.selectArea == 9)
+      return;
+    else
+      this.intern!.phonenumber = "0" + this.selectArea + this.intern!.phonenumber;
+  }
+
+  back(): void{ //回到上一頁
+    this.selectYear = 0;
+    this.selectMonth = 0;
+    this.selectDay = 0;
+    this.isPost = false;
+    this.isPut = false;
+  }
 
   
+  
+  //表單驗證
+
   //姓名驗證
   insuredNameChange(name : string, error : ValidationErrors| null): void{
     this.intern!.name = name.trim();
@@ -141,15 +165,8 @@ export class InternFormEditComponent implements OnInit {
   insuredPhoneChange(phone : string, error : ValidationErrors| null): void{
     this.intern!.phonenumber = phone.trim();
     this.phonenumberError = '';
-    if (error?.['minlength'] || error?.['miaxlength'] || error?.['validatePhoneNumber'])
+    if (error?.['validatePhoneNumber'])
       this.phonenumberError = '輸入錯誤'
-  }
-
-  isCellOrTell(): void{
-    if (this.selectArea == 9)
-      return;
-    else
-      this.intern!.phonenumber="0" + this.selectArea + this.intern!.phonenumber.replace(/[^0-9]/ig,"");
   }
 
 

@@ -12,7 +12,7 @@ import { environment } from 'src/environments/environment';
 })
 export class NotesService {
 
-  InternUrl = environment.apiHost + 'https://localhost:44388/api/';
+  InternUrl = `${environment.api}`;
 
   constructor(private http: HttpClient) { }
 

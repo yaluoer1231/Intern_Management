@@ -32,7 +32,6 @@ export class InternsTableComponent implements OnInit {
   showCode = 0; //以代號顯示功能，0:關閉，1:PUT，2:DELETE，3:POST，4：SELECT
   idShow = 0;
 
-
   constructor(private internService : InternService) { }
 
   ngOnInit(): void {
@@ -87,12 +86,29 @@ export class InternsTableComponent implements OnInit {
   }
 
   phoneNumberChange(intern: Intern){
-    if (intern.phonenumber.slice(0,2)=="09")
-      intern.phonenumber = intern.phonenumber.slice(0,4)
-                            +"-"+intern.phonenumber.slice(4,7)+"-"+intern.phonenumber.slice(7,10);
-    else
-      intern.phonenumber = "("+intern.phonenumber.slice(0,2) +")"
-                            +intern.phonenumber.slice(2,6)+"-"+intern.phonenumber.slice(6,10);
+    var areaCode = [2,3,37,4,49,5,6,7,8,89,82,826,836];
+    var phoneNumber = intern.phonenumber;
+    for (var i = 0; i < areaCode.length; i++){
+      if (Number(phoneNumber.slice(0,3)) == areaCode[i]){
+        intern.phonenumber = 
+              "("+ phoneNumber.slice(0,3) +") "+ phoneNumber.slice(3,6) +"-"+ phoneNumber.slice(6,10);
+        i += areaCode.length;
+      }
+      else if (Number(phoneNumber.slice(0,4)) == areaCode[i]){
+        intern.phonenumber = 
+              "("+ phoneNumber.slice(0,4) +") "+ phoneNumber.slice(4,7) +"-"+ phoneNumber.slice(7,10);
+        i += areaCode.length;
+      }
+      else if (Number(phoneNumber.slice(0,2)) == 9){
+        intern.phonenumber = 
+             phoneNumber.slice(0,4) +"-"+ phoneNumber.slice(4,7) +"-"+ phoneNumber.slice(7,10);
+        i += areaCode.length;
+      }
+      else {
+        intern.phonenumber =
+              "("+ phoneNumber.slice(0,2) +") "+ phoneNumber.slice(2,5) +"-"+ phoneNumber.slice(6,10);
+      }
+    }
   }
 
   delete(intern: Intern): void{
@@ -112,7 +128,7 @@ export class InternsTableComponent implements OnInit {
 
   back(): void{
     this.showCode = 0;
-    this.emptyIntern = { //Post傳輸用
+    this.emptyIntern = { //重置Post傳輸用的資料
       id : 0,
       name : '',
       sexCode : 1,
